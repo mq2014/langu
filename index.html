@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>览古 · 历史学习 & PK 对战</title>
+  <style>
+:root{
+  --ink:#17120c;            /* 古铜深底 */
+  --ink-2:#241a10;
+  --panel:#2b2114;
+  --panel-2:#332617;
+  --bronze:#b08d57;        /* 青铜金 */
+  --bronze-soft:#cda434;
+  --gold:#d4af37;
+  --patina:#6b9080;        /* 锈蚀绿 */
+  --patina-d:#4a7a6a;
+  --cinnabar:#b34234;      /* 朱红 */
+  --parch:#e8dcc0;         /* 羊皮纸文字 */
+  --parch-dim:#b9a986;
+  --line:rgba(176,141,87,.35);
+}
+
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  font-family:"PingFang SC","Microsoft YaHei",-apple-system,sans-serif;
+  background:
+    radial-gradient(1200px 600px at 80% -10%, rgba(176,141,87,.12), transparent 60%),
+    radial-gradient(900px 500px at 0% 110%, rgba(74,122,106,.10), transparent 60%),
+    linear-gradient(160deg,var(--ink),var(--ink-2));
+  color:var(--parch);
+  min-height:100vh;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3{font-family:"STKaiti","KaiTi","Songti SC","SimSun",serif;letter-spacing:.04em;}
+
+/* 顶栏 */
+.topbar{
+  display:flex;align-items:center;gap:24px;
+  padding:14px 28px;
+  background:linear-gradient(180deg,rgba(43,33,20,.95),rgba(43,33,20,.75));
+  border-bottom:1px solid var(--line);
+  position:sticky;top:0;z-index:20;
+  backdrop-filter:blur(6px);
+}
+.brand{display:flex;align-items:center;gap:12px;}
+.seal{
+  width:46px;height:46px;border-radius:8px;
+  display:grid;place-items:center;
+  background:linear-gradient(145deg,var(--cinnabar),#7e2b22);
+  color:#f3e4c8;font-family:"STKaiti","KaiTi",serif;font-size:26px;font-weight:700;
+  box-shadow:inset 0 0 0 2px rgba(255,255,255,.18), 0 4px 14px rgba(0,0,0,.4);
+}
+.brand-text h1{margin:0;font-size:24px;color:var(--gold);}
+.brand-text p{margin:2px 0 0;font-size:12px;color:var(--parch-dim);letter-spacing:.3em;}
+.nav{display:flex;gap:6px;margin-left:10px;}
+.nav-btn{
+  background:transparent;border:1px solid transparent;color:var(--parch-dim);
+  padding:8px 16px;border-radius:8px;cursor:pointer;font-size:15px;transition:.18s;
+}
+.nav-btn:hover{color:var(--parch);background:rgba(176,141,87,.12);}
+.nav-btn.active{color:var(--ink);background:linear-gradient(145deg,var(--bronze-soft),var(--bronze));font-weight:700;box-shadow:0 3px 10px rgba(0,0,0,.3);}
+.user-chip{margin-left:auto;display:flex;align-items:center;gap:10px;}
+.user-chip .uname{color:var(--parch);font-size:14px;}
+.tier-badge{
+  font-size:12px;padding:3px 10px;border-radius:20px;
+  background:rgba(176,141,87,.2);border:1px solid var(--line);color:var(--bronze-soft);
+}
+.hidden{display:none !important;}
+
+/* 舞台 */
+.stage{max-width:1080px;margin:0 auto;padding:28px 22px 80px;}
+.view{display:none;animation:fade .35s ease;}
+.view.active{display:block;}
+@keyframes fade{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
+
+/* 首页 */
+.hero{
+  text-align:center;padding:40px 20px 30px;
+  border:1px solid var(--line);border-radius:18px;
+  background:
+    radial-gradient(600px 200px at 50% -20%, rgba(212,175,55,.14), transparent 70%),
+    linear-gradient(180deg, rgba(51,38,23,.6), rgba(43,33,20,.4));
+}
+.hero-rune{
+  font-family:"STKaiti","KaiTi",serif;font-size:64px;color:var(--bronze-soft);
+  text-shadow:0 0 24px rgba(212,175,55,.4);
+}
+.hero-title{font-size:38px;margin:6px 0 10px;color:var(--gold);}
+.hero-sub{color:var(--parch-dim);font-size:15px;line-height:1.8;margin:0 0 22px;}
+.hero-actions{display:flex;gap:14px;justify-content:center;}
+.home-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:26px;}
+.hcard{
+  border:1px solid var(--line);border-radius:14px;padding:20px 18px;cursor:pointer;
+  background:linear-gradient(180deg, rgba(51,38,23,.55), rgba(43,33,20,.35));
+  transition:.2s;
+}
+.hcard:hover{transform:translateY(-4px);border-color:var(--bronze);box-shadow:0 10px 26px rgba(0,0,0,.35);}
+.hcard-ic{font-size:34px;}
+.hcard h3{margin:10px 0 6px;color:var(--bronze-soft);font-size:20px;}
+.hcard p{margin:0;color:var(--parch-dim);font-size:13px;line-height:1.7;}
+
+/* 通用按钮 */
+.btn{
+  border:none;border-radius:10px;padding:11px 22px;font-size:15px;cursor:pointer;
+  transition:.18s;font-family:inherit;
+}
+.btn-gold{background:linear-gradient(145deg,var(--bronze-soft),var(--bronze));color:#1c150c;font-weight:700;}
+.btn-gold:hover{filter:brightness(1.08);transform:translateY(-1px);}
+.btn-ghost{background:transparent;border:1px solid var(--line);color:var(--parch);}
+.btn-ghost:hover{border-color:var(--bronze);background:rgba(176,141,87,.12);}
+.btn-heal{background:linear-gradient(145deg,#7fae8f,var(--patina-d));color:#0f1c16;font-weight:700;}
+.btn-atk{background:linear-gradient(145deg,#c75a4a,var(--cinnabar));color:#fff;font-weight:700;}
+
+/* 视图标题 */
+.view-head{margin-bottom:18px;}
+.view-head h2{font-size:30px;color:var(--gold);margin:0 0 6px;}
+.view-sub{color:var(--parch-dim);font-size:14px;margin:0;}
+
+/* 学习 tabs */
+.learn-tabs{display:flex;gap:8px;margin-bottom:18px;flex-wrap:wrap;}
+.ltab{
+  background:transparent;border:1px solid var(--line);color:var(--parch-dim);
+  padding:8px 18px;border-radius:20px;cursor:pointer;font-size:14px;transition:.18s;
+}
+.ltab:hover{color:var(--parch);}
+.ltab.active{color:var(--ink);background:linear-gradient(145deg,var(--bronze-soft),var(--bronze));font-weight:700;}
+.learn-panel{display:none;}
+.learn-panel.active{display:block;animation:fade .3s ease;}
+
+/* 时间轴 */
+.timeline{position:relative;padding-left:6px;}
+.timeline::before{content:"";position:absolute;left:14px;top:0;bottom:0;width:2px;background:linear-gradient(var(--bronze),var(--patina-d));opacity:.5;}
+.dyn{
+  position:relative;margin:0 0 14px 40px;padding:16px 18px;
+  border:1px solid var(--line);border-radius:12px;
+  background:linear-gradient(180deg, rgba(51,38,23,.6), rgba(43,33,20,.4));
+}
+.dyn::before{
+  content:"";position:absolute;left:-32px;top:22px;width:14px;height:14px;border-radius:50%;
+  background:var(--bronze-soft);box-shadow:0 0 0 4px rgba(212,175,55,.2);
+}
+.dyn-top{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;}
+.dyn-name{font-family:"STKaiti","KaiTi",serif;font-size:22px;color:var(--gold);}
+.dyn-period{color:var(--patina);font-size:13px;}
+.dyn-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:6px 22px;margin-top:10px;font-size:13px;color:var(--parch-dim);}
+.dyn-grid b{color:var(--parch);font-weight:600;}
+.dyn-sum{margin-top:10px;font-size:13.5px;line-height:1.7;color:var(--parch-dim);}
+
+/* 市集趣答 / 测验 */
+.quiz-box{max-width:640px;}
+.quiz-card{
+  border:1px solid var(--line);border-radius:14px;padding:22px;
+  background:linear-gradient(180deg, rgba(51,38,23,.6), rgba(43,33,20,.4));
+}
+.quiz-card h3{margin:0 0 4px;color:var(--bronze-soft);}
+.quiz-q{font-size:16px;margin:14px 0 16px;line-height:1.6;}
+.opt{
+  display:block;width:100%;text-align:left;margin:8px 0;padding:12px 16px;
+  border:1px solid var(--line);border-radius:10px;background:rgba(23,18,12,.5);
+  color:var(--parch);cursor:pointer;font-size:14.5px;transition:.15s;font-family:inherit;
+}
+.opt:hover{border-color:var(--bronze);background:rgba(176,141,87,.12);}
+.opt.correct{border-color:var(--patina);background:rgba(107,144,128,.2);}
+.opt.wrong{border-color:var(--cinnabar);background:rgba(179,66,52,.18);}
+.opt:disabled{cursor:default;}
+.quiz-feedback{margin-top:14px;font-size:14px;line-height:1.6;min-height:22px;}
+.quiz-feedback.ok{color:var(--patina);}
+.quiz-feedback.no{color:var(--cinnabar);}
+.quiz-foot{margin-top:16px;display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--parch-dim);}
+.quiz-score b{color:var(--gold);}
+
+/* 锦江岁时志 */
+.chrono{max-width:720px;}
+.chrono-block{
+  border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin-bottom:14px;
+  background:linear-gradient(180deg, rgba(51,38,23,.55), rgba(43,33,20,.35));
+}
+.chrono-block h3{margin:0 0 8px;color:var(--bronze-soft);font-size:19px;}
+.chrono-block p{margin:0;color:var(--parch-dim);font-size:14px;line-height:1.8;}
+.chrono-block .ex{margin-top:8px;font-size:13px;color:var(--patina);}
+
+/* 十二月市卡片 */
+.market-card{margin-left:0 !important;}
+.market-card::before{display:none !important;}
+.market-card .dyn-top{align-items:flex-start;flex-direction:column;gap:6px;}
+.market-card .dyn-name{font-size:20px;}
+.market-card .dyn-period{font-size:13px;line-height:1.6;color:var(--parch-dim);}
+.market-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:14px;}
+.market-grid > div{border:1px solid var(--line);border-radius:10px;padding:12px;background:rgba(23,18,12,.35);}
+.market-grid p{margin:0;font-size:13px;line-height:1.7;color:var(--parch-dim);}
+.m-label{display:block;color:var(--bronze-soft);font-size:13px;margin-bottom:6px;letter-spacing:.05em;}
+.m-point{cursor:pointer;transition:.15s;}
+.m-point:hover{border-color:var(--bronze) !important;background:rgba(176,141,87,.10) !important;transform:translateY(-2px);}
+.m-point:focus{outline:none;border-color:var(--bronze-soft) !important;}
+.m-more{display:inline-block;margin-top:10px;font-size:12px;color:var(--bronze-soft);letter-spacing:.04em;}
+@media(max-width:900px){
+  .market-grid{grid-template-columns:1fr;}
+  .market-card .dyn-name{font-size:18px;}
+}
+
+/* 十二月市详情弹窗 */
+.m-modal{position:fixed;inset:0;z-index:60;display:none;align-items:center;justify-content:center;padding:20px;}
+.m-modal.open{display:flex;}
+.m-mask{position:absolute;inset:0;background:rgba(10,7,4,.72);backdrop-filter:blur(3px);}
+.m-box{position:relative;max-width:560px;width:100%;max-height:82vh;overflow:auto;border:1px solid var(--bronze);border-radius:16px;padding:26px 28px;background:linear-gradient(180deg,var(--panel-2),var(--panel));box-shadow:0 20px 60px rgba(0,0,0,.55);animation:fade .25s ease;}
+.m-close{position:absolute;top:12px;right:14px;width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:rgba(0,0,0,.3);color:var(--parch);font-size:20px;line-height:1;cursor:pointer;}
+.m-close:hover{color:var(--gold);}
+.m-head{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:14px;padding-right:30px;}
+.m-chip{font-size:12px;padding:3px 12px;border-radius:20px;background:rgba(176,141,87,.2);border:1px solid var(--line);color:var(--bronze-soft);}
+.m-box h3{margin:0;font-size:21px;color:var(--gold);font-family:"STKaiti","KaiTi",serif;}
+.m-summary{font-size:14.5px;line-height:1.8;color:var(--parch);margin:0 0 16px;padding-bottom:16px;border-bottom:1px dashed var(--line);}
+.m-detail{font-size:14px;line-height:1.9;color:var(--parch-dim);}
+
+/* PK */
+.pk-gate{display:grid;place-items:center;padding:50px 0;}
+.gate-card{text-align:center;border:1px solid var(--line);border-radius:16px;padding:34px;background:rgba(43,33,20,.5);max-width:420px;}
+.gate-ic{font-size:46px;}
+.gate-card h3{color:var(--gold);margin:10px 0 8px;}
+.gate-card p{color:var(--parch-dim);font-size:14px;line-height:1.7;margin:0 0 18px;}
+
+.pk-arena{border:1px solid var(--line);border-radius:16px;padding:22px;background:rgba(43,33,20,.4);}
+.pk-mode{display:flex;align-items:center;gap:8px;margin-bottom:16px;font-size:13px;color:var(--parch-dim);flex-wrap:wrap;}
+.pmode{background:transparent;border:1px solid var(--line);color:var(--parch-dim);padding:6px 14px;border-radius:18px;cursor:pointer;font-size:13px;transition:.15s;font-family:inherit;}
+.pmode:hover{color:var(--parch);}
+.pmode.active{color:var(--ink);background:linear-gradient(145deg,var(--bronze-soft),var(--bronze));font-weight:700;}
+
+.hp-row{display:flex;align-items:center;gap:18px;margin-bottom:18px;}
+.fighter{flex:1;}
+.f-name{font-size:15px;color:var(--parch);margin-bottom:6px;}
+.hp-bar{height:18px;border-radius:10px;background:rgba(0,0,0,.35);overflow:hidden;border:1px solid var(--line);}
+.hp-fill{height:100%;width:100%;transition:width .4s ease;}
+.hp-fill.you{background:linear-gradient(90deg,var(--patina),var(--patina-d));}
+.hp-fill.bot{background:linear-gradient(90deg,var(--cinnabar),#7e2b22);}
+.hp-num{font-size:12px;color:var(--parch-dim);margin-top:4px;}
+.vs{font-family:"STKaiti","KaiTi",serif;font-size:22px;color:var(--gold);}
+
+.round-box{border:1px solid var(--line);border-radius:12px;padding:18px;background:rgba(23,18,12,.45);}
+.round-tag{font-size:13px;color:var(--bronze-soft);margin-bottom:10px;letter-spacing:.1em;}
+.q-text{font-size:17px;line-height:1.6;margin-bottom:14px;}
+.q-options{display:grid;gap:8px;}
+
+.buzz-box{margin-top:16px;text-align:center;border:1px solid var(--line);border-radius:12px;padding:16px;background:rgba(23,18,12,.4);}
+.buzz-tip{margin:0 0 12px;color:var(--bronze-soft);font-size:14px;}
+.buzz-pad{display:flex;gap:14px;justify-content:center;}
+.buzz-btn{flex:1;max-width:240px;padding:18px 10px;border-radius:12px;border:2px solid var(--line);background:rgba(51,38,23,.6);color:var(--parch);font-size:17px;font-weight:700;cursor:pointer;font-family:inherit;transition:.15s;}
+.buzz-btn.b0{border-color:var(--patina-d);}
+.buzz-btn.b1{border-color:var(--cinnabar);}
+.buzz-btn:hover:not(:disabled){filter:brightness(1.12);transform:translateY(-2px);}
+.buzz-btn:disabled{opacity:.4;cursor:default;}
+.buzz-btn.win{background:linear-gradient(145deg,var(--bronze-soft),var(--bronze));color:#1c150c;border-color:var(--bronze-soft);}
+
+.action-box{margin-top:16px;text-align:center;border:1px dashed var(--bronze);border-radius:12px;padding:16px;background:rgba(176,141,87,.08);}
+.action-box p{margin:0 0 12px;color:var(--parch);}
+.action-btns{display:flex;gap:14px;justify-content:center;}
+
+.pk-log{margin-top:16px;max-height:160px;overflow:auto;font-size:13px;color:var(--parch-dim);line-height:1.7;border-top:1px solid var(--line);padding-top:12px;}
+.pk-log .l-you{color:var(--patina);}
+.pk-log .l-bot{color:var(--cinnabar);}
+.pk-log .l-sys{color:var(--bronze-soft);}
+.pk-foot{display:flex;justify-content:space-between;align-items:center;margin-top:16px;}
+.exp-line{font-size:13px;color:var(--parch-dim);}
+.exp-line b{color:var(--gold);}
+
+/* 账号 */
+.acc-card{max-width:440px;margin:0 auto;border:1px solid var(--line);border-radius:16px;padding:26px;background:rgba(43,33,20,.45);}
+.acc-card h3{margin:0 0 18px;color:var(--gold);}
+.acc-card label{display:block;font-size:13px;color:var(--parch-dim);margin-bottom:14px;}
+.acc-card input{
+  width:100%;margin-top:6px;padding:11px 14px;border-radius:10px;
+  border:1px solid var(--line);background:rgba(23,18,12,.6);color:var(--parch);font-size:15px;font-family:inherit;
+}
+.acc-card input:focus{outline:none;border-color:var(--bronze);}
+.acc-btns{display:flex;gap:10px;margin-top:6px;}
+.acc-btns .btn{flex:1;}
+.acc-hint{font-size:13px;margin:14px 0 0;color:var(--cinnabar);min-height:18px;}
+.acc-hint.ok{color:var(--patina);}
+
+.acc-stat{display:flex;gap:12px;margin:8px 0 18px;}
+.stat{flex:1;text-align:center;border:1px solid var(--line);border-radius:12px;padding:14px 8px;background:rgba(23,18,12,.4);}
+.stat-num{display:block;font-family:"STKaiti","KaiTi",serif;font-size:24px;color:var(--gold);}
+.stat-lbl{font-size:12px;color:var(--parch-dim);}
+.tier-track{display:flex;gap:4px;margin-bottom:18px;flex-wrap:wrap;}
+.tt{font-size:11px;padding:4px 9px;border-radius:14px;background:rgba(176,141,87,.12);border:1px solid var(--line);color:var(--parch-dim);}
+.tt.cur{background:linear-gradient(145deg,var(--bronze-soft),var(--bronze));color:#1c150c;font-weight:700;}
+
+/* 左拉 */
+.zola{position:fixed;right:22px;bottom:22px;z-index:40;}
+.zola-toggle{
+  width:56px;height:56px;border-radius:50%;border:none;cursor:pointer;font-size:26px;
+  background:linear-gradient(145deg,var(--bronze-soft),var(--bronze));color:#1c150c;
+  box-shadow:0 8px 22px rgba(0,0,0,.45);transition:.18s;
+}
+.zola-toggle:hover{transform:scale(1.06);}
+.zola-panel{
+  position:absolute;right:0;bottom:68px;width:320px;
+  border:1px solid var(--line);border-radius:16px;overflow:hidden;
+  background:linear-gradient(180deg, rgba(43,33,20,.98), rgba(33,25,15,.98));
+  box-shadow:0 18px 40px rgba(0,0,0,.5);
+}
+.zola-head{display:flex;align-items:center;gap:12px;padding:14px 16px;border-bottom:1px solid var(--line);background:rgba(176,141,87,.1);}
+.zola-avatar{width:40px;height:40px;border-radius:10px;display:grid;place-items:center;background:linear-gradient(145deg,var(--patina),var(--patina-d));color:#0f1c16;font-family:"STKaiti","KaiTi",serif;font-size:22px;font-weight:700;}
+.zola-name{font-size:15px;color:var(--gold);}
+.zola-role{font-size:12px;color:var(--parch-dim);}
+.zola-msg{padding:14px 16px;font-size:13.5px;line-height:1.7;color:var(--parch);min-height:60px;max-height:160px;overflow:auto;}
+.zola-quick{display:flex;flex-wrap:wrap;gap:6px;padding:0 16px 10px;}
+.zola-quick button{font-size:12px;padding:5px 10px;border-radius:14px;border:1px solid var(--line);background:rgba(176,141,87,.12);color:var(--parch-dim);cursor:pointer;}
+.zola-quick button:hover{color:var(--parch);border-color:var(--bronze);}
+.zola-input{display:flex;gap:8px;padding:12px 16px;border-top:1px solid var(--line);}
+.zola-input input{flex:1;padding:9px 12px;border-radius:8px;border:1px solid var(--line);background:rgba(23,18,12,.6);color:var(--parch);font-family:inherit;font-size:13px;}
+.zola-input input:focus{outline:none;border-color:var(--bronze);}
+.zola-input button{padding:0 16px;border:none;border-radius:8px;background:var(--bronze);color:#1c150c;font-weight:700;cursor:pointer;}
+
+.footer{text-align:center;color:var(--parch-dim);font-size:12px;padding:24px;opacity:.7;}
+
+@media(max-width:720px){
+  .home-cards{grid-template-columns:1fr;}
+  .dyn-grid{grid-template-columns:1fr;}
+  .topbar{flex-wrap:wrap;gap:12px;}
+  .nav{order:3;width:100%;justify-content:center;}
+}
+
+</style>
+</head>
+<body>
+  <!-- 顶部导航 -->
+  <header class="topbar">
+    <div class="brand">
+      <span class="seal">览</span>
+      <div class="brand-text">
+        <h1>览古</h1>
+        <p>阅千年 · 知兴替</p>
+      </div>
+    </div>
+    <nav class="nav">
+      <button class="nav-btn active" data-view="home">首页</button>
+      <button class="nav-btn" data-view="learn">学习板块</button>
+      <button class="nav-btn" data-view="pk">PK 对战</button>
+      <button class="nav-btn" data-view="account">账号</button>
+    </nav>
+    <div id="user-chip" class="user-chip hidden">
+      <span class="uname">游客</span>
+      <span class="tier-badge" id="tier-badge">未注册</span>
+    </div>
+  </header>
+
+  <main class="stage">
+    <!-- 首页 -->
+    <section class="view active" id="view-home">
+      <div class="hero">
+        <div class="hero-rune">鼎</div>
+        <h2 class="hero-title">穿越上下五千年</h2>
+        <p class="hero-sub">从史前神话到近代风云，跟着导游「左拉」学历史，<br/>学成之后，与他人 PK 精进你的历史功力。</p>
+        <div class="hero-actions">
+          <button class="btn btn-gold" data-go="learn">开始学习</button>
+          <button class="btn btn-ghost" data-go="pk">去 PK 对战</button>
+        </div>
+      </div>
+      <div class="home-cards">
+        <div class="hcard" data-go="learn">
+          <div class="hcard-ic">📜</div>
+          <h3>学习板块</h3>
+          <p>锦江十二月市：历史故事点 · 锦江打卡点 · 年轻互动点。</p>
+        </div>
+        <div class="hcard" data-go="pk">
+          <div class="hcard-ic">⚔️</div>
+          <h3>PK 对战</h3>
+          <p>100 滴血对决机器人，答对选择题回血或攻击，青铜打到王者。</p>
+        </div>
+        <div class="hcard" data-go="account">
+          <div class="hcard-ic">🪪</div>
+          <h3>注册账号</h3>
+          <p>注册后可参与 PK、累积经验与段位；不注册也能安心学历史。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 学习板块 -->
+    <section class="view" id="view-learn">
+      <div class="view-head">
+        <h2>学习板块</h2>
+        <p class="view-sub">锦江十二月市：历史故事点 · 锦江打卡点 · 年轻互动点。点击任意卡片可查看详情。</p>
+      </div>
+      <div class="learn-tabs">
+        <button class="ltab active" data-ltab="timeline">十二月市</button>
+        <button class="ltab" data-ltab="relic">市集趣答</button>
+        <button class="ltab" data-ltab="chronology">锦江岁时志</button>
+      </div>
+
+      <div class="learn-panel active" id="lt-timeline">
+        <div class="timeline" id="timeline"></div>
+      </div>
+
+      <div class="learn-panel" id="lt-relic">
+        <div class="quiz-box" id="relic-quiz"></div>
+      </div>
+
+      <div class="learn-panel" id="lt-chronology">
+        <div class="chrono" id="chrono"></div>
+      </div>
+    </section>
+
+    <!-- PK 对战 -->
+    <section class="view" id="view-pk">
+      <div class="view-head">
+        <h2>PK 对战</h2>
+        <p class="view-sub">两个机器人同屏抢答：先抢且答对的一方，可选择「回血 +10」或「攻击 -10」。先把对手打到 0 血即胜。</p>
+      </div>
+      <div id="pk-gate" class="pk-gate hidden">
+        <div class="gate-card">
+          <div class="gate-ic">🔒</div>
+          <h3>需要先注册</h3>
+          <p>设计说明书规定：未注册不能参与 PK，仅可学习历史。请先到「账号」页注册。</p>
+          <button class="btn btn-gold" data-go="account">去注册</button>
+        </div>
+      </div>
+      <div id="pk-arena" class="pk-arena hidden">
+        <div class="pk-mode">
+          <span>模式：</span>
+          <button class="pmode active" data-mode="solo">单人（对战机器人）</button>
+          <button class="pmode" data-mode="duo">双人（两人对战）</button>
+        </div>
+
+        <div class="hp-row">
+          <div class="fighter">
+            <div class="f-name" id="pk-name-0">玩家1 · 机器人A</div>
+            <div class="hp-bar"><div class="hp-fill you" id="hp-0"></div></div>
+            <div class="hp-num"><span id="hp-0-num">100</span> / 100</div>
+          </div>
+          <div class="vs">VS</div>
+          <div class="fighter">
+            <div class="f-name" id="pk-name-1">机器人B</div>
+            <div class="hp-bar"><div class="hp-fill bot" id="hp-1"></div></div>
+            <div class="hp-num"><span id="hp-1-num">100</span> / 100</div>
+          </div>
+        </div>
+
+        <div class="round-box" id="pk-round">
+          <div class="round-tag" id="pk-round-tag">第 1 回合</div>
+          <div class="q-text" id="pk-q"></div>
+          <div class="q-options" id="pk-options"></div>
+        </div>
+
+        <div class="buzz-box" id="pk-buzz">
+          <p class="buzz-tip" id="pk-buzz-tip">抢答！谁先按下谁先答</p>
+          <div class="buzz-pad">
+            <button class="buzz-btn b0" id="buzz-0">玩家1 抢答</button>
+            <button class="buzz-btn b1" id="buzz-1">玩家2 抢答</button>
+          </div>
+        </div>
+
+        <div class="action-box hidden" id="pk-action">
+          <p id="pk-action-tip">抢答成功！选择行动：</p>
+          <div class="action-btns">
+            <button class="btn btn-heal" id="act-heal">回血 +10</button>
+            <button class="btn btn-atk" id="act-atk">攻击 -10</button>
+          </div>
+        </div>
+
+        <div class="pk-log" id="pk-log"></div>
+        <div class="pk-foot">
+          <span class="exp-line">经验 <b id="exp-now">0</b> · 段位 <b id="tier-now">青铜</b></span>
+          <button class="btn btn-ghost" id="pk-restart">重新开战</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 账号 -->
+    <section class="view" id="view-account">
+      <div class="view-head">
+        <h2>账号</h2>
+        <p class="view-sub">注册后可参与 PK，并在每场对战后累积经验、提升段位。</p>
+      </div>
+      <div id="acc-loggedout">
+        <div class="acc-card">
+          <h3>注册 / 登录</h3>
+          <label>名称
+            <input type="text" id="acc-name" placeholder="给自己起个名号" maxlength="12" />
+          </label>
+          <label>密码
+            <input type="password" id="acc-pass" placeholder="设置密码" maxlength="20" />
+          </label>
+          <div class="acc-btns">
+            <button class="btn btn-gold" id="acc-register">注册并登录</button>
+            <button class="btn btn-ghost" id="acc-login">已有账号？登录</button>
+          </div>
+          <p class="acc-hint" id="acc-hint"></p>
+        </div>
+      </div>
+      <div id="acc-loggedin" class="hidden">
+        <div class="acc-card">
+          <h3>欢迎，<span id="acc-name-show">玩家</span></h3>
+          <div class="acc-stat">
+            <div class="stat"><span class="stat-num" id="acc-exp">0</span><span class="stat-lbl">经验</span></div>
+            <div class="stat"><span class="stat-num" id="acc-tier">青铜</span><span class="stat-lbl">段位</span></div>
+            <div class="stat"><span class="stat-num" id="acc-next">还需 50</span><span class="stat-lbl">距下一段位</span></div>
+          </div>
+          <div class="tier-track" id="tier-track"></div>
+          <button class="btn btn-ghost" id="acc-logout">退出登录</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 左拉导游悬浮面板 -->
+  <aside class="zola" id="zola">
+    <button class="zola-toggle" id="zola-toggle" title="召唤导游左拉">🧭</button>
+    <div class="zola-panel hidden" id="zola-panel">
+      <div class="zola-head">
+        <div class="zola-avatar">左</div>
+        <div>
+          <div class="zola-name">左拉 · 历史导游</div>
+          <div class="zola-role">为你引路千年</div>
+        </div>
+      </div>
+      <div class="zola-msg" id="zola-msg"></div>
+      <div class="zola-quick" id="zola-quick"></div>
+      <div class="zola-input">
+        <input type="text" id="zola-q" placeholder="问左拉点什么…" maxlength="40" />
+        <button id="zola-send">问</button>
+      </div>
+    </div>
+  </aside>
+
+  <footer class="footer">览古 · AI 创造说明书 MVP 实现 · 青铜器风格</footer>
+
+  <!-- 十二月市详情弹窗 -->
+  <div class="m-modal" id="m-modal">
+    <div class="m-mask" id="m-mask"></div>
+    <div class="m-box" role="dialog" aria-modal="true">
+      <button class="m-close" id="m-close" aria-label="关闭">×</button>
+      <div class="m-head">
+        <span class="m-chip" id="m-chip"></span>
+        <h3 id="m-title"></h3>
+      </div>
+      <p class="m-summary" id="m-summary"></p>
+      <div class="m-detail" id="m-detail"></div>
+    </div>
+  </div>
+
+  <script>
+/* ====== 览古 · 数据层 ====== */
+/* 十二月市：锦江岁时记（历史故事点 + 锦江打卡点 + 年轻互动点） */
+const MONTHLY_MARKETS = [
+  { month:"正月", market:"灯市", desc:"灯火标记年轮，守岁焕发新机。主要展示彩灯、灯谜等。",
+    points:[
+      {key:"history", label:"历史故事点", icon:"📖", summary:"宋代成都正月十五灯市极盛，锦江两岸灯火如昼。陆游《老学庵笔记》载「成都灯市甲天下」，百姓扎彩楼、猜灯谜，以灯火守岁迎新。",
+        detail:"宋代成都灯市以「灯山」著称，官府在锦江边搭数丈高的彩山，缀满琉璃灯、羊皮灯，彻夜不熄。灯市不仅是节庆，更是宋代成都商业与市民文化的窗口——商铺借灯会招徕顾客，形成「以灯促市」的传统，是十二月市中最具仪式感的一幕。"},
+      {key:"jinjiang", label:"锦江打卡点", icon:"📍", summary:"夜游锦江：合江亭—安顺廊桥一线，看花灯倒映江面，延续千年灯火的仪式感。",
+        detail:"夜游锦江航线从合江亭出发，沿锦江而下至安顺廊桥，两岸古迹与现代灯光秀交映。推荐傍晚登船，先看落日余晖中的廊桥，再赏「十二月市」主题光影秀；合江亭本身是纪念李冰治水的唐代地标，登亭可俯瞰锦江双流交汇。"},
+      {key:"youth", label:"年轻互动点", icon:"🎯", summary:"AR 猜灯谜、放河灯祈福、锦江灯会打卡集章，把年味变成可收藏的社交货币。",
+        detail:"在锦江绿道设置 AR 灯谜装置，手机一扫即可答题解锁灯谜，集齐 12 道可兑换限定「锦江灯神」电子徽章；还可购买河灯放入江中祈福并拍照打卡，发起 #锦江灯会 话题挑战，把年味变成可分享、可收藏的社交货币。"}
+    ]},
+  { month:"二月", market:"花市", desc:"花事唤醒春天，芳菲亦是经济。相关花卉器皿、插花表演。",
+    points:[
+      {key:"history", label:"历史故事点", icon:"📖", summary:"成都二月花市始于唐宋，五代花蕊夫人偏爱芙蓉，成都「锦城」「蓉城」皆因花得名。古时花市与游春结合，是成都人最早的「春日经济」。",
+        detail:"五代后蜀皇帝孟昶命人在城上遍种芙蓉，成都因此得名「芙蓉城」「蓉城」。花市与蚕市、药市并称，是成都最早的「春日经济」形态，苏轼、陆游都曾赋诗咏成都花事，可见花在成都人生活中的分量。"},
+      {key:"jinjiang", label:"锦江打卡点", icon:"📍", summary:"三圣花乡 / 镗钯街花店：在锦江的街巷与花海间，寻找属于春天的色彩。",
+        detail:"三圣花乡（锦江区）是成都人周末赏花购花的头号去处，镗钯街、玉林路一带的鲜花小店则以「十元一束」的平价花艺出圈，适合拍 ins 风花墙，是年轻人记录春天的最佳背景板。"},
+      {key:"youth", label:"年轻互动点", icon:"🎯", summary:"春日簪花挑战、AI 识花打卡、花艺盲盒，把花市的浪漫变成朋友圈九宫格。",
+        detail:"春日簪花挑战——买一支鲜花簪在发间，沿锦江绿道打卡；「AI 识花」小程序一键识别花种并生成花语卡片；花艺盲盒随机开出当季花材与教程，让每个人都能把花市的浪漫搬回家、发上朋友圈。"}
+    ]},
+  { month:"三月", market:"蚕市", desc:"蚕事预判年成，农时蕴藏商机。蚕桑器具、丝绸文创。",
+    points:[
+      {key:"history", label:"历史故事点", icon:"📖", summary:"蚕市源于古蜀蚕丛氏，成都平原自古桑蚕兴盛。三月蚕市既是农具交易，也是祈求蚕桑丰收的岁时仪式，体现了蜀人对「蚕桑立国」的集体记忆。",
+        detail:"古蜀第一位王「蚕丛」教民养蚕，成都平原的蚕桑业由此发端。三月蚕市既是农具桑苗交易，也是祭祀蚕神的仪式，宋代成都蚕市「动辄十里」，可见规模，是蜀地农耕文明的活化石。"},
+      {key:"jinjiang", label:"锦江打卡点", icon:"📍", summary:"成都蜀锦织绣博物馆 / 水井坊街区：从养蚕到织锦，看一匹蜀锦如何走过三千年。",
+        detail:"成都蜀锦织绣博物馆（草堂东路）收藏历代蜀锦实物与织机，可现场看织娘操作花楼木织机；水井坊博物馆旁的锦江老街仍有丝绸文创小店，是理解「蚕—丝—锦」产业链的实景课堂。"},
+      {key:"youth", label:"年轻互动点", icon:"🎯", summary:"养蚕日记打卡、丝绸纹样 DIY、AI 汉服换妆，让古老蚕桑成为可穿可戴的潮流。",
+        detail:"体验养蚕日记——从领蚕卵到结茧全程记录打卡；丝绸纹样 DIY 把传统蜀锦纹样印到帆布袋上；AI 汉服换妆生成专属古风写真，让三千年蚕桑成为可穿、可戴、可拍的潮流符号。"}
+    ]},
+  { month:"四月", market:"锦市", desc:"晴燥临抒织锦，天时铸就华裳。蜀锦织造技艺、锦绣产品。",
+    points:[
+      {key:"history", label:"历史故事点", icon:"📖", summary:"成都别称「锦官城」，因西汉设锦官管理织锦得名。四月天气晴燥，适于晾晒与织锦，锦江因此得名「濯锦之江」。锦市是成都最具代表性的手工业记忆。",
+        detail:"西汉时成都设「锦官」专管织锦，官署所在称「锦官城」，绕城的江水因洗锦而华彩斑斓，得名「锦江」。四月天气干爽，最宜曝锦晾绸，故为锦市之月，蜀锦也由此成为丝绸之路上的硬通货。"},
+      {key:"jinjiang", label:"锦江打卡点", icon:"📍", summary:"成都蜀锦织绣博物馆 / 太古里「锦官」主题装置：触摸蜀锦经纬，感受锦官城的底色。",
+        detail:"蜀锦织绣博物馆有完整的蜀锦织造演示，可近距离触摸经纬之美；太古里「锦官」主题装置用现代光影重述蜀锦故事，是年轻人最爱的拍照点，古今在锦江畔奇妙相遇。"},
+      {key:"youth", label:"年轻互动点", icon:"🎯", summary:"织锦纹样填色、AI 换汉服、锦绣滤镜打卡，把蜀锦穿在身上、发朋友圈。",
+        detail:"织锦纹样填色游戏把经典纹样（如「方胜」「如意」）变成可上色的画板；AI 换汉服一键试穿不同朝代服饰；锦绣滤镜给照片加蜀锦暗纹边框，把国家级非遗轻松穿在身上、发出朋友圈。"}
+    ]},
+  { month:"五月", market:"扇市", desc:"竹扇驯服炎夏，清风引客云来。蜀绣扇、竹扇、团扇。",
+    points:[
+      {key:"history", label:"历史故事点", icon:"📖", summary:"蜀中炎夏，竹扇、团扇、蜀绣扇是消夏必备。唐宋成都扇市云集各地名匠，扇面题诗作画，兼具实用与风雅，是文人雅士的夏日社交道具。",
+        detail:"蜀地盛产竹，竹扇、团扇、蜀绣扇自古消夏。唐代成都扇面已题诗作画，宋代扇市成为文人雅集的延伸，一把好扇既是日用品也是身份符号，折射出蜀地竹文化与诗书气。"},
+      {key:"jinjiang", label:"锦江打卡点", icon:"📍", summary:"望江楼公园（竹文化）/ 兰桂坊创意街区：在竹影清风里，选一把属于自己的蜀扇。",
+        detail:"望江楼公园以竹闻名（薛涛曾居此制「薛涛笺」），园中竹影与江风是天然取景地；兰桂坊创意街区则有手作扇工作室，可在竹影清风里挑一把心仪的蜀扇。"},
+      {key:"youth", label:"年轻互动点", icon:"🎯", summary:"手绘团扇、扇面摄影挑战、古风 pose 打卡，让一把扇子成为夏日出片神器。",
+        detail:"手绘团扇——在素面团扇上画荷花、锦鲤；扇面摄影挑战比谁拍得更有古意；古风 pose 打卡邀请好友模仿古画人物姿态，让一把小小的扇子成为夏日出片神器。"}
+    ]},
+  { month:"六月", market:"香市", desc:"篆烟调和时序，芳香氤氲潮流。传统香品、香炉、香疗产品。",
+    points:[
+      {key:"history", label:"历史故事点", icon:"📖", summary:"六月暑湿，成都香市售香品、香炉以避暑驱疫。唐宋时期，焚香已成为成都市民生活的一部分，香事背后藏着古代「气味疗法」的智慧。",
+        detail:"六月暑湿，成都人于香市购香品、香炉以驱暑避瘟。唐宋焚香成俗，从庙堂祭祀到文人雅室、市井人家皆用香，「香事」是古代生活美学的一部分，也是最早的「芳香疗法」。"},
+      {key:"jinjiang", label:"锦江打卡点", icon:"📍", summary:"大慈寺周边 / 水井坊：于闹市中寻一缕古香，体验成都人的「嗅觉生活史」。",
+        detail:"大慈寺是成都最古老的寺庙之一，香火延续千年，周边香铺、茶铺密集；水井坊街区可顺道体验老成都的市井香生活，于闹市中寻一缕古香。"},
+      {key:"youth", label:"年轻互动点", icon:"🎯", summary:"古法香囊 DIY、嗅觉盲猜游戏、线香手作，把传统香道变成可分享的治愈体验。",
+        detail:"古法香囊 DIY——按古方配艾草、薄荷、丁香；嗅觉盲猜游戏蒙眼辨香；线香手作把香料搓成线香带回家，让传统香道变成可亲手做、可分享的治愈体验。"}
+    ]},
+  { month:"七月", market:"七宝市", desc:"巧手锤炼金玉，匠心即是财富。兼具日用品与奇珍异宝的大集市。",
+    points:[
+      {key:"history", label:"历史故事点", icon:"📖", summary:"七月七宝市是成都规模最大的综合集市，金玉古玩、日常百货、奇珍异物汇聚一堂。宋代成都商业繁荣，七宝市正是「扬一益二」中「益州」繁华的缩影。",
+        detail:"七月七宝市是成都最盛大的综合集市，金玉、古玩、犀象、日用之器无不汇聚。宋代成都「每月皆有市」，而七宝市因品类最全、最显繁华，是「扬一益二」的实证，展现蜀地商业基因。"},
+      {key:"jinjiang", label:"锦江打卡点", icon:"📍", summary:"太古里 / 春熙路：千年后，锦江畔的现代商业街区仍延续着「七宝市」的繁华基因。",
+        detail:"太古里、春熙路是今日成都的商业心脏，古今呼应；可顺访附近的镗钯街、崇德里，感受老巷与新潮并存，看千年市集基因如何在 modern 街区延续。"},
+      {key:"youth", label:"年轻互动点", icon:"🎯", summary:"非遗手作市集、城市寻宝打卡、限定文创收集，在钢筋水泥里玩一场古今互通的寻宝游戏。",
+        detail:"非遗手作市集集合蜀绣、银花丝、漆器等；城市寻宝打卡在街区隐藏点位盖章；限定文创收集每月一款「十二月市」主题周边，在钢筋水泥里玩一场古今互通的寻宝游戏。"}
+    ]},
+  { month:"八月", market:"桂市", desc:"闻桂而知秋香，食桂而知秋味。桂花茶、桂花糕、桂花酒。",
+    points:[
+      {key:"history", label:"历史故事点", icon:"📖", summary:"唐宋成都八月桂花香，文人雅士多沿锦江泛舟赏桂、饮酒赋诗。桂花入馔、入茶、入酒，是成都人对秋天的味觉记忆。",
+        detail:"唐宋成都八月桂花盛开，文人沿锦江泛舟赏桂、置酒赋诗。桂花入茶、入糕、入酒，形成独特的「秋之味」，至今仍是成都人的秋季仪式，封存着城市的嗅觉乡愁。"},
+      {key:"jinjiang", label:"锦江打卡点", icon:"📍", summary:"东湖公园桂花林 / 望江楼公园：秋风起时，沿锦江寻找最浓的一树桂香。",
+        detail:"东湖公园有成都市区罕见的成片桂林，秋风起时满园飘香；望江楼公园竹桂相映，也是赏桂佳处，沿锦江寻找最浓的一树桂香。"},
+      {key:"youth", label:"年轻互动点", icon:"🎯", summary:"桂花特调饮品打卡、桂香地图、中秋对诗挑战，把秋天的味道做成城市漫游企划。",
+        detail:"桂花特调饮品在沿锦江咖啡馆推出季节限定；桂香地图标记最佳赏桂点；中秋对诗挑战在桂树下以桂花为题对句，把秋天的味道做成一场城市漫游企划。"}
+    ]},
+  { month:"九月", market:"药市", desc:"九月药市规模盛大，是全国性的药材集散中心。",
+    points:[
+      {key:"history", label:"历史故事点", icon:"📖", summary:"成都九月药市曾是全国性药材集散中心，医馆林立、名医辈出。孙思邈曾入蜀采药，川药文化深厚，药市也孕育了成都独特的「药食同源」传统。",
+        detail:"成都九月药市曾是全国药材集散中心，川药（如川贝、川芎、附子）经此发往各地。孙思邈曾入蜀采药，成都名医辈出，「药食同源」传统深厚，药市是中医文化与市井生活交汇的节点。"},
+      {key:"jinjiang", label:"锦江打卡点", icon:"📍", summary:"春熙路老字号药房 / 成都中医药大学博物馆：在闹市中回望「药都」成都的百年药房。",
+        detail:"春熙路一带保留多家百年老字号药房（如同仁堂）；成都中医药大学博物馆陈列川药标本与传统制药器具，在闹市中回望「药都」成都的百年药房记忆。"},
+      {key:"youth", label:"年轻互动点", icon:"🎯", summary:"中药香囊调配、草本奶茶打卡、药材盲盒，让「苦药」变身为年轻人的养生潮玩。",
+        detail:"中药香囊调配按节气配方；草本奶茶把枸杞、菊花、桂圆做成饮品；药材盲盒随机开出一味川药并附科普卡，让「苦药」变身为年轻人的养生潮玩。"}
+    ]},
+  { month:"十月", market:"酒市", desc:"酒是游宴饮品，四川人的心头好。汇集了文君酒、鹅黄酒等名酒。",
+    points:[
+      {key:"history", label:"历史故事点", icon:"📖", summary:"成都酒市源远流长，卓文君与司马相如当垆卖酒传为佳话，文君酒、鹅黄酒名动天下。锦江两岸酒楼林立，诗酒风流是成都文化的重要底色。",
+        detail:"成都酿酒史可溯至古蜀，卓文君与司马相如「当垆卖酒」的典故即发生于此。文君酒、鹅黄酒名动一时，锦江酒楼「锦江春」自唐宋延名，诗酒风流是成都文化的重要底色。"},
+      {key:"jinjiang", label:"锦江打卡点", icon:"📍", summary:"水井坊博物馆 / 九眼桥酒吧街：从古代酒坊到现代酒廊，锦江始终飘着酒香。",
+        detail:"水井坊博物馆是「中国白酒第一坊」，有连续使用数百年的老窖；九眼桥酒吧街入夜后灯火连江，是当代「酒市」的延续，从古代酒坊到现代酒廊，锦江始终飘着酒香。"},
+      {key:"youth", label:"年轻互动点", icon:"🎯", summary:"古法酿酒体验、酒馆打卡地图、微醺摄影挑战，让「诗酒锦江」成为年轻人的夜生活主题。",
+        detail:"古法酿酒体验从蒸粮到封坛；酒馆打卡地图集章换限定杯垫；微醺摄影挑战拍出锦江夜酒的松弛感，让「诗酒锦江」成为年轻人的夜生活主题。"}
+    ]},
+  { month:"十一月", market:"梅市", desc:"天气渐冷，赏梅、售梅花相关物品的市集。",
+    points:[
+      {key:"history", label:"历史故事点", icon:"📖", summary:"成都冬日梅市售梅、赏梅，杜甫草堂早梅、陆游入蜀咏梅皆与此有关。梅花不仅是岁时风物，更承载了成都文人「凌寒独放」的精神意象。",
+        detail:"成都冬日梅市售梅、赏梅，杜甫草堂的「江梅」、陆游入蜀后「二十里中香不断」的咏梅名句，都让梅花成为成都文人的精神符号，承载着凌寒独放的气节。"},
+      {key:"jinjiang", label:"锦江打卡点", icon:"📍", summary:"杜甫草堂 / 浣花溪公园：在锦江畔寻梅，感受诗人杜甫、陆游笔下的冬日成都。",
+        detail:"杜甫草堂与浣花溪公园冬日蜡梅、红梅相继开放；可沿浣花溪绿道漫步寻梅，在锦江畔感受诗人杜甫、陆游笔下的冬日成都。"},
+      {key:"youth", label:"年轻互动点", icon:"🎯", summary:"梅花主题穿搭打卡、诗词飞花令、寻梅地图，把冬天过成一场文化与时尚的合谋。",
+        detail:"梅花主题穿搭打卡以红/白为主色系拍照；诗词飞花令以「梅」字为令；寻梅地图标出城区最佳赏梅点，把冬天过成一场文化与时尚的合谋。"}
+    ]},
+  { month:"十二月", market:"桃符市", desc:"售卖春联、桃符等过年用品的市集。",
+    points:[
+      {key:"history", label:"历史故事点", icon:"📖", summary:"桃符即春联前身，古人以桃木板画神荼、郁垒驱邪。王安石「千门万户曈曈日，总把新桃换旧符」正是岁末桃符市的写照。成都桃符市为新年拉开序幕。",
+        detail:"桃符是春联前身，古人于岁末在桃木板上画神荼、郁垒二神以驱邪。五代后蜀主孟昶写下第一副春联「新年纳余庆，嘉节号长春」，王安石诗句使之家喻户晓，成都桃符市为新年拉开序幕。"},
+      {key:"jinjiang", label:"锦江打卡点", icon:"📍", summary:"太古里 / 锦华万达广场年货街：在锦江的商场与街巷，挑选一副春联、一枚福字。",
+        detail:"太古里、IFS、锦华万达的年货街是买春联福字的首选；老巷里的手写春联摊更有年味，在锦江的商场与街巷挑一副春联、一枚福字，把年俗带回家。"},
+      {key:"youth", label:"年轻互动点", icon:"🎯", summary:"AI 写春联、福字涂鸦墙、新年盲盒，把传统年俗变成可参与、可传播的新年仪式。",
+        detail:"AI 写春联输入姓名与心愿生成专属对联；福字涂鸦墙集体创作；新年盲盒开出「十二月市」限定红包与贴纸，把传统年俗变成可参与、可传播的新年仪式。"}
+    ]}
+];
+
+/* 市集趣答：围绕十二月市与锦江文化出题 */
+const MARKET_QUIZ = [
+  { q:"成都别称「锦官城」与哪一个市集关系最密切？",
+    options:["灯市","锦市","药市","桃符市"], answer:1,
+    fb:"四月锦市与蜀锦织造有关，成都因西汉设锦官管理织锦而称「锦官城」。" },
+  { q:"「千门万户曈曈日，总把新桃换旧符」描写的是哪个月市？",
+    options:["灯市","梅市","桃符市","七宝市"], answer:2,
+    fb:"王安石诗句写的是岁末换桃符，对应十二月桃符市。" },
+  { q:"宋代成都「灯市甲天下」主要在哪个月举行？",
+    options:["正月","二月","八月","十月"], answer:0,
+    fb:"正月十五灯市在锦江两岸极盛，陆游笔记中多有记载。" },
+  { q:"成都被称为「蓉城」与哪种花市有关？",
+    options:["花市","桂市","梅市","药市"], answer:0,
+    fb:"五代花蕊夫人偏爱芙蓉，成都二月花市与芙蓉文化使成都得名「蓉城」。" },
+  { q:"孙思邈曾入蜀采药，成都哪个月市曾是全国性药材集散中心？",
+    options:["三月蚕市","七月七宝市","九月药市","十一月梅市"], answer:2,
+    fb:"九月药市规模盛大，是全国性的药材集散中心。" }
+];
+
+/* PK 对战题库（历史选择题） */
+const PK_QUESTIONS = [
+  { q:"中国历史上第一个世袭王朝是？", options:["夏","商","周","秦"], answer:0 },
+  { q:"甲骨文最早大量出现于哪个朝代？", options:["夏","商","汉","唐"], answer:1 },
+  { q:"统一六国、自称「始皇帝」的是？", options:["汉武帝","秦始皇","唐太宗","明太祖"], answer:1 },
+  { q:"开通丝绸之路的盛世皇帝是？", options:["汉高祖","汉文帝","汉武帝","汉献帝"], answer:2 },
+  { q:"唐朝的都城是？", options:["长安","洛阳","汴京","大都"], answer:0 },
+  { q:"科举制度创立于哪个朝代？", options:["汉","隋","唐","明"], answer:1 },
+  { q:"郑和七下西洋发生在哪个朝代？", options:["宋","元","明","清"], answer:2 },
+  { q:"中国最后一个封建王朝是？", options:["明","清","元","隋"], answer:1 },
+  { q:"「贞观之治」出现在哪位皇帝在位时？", options:["唐高祖","唐太宗","唐玄宗","唐高宗"], answer:1 },
+  { q:"活字印刷术的改进者毕昇，生活于哪个朝代？", options:["唐","宋","元","明"], answer:1 },
+  { q:"京杭大运河在哪一朝代大规模开凿贯通？", options:["秦","隋","唐","宋"], answer:1 },
+  { q:"「康乾盛世」属于哪个王朝？", options:["明","清","元","宋"], answer:1 },
+  { q:"辛亥革命推翻的末代皇帝是？", options:["光绪","宣统","同治","道光"], answer:1 },
+  { q:"三国中「鞠躬尽瘁」的蜀汉丞相是？", options:["曹操","孙权","诸葛亮","司马懿"], answer:2 },
+  { q:"分封制与宗法礼制高度成熟于哪个朝代？", options:["商","周","秦","汉"], answer:1 }
+];
+
+/* 段位阈值（来自设计说明书） */
+const TIERS = [
+  { name:"青铜", need:50 },
+  { name:"白银", need:100 },
+  { name:"黄金", need:200 },
+  { name:"铂金", need:250 },
+  { name:"钻石", need:300 },
+  { name:"王者", need:400 }
+];
+
+/* 锦江岁时志 */
+const JIANGJIN_GUIDE = [
+  { t:"锦江之名", p:"锦江因「濯锦之江」得名。汉代成都设锦官，织好的蜀锦需在江中洗涤，江水因染料呈现斑斓色彩，故称锦江。",
+    ex:"打卡点：合江亭、安顺廊桥、九眼桥一带，夜游锦江最能体会「濯锦」诗意。" },
+  { t:"十二月市", p:"十二月市是宋代成都按月举办的商贸与游赏集市，从正月灯市到十二月桃符市，月月有主题。它既是经济活动，也是成都人生活美学的体现。",
+    ex:"玩法：按月份解锁市集卡片，收集「历史故事点+锦江打卡点+年轻互动点」。" },
+  { t:"扬一益二", p:"唐代谚语「扬一益二」指扬州第一、益州（成都）第二，说明成都自古商业繁荣。锦江畔的市集正是这种繁华的延续。",
+    ex:"古今对照：今天的春熙路、太古里、九眼桥，正是古代十二月市的当代版本。" },
+  { t:"岁时与互动", p:"每个月市都有对应的自然时序、传统技艺和年轻玩法。学习历史不只是背书，更是把岁时文化变成可打卡、可体验、可分享的城市生活。",
+    ex:"建议：选一个你最感兴趣的月份，去对应的锦江打卡点完成一次年轻互动任务。" }
+];
+
+</script>
+  <script>
+/* ====== 览古 · 应用逻辑 ====== */
+(function(){
+  "use strict";
+  const $ = (s, r=document)=>r.querySelector(s);
+  const $$ = (s, r=document)=>Array.from(r.querySelectorAll(s));
+
+  /* ---------- 视图导航 ---------- */
+  function goView(v){
+    $$(".view").forEach(el=>el.classList.toggle("active", el.id === "view-"+v));
+    $$(".nav-btn").forEach(b=>b.classList.toggle("active", b.dataset.view === v));
+    if(v==="account") renderAccount();
+    if(v==="pk") initPKGate();
+    Zola.context(v);
+  }
+  $$("[data-view]").forEach(b=>b.addEventListener("click",()=>goView(b.dataset.view)));
+  $$("[data-go]").forEach(b=>b.addEventListener("click",()=>goView(b.dataset.go)));
+
+  /* ---------- 学习板块 ---------- */
+  const timelineEl = $("#timeline");
+  function renderTimeline(){
+    timelineEl.innerHTML = MONTHLY_MARKETS.map((d,mi)=>`
+      <div class="dyn market-card">
+        <div class="dyn-top">
+          <span class="dyn-name">${d.month} · ${d.market}</span>
+          <span class="dyn-period">${d.desc}</span>
+        </div>
+        <div class="market-grid">
+          ${d.points.map(p=>`
+          <div class="m-point" data-mi="${mi}" data-pk="${p.key}" role="button" tabindex="0">
+            <b class="m-label">${p.icon} ${p.label}</b>
+            <p>${p.summary}</p>
+            <span class="m-more">点击查看详情 ›</span>
+          </div>`).join("")}
+        </div>
+      </div>`).join("");
+  }
+
+  /* 十二月市详情弹窗 */
+  const mModal=$("#m-modal"), mMtitle=$("#m-title"), mMsummary=$("#m-summary"), mMdetail=$("#m-detail"), mMchip=$("#m-chip");
+  function openPoint(mi, pk){
+    const m = MONTHLY_MARKETS[mi];
+    const pt = m.points.find(p=>p.key===pk);
+    if(!pt) return;
+    mMchip.textContent = m.month + " · " + m.market;
+    mMtitle.textContent = pt.icon + " " + pt.label;
+    mMsummary.textContent = pt.summary;
+    mMdetail.textContent = pt.detail;
+    mModal.classList.add("open");
+  }
+  function closePoint(){ mModal.classList.remove("open"); }
+  timelineEl.addEventListener("click", e=>{
+    const btn = e.target.closest(".m-point");
+    if(btn){ openPoint(+btn.dataset.mi, btn.dataset.pk); }
+  });
+  timelineEl.addEventListener("keydown", e=>{
+    if(e.key==="Enter" || e.key===" "){
+      const btn = e.target.closest(".m-point");
+      if(btn){ e.preventDefault(); openPoint(+btn.dataset.mi, btn.dataset.pk); }
+    }
+  });
+  $("#m-close").addEventListener("click", closePoint);
+  $("#m-mask").addEventListener("click", closePoint);
+  document.addEventListener("keydown", e=>{ if(e.key==="Escape") closePoint(); });
+
+  const relicEl = $("#relic-quiz");
+  let relicIdx=0, relicScore=0, relicDone=0;
+  function renderRelic(){
+    if(relicIdx>=MARKET_QUIZ.length){
+      relicEl.innerHTML = `<div class="quiz-card">
+        <h3>市集趣答 · 完成</h3>
+        <div class="quiz-q">你答对了 <b style="color:var(--gold)">${relicScore}</b> / ${MARKET_QUIZ.length} 题。</div>
+        <div class="quiz-foot"><span class="quiz-score"></span>
+        <button class="btn btn-gold" id="relic-restart">再来一次</button></div></div>`;
+      $("#relic-restart").addEventListener("click",()=>{relicIdx=0;relicScore=0;relicDone=0;renderRelic();});
+      return;
+    }
+    const q = MARKET_QUIZ[relicIdx];
+    relicEl.innerHTML = `<div class="quiz-card">
+      <h3>市集趣答 · 第 ${relicIdx+1}/${MARKET_QUIZ.length} 题</h3>
+      <div class="quiz-q">${q.q}</div>
+      <div>${q.options.map((o,i)=>`<button class="opt" data-i="${i}">${o}</button>`).join("")}</div>
+      <div class="quiz-feedback" id="relic-fb"></div>
+      <div class="quiz-foot"><span class="quiz-score">得分 <b>${relicScore}</b></span>
+      <span>${relicDone}/${MARKET_QUIZ.length}</span></div>
+    </div>`;
+    $$(".opt", relicEl).forEach(btn=>{
+      btn.addEventListener("click",()=>{
+        const i = +btn.dataset.i;
+        $$(".opt", relicEl).forEach(b=>b.disabled=true);
+        if(i===q.answer){ btn.classList.add("correct"); relicScore++;
+          $("#relic-fb").className="quiz-feedback ok"; $("#relic-fb").textContent="答对啦！"+q.fb;
+        } else {
+          btn.classList.add("wrong");
+          $(`.opt[data-i="${q.answer}"]`, relicEl).classList.add("correct");
+          $("#relic-fb").className="quiz-feedback no"; $("#relic-fb").textContent="答错了。"+q.fb;
+        }
+        relicDone++;
+        setTimeout(()=>{relicIdx++;renderRelic();}, 1700);
+      });
+    });
+  }
+
+  const chronoEl = $("#chrono");
+  function renderChrono(){
+    chronoEl.innerHTML = JIANGJIN_GUIDE.map(c=>`
+      <div class="chrono-block"><h3>${c.t}</h3><p>${c.p}</p><div class="ex">${c.ex}</div></div>`).join("");
+  }
+
+  $$(".ltab").forEach(t=>t.addEventListener("click",()=>{
+    $$(".ltab").forEach(x=>x.classList.toggle("active", x===t));
+    $$(".learn-panel").forEach(p=>p.classList.remove("active"));
+    $("#lt-"+t.dataset.ltab).classList.add("active");
+  }));
+
+  renderTimeline(); renderRelic(); renderChrono();
+
+  /* ---------- 账号 / localStorage ---------- */
+  const USERS_KEY="langu_users", CUR_KEY="langu_current";
+  const userChip=$("#user-chip"), tierBadge=$("#tier-badge");
+  function loadUsers(){ try{return JSON.parse(localStorage.getItem(USERS_KEY))||{};}catch(e){return {};} }
+  function saveUsers(u){ localStorage.setItem(USERS_KEY, JSON.stringify(u)); }
+  function currentUser(){ return localStorage.getItem(CUR_KEY); }
+  function tierInfo(exp){
+    let cur=TIERS[0], next=null;
+    for(const t of TIERS){ if(exp>=t.need){cur=t;} else {next=t;break;} }
+    const maxed = exp>=TIERS[TIERS.length-1].need;
+    return {cur, next, maxed};
+  }
+  function refreshUserChip(){
+    const name=currentUser();
+    if(name){
+      const u=loadUsers()[name]; const ti=tierInfo(u.exp);
+      userChip.classList.remove("hidden");
+      $(".uname",userChip).textContent=name;
+      tierBadge.textContent=ti.cur.name;
+    } else userChip.classList.add("hidden");
+  }
+  function renderAccount(){
+    const name=currentUser();
+    if(name){
+      const u=loadUsers()[name]; const ti=tierInfo(u.exp);
+      $("#acc-loggedout").classList.add("hidden");
+      $("#acc-loggedin").classList.remove("hidden");
+      $("#acc-name-show").textContent=name;
+      $("#acc-exp").textContent=u.exp;
+      $("#acc-tier").textContent=ti.cur.name;
+      $("#acc-next").textContent = ti.maxed ? "已满级" : ("还需 "+(ti.next.need-u.exp));
+      $("#tier-track").innerHTML = TIERS.map(t=>
+        `<span class="tt ${t.name===ti.cur.name?'cur':''}">${t.name}</span>`).join("");
+    } else {
+      $("#acc-loggedout").classList.remove("hidden");
+      $("#acc-loggedin").classList.add("hidden");
+    }
+  }
+  function setHint(msg, ok){
+    const h=$("#acc-hint"); h.textContent=msg; h.className="acc-hint"+(ok?" ok":"");
+  }
+  $("#acc-register").addEventListener("click",()=>{
+    const name=$("#acc-name").value.trim(), pass=$("#acc-pass").value;
+    if(!name||!pass){ setHint("请填写名称与密码。"); return; }
+    const users=loadUsers();
+    if(users[name]){ setHint("该名称已被占用，请换一个或登录。"); return; }
+    users[name]={pass, exp:0}; saveUsers(users); localStorage.setItem(CUR_KEY,name);
+    setHint("注册成功，已登录！", true); refreshUserChip(); renderAccount();
+    Zola.say(`欢迎加入览古，${name}！现在可以去「PK 对战」检验你的历史功力了。`);
+  });
+  $("#acc-login").addEventListener("click",()=>{
+    const name=$("#acc-name").value.trim(), pass=$("#acc-pass").value;
+    const users=loadUsers();
+    if(!users[name]){ setHint("没有这个账号，请先注册。"); return; }
+    if(users[name].pass!==pass){ setHint("密码不对，再试试。"); return; }
+    localStorage.setItem(CUR_KEY,name); setHint("登录成功！", true);
+    refreshUserChip(); renderAccount();
+  });
+  $("#acc-logout").addEventListener("click",()=>{
+    localStorage.removeItem(CUR_KEY); refreshUserChip(); renderAccount();
+    Zola.say("已退出。随时可再来学习或注册 PK。");
+  });
+
+  /* ---------- PK 对战引擎（单人 / 双人抢答） ---------- */
+  const BOT_ACC=0.66;
+  let pk=null, qOrder=[], qPos=0, pkMode="solo", botTimer=null, botActTimer=null;
+  const pkGate=$("#pk-gate"), pkArena=$("#pk-arena");
+
+  function clearBotTimers(){ if(botTimer){clearTimeout(botTimer);botTimer=null;} if(botActTimer){clearTimeout(botActTimer);botActTimer=null;} }
+
+  $$(".pmode").forEach(b=>b.addEventListener("click",()=>{
+    if(pkMode===b.dataset.mode) return;
+    pkMode=b.dataset.mode;
+    $$(".pmode").forEach(x=>x.classList.toggle("active", x===b));
+    if(currentUser()) startBattle();
+  }));
+
+  function initPKGate(){
+    clearBotTimers();
+    if(currentUser()){
+      pkGate.classList.add("hidden"); pkArena.classList.remove("hidden");
+      startBattle();
+    } else { pkGate.classList.remove("hidden"); pkArena.classList.add("hidden"); }
+  }
+  function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+
+  function sideName(s){
+    if(s===0) return (currentUser()||"玩家1")+" · 机器人A";
+    return pkMode==="solo" ? "机器人B（电脑）" : "玩家2 · 机器人B";
+  }
+  function isBot(s){ return pkMode==="solo" && s===1; }
+
+  function startBattle(){
+    clearBotTimers();
+    pk={hp:[100,100], round:1, over:false, buzzer:null, phase:null, qi:null, wrong:{}};
+    qOrder=shuffle(PK_QUESTIONS.map((_,i)=>i)); qPos=0;
+    $("#pk-log").innerHTML="";
+    $("#pk-name-0").textContent=sideName(0);
+    $("#pk-name-1").textContent=sideName(1);
+    $("#pk-action").classList.add("hidden");
+    $("#pk-buzz").classList.remove("hidden");
+    updateHP();
+    log("sys", pkMode==="solo" ? "单人模式：你(机器人A) 对战 电脑(机器人B)" : "双人模式：玩家1 对战 玩家2，同屏抢答");
+    nextRound();
+  }
+  function updateHP(){
+    $("#hp-0").style.width=pk.hp[0]+"%"; $("#hp-0-num").textContent=pk.hp[0];
+    $("#hp-1").style.width=pk.hp[1]+"%"; $("#hp-1-num").textContent=pk.hp[1];
+    const u=loadUsers()[currentUser()]; const ti=tierInfo(u.exp);
+    $("#exp-now").textContent=u.exp; $("#tier-now").textContent=ti.cur.name;
+  }
+  function log(cls,msg){ const l=$("#pk-log"); l.innerHTML+=`<div class="l-${cls}">${msg}</div>`; l.scrollTop=l.scrollHeight; }
+
+  function nextRound(){
+    if(pk.over) return;
+    pk.buzzer=null; pk.phase="buzz"; pk.wrong={};
+    $("#pk-action").classList.add("hidden");
+    $("#pk-buzz").classList.remove("hidden");
+    $("#pk-round-tag").textContent="第 "+pk.round+" 回合";
+    pk.qi = qOrder[qPos % qOrder.length]; qPos++;
+    const q=PK_QUESTIONS[pk.qi];
+    $("#pk-q").textContent=q.q;
+    $("#pk-options").innerHTML="";
+    const b0=$("#buzz-0"), b1=$("#buzz-1");
+    b0.disabled=false; b0.classList.remove("win"); b0.textContent= pkMode==="solo" ? "你 抢答" : "玩家1 抢答";
+    b1.disabled=(pkMode==="solo"); b1.classList.remove("win"); b1.textContent= pkMode==="solo" ? "机器人(自动)" : "玩家2 抢答";
+    $("#pk-buzz-tip").textContent = pkMode==="solo"
+      ? "快抢答！你先按就你先答；不按电脑会自动抢。"
+      : "抢答！玩家1 / 玩家2 谁先按下谁先答。";
+    if(pkMode==="solo"){
+      const delay = 700 + Math.random()*1600;
+      botTimer=setTimeout(()=>{ if(pk && pk.phase==="buzz") onBuzz(1); }, delay);
+    }
+  }
+
+  function onBuzz(side){
+    if(!pk || pk.over || pk.phase!=="buzz") return;
+    if(botTimer){clearTimeout(botTimer);botTimer=null;}
+    pk.phase="answer"; pk.buzzer=side;
+    $("#buzz-0").disabled=true; $("#buzz-1").disabled=true;
+    $("#buzz-"+side).classList.add("win");
+    log(side===0?"you":"bot", sideName(side)+" 抢到答题权 ⚡");
+    showOptions(side);
+  }
+
+  function showOptions(side){
+    const q=PK_QUESTIONS[pk.qi];
+    const box=$("#pk-options"); box.innerHTML="";
+    q.options.forEach((o,i)=>{
+      const b=document.createElement("button"); b.className="opt"; b.textContent=o;
+      b.addEventListener("click",()=>onAnswer(side,i));
+      box.appendChild(b);
+    });
+    if(isBot(side)){
+      const delay = 500 + Math.random()*900;
+      botActTimer=setTimeout(()=>{
+        if(!pk||pk.phase!=="answer"||pk.buzzer!==side) return;
+        const correct = Math.random()<BOT_ACC;
+        onAnswer(side, correct ? q.answer : (q.answer+1)%q.options.length);
+      }, delay);
+    }
+  }
+
+  function onAnswer(side, idx){
+    if(!pk || pk.over || pk.phase!=="answer" || side!==pk.buzzer) return;
+    if(botActTimer){clearTimeout(botActTimer);botActTimer=null;}
+    $$("#pk-options .opt").forEach(b=>b.disabled=true);
+    const q=PK_QUESTIONS[pk.qi];
+    const correct = idx===q.answer;
+    log(side===0?"you":"bot", sideName(side)+(correct?" 答对了 ✔":" 答错了 ✘"));
+    if(correct){
+      pk.phase="action";
+      $("#pk-action").classList.remove("hidden");
+      $("#pk-action-tip").textContent = sideName(side)+" 抢答成功！选择行动：";
+      if(isBot(side)){
+        botActTimer=setTimeout(()=>{
+          if(!pk||pk.phase!=="action"||pk.buzzer!==side) return;
+          doAction(side, Math.random()<0.4);
+        }, 700);
+      }
+    } else {
+      const other = 1-side;
+      if(pk.wrong[other]){
+        log("sys","双方都答错，进入下一题");
+        pk.wrong={};
+        setTimeout(()=>{ pk.round++; nextRound(); }, 900);
+        return;
+      }
+      pk.wrong[side]=true;
+      log("sys", sideName(other)+" 获得补答机会");
+      pk.buzzer=other; pk.phase="answer";
+      showOptions(other);
+    }
+  }
+
+  function doAction(side, heal){
+    if(!pk || pk.over) return;
+    if(botActTimer){clearTimeout(botActTimer);botActTimer=null;}
+    $("#pk-action").classList.add("hidden");
+    if(heal){ pk.hp[side]=Math.min(100,pk.hp[side]+10); log(side===0?"you":"bot", sideName(side)+" 回血 +10"); }
+    else { pk.hp[1-side]=Math.max(0,pk.hp[1-side]-10); log(side===0?"you":"bot", sideName(side)+" 攻击 "+sideName(1-side)+" -10"); }
+    updateHP();
+    if(!endCheck()) setTimeout(()=>{ pk.round++; nextRound(); }, 800);
+  }
+  $("#act-heal").addEventListener("click",()=>{ if(pk&&pk.phase==="action") doAction(pk.buzzer,true); });
+  $("#act-atk").addEventListener("click",()=>{ if(pk&&pk.phase==="action") doAction(pk.buzzer,false); });
+  $("#pk-restart").addEventListener("click",()=>{ if(currentUser()) startBattle(); });
+  $("#buzz-0").addEventListener("click",()=>onBuzz(0));
+  $("#buzz-1").addEventListener("click",()=>{ if(pkMode==="duo") onBuzz(1); });
+
+  function endCheck(){
+    if(pk.hp[1]<=0){ finish(0); return true; }
+    if(pk.hp[0]<=0){ finish(1); return true; }
+    return false;
+  }
+  function finish(winner){
+    pk.over=true; clearBotTimers();
+    $("#pk-buzz").classList.add("hidden");
+    $("#pk-action").classList.add("hidden");
+    const youWin = winner===0;
+    const users=loadUsers(); const name=currentUser(); const u=users[name];
+    u.exp = youWin ? u.exp+5 : Math.max(0,u.exp-5); saveUsers(users);
+    const ti=tierInfo(u.exp);
+    const dist = ti.maxed ? "已达最高段位「王者」" : ("距「"+ti.next.name+"」还需 "+(ti.next.need-u.exp)+" 经验");
+    const verdict = pkMode==="solo" ? (youWin?"你赢了！":"你输了！") : (winner===0?"玩家1 获胜！":"玩家2 获胜！");
+    log("sys","—— 结算 ——");
+    log(youWin?"you":"bot", (youWin?"🏆 ":"💀 ")+verdict+" 经验 "+(youWin?"+5":"-5")+"（当前 "+u.exp+"）");
+    log("sys", dist);
+    updateHP(); refreshUserChip();
+    $("#pk-q").textContent = (youWin?"🏆 ":"💀 ")+verdict;
+    $("#pk-options").innerHTML = `<div class="quiz-feedback ${youWin?'ok':'no'}" style="font-size:15px">${dist}。点「重新开战」再战一场。</div>`;
+    Zola.say(youWin? `恭喜获胜！${dist}。继续 PK 能更快冲上王者。` : `这局惜败，${dist}。回「学习板块」补补课，下一局翻盘！`);
+  }
+
+  /* ---------- 左拉 · 导游 AI ---------- */
+  const Zola = (function(){
+    const panel=$("#zola-panel"), msg=$("#zola-msg"), quick=$("#zola-quick"),
+          qInput=$("#zola-q"), toggle=$("#zola-toggle");
+    toggle.addEventListener("click",()=>panel.classList.toggle("hidden"));
+    function say(text){ msg.innerHTML=text; }
+    const KB=[
+      {k:["朝代","顺序","夏商周","历史","时间轴"], a:"我们从时间轴学习：夏→商→周→秦→汉→三国→晋→隋→唐→宋→元→明→清→近代。记住「开国君主 + 亡国君主 + 标志性制度」三条线，朝代就串起来了。"},
+      {k:["纪年","公元","干支","年号"], a:"主要有三种：①公元纪年（耶稣诞生为界）；②君王/年号纪年（如贞观三年）；③干支纪年（甲乙…子丑…60 年一甲子，如甲午、辛亥）。"},
+      {k:["市集","十二月市","花市","灯市","锦市"], a:"锦江十二月市从正月灯市到十二月桃符市，月月有主题。每张卡片都写了「历史故事点+锦江打卡点+年轻互动点」，去「学习板块 · 十二月市」慢慢逛。"},
+      {k:["pk","对战","战斗","怎么玩","规则","抢答"], a:"PK 是两个机器人同屏抢答：每回合出历史题，谁先抢答且答对，就能选「回血 +10」或「攻击 -10」，先把对手打到 0 血即胜。可选「单人」对战电脑，或「双人」两人同屏抢答。胜 +5 经验、负 -5，需先注册！"},
+      {k:["段位","经验","升级","青铜","王者"], a:"胜一场 +5 经验、负一场 -5（最低 0）。段位门槛：青铜50·白银100·黄金200·铂金250·钻石300·王者400。多打多学就能升段。"},
+      {k:["注册","账号","登录","密码"], a:"到「账号」页填名称和密码即可注册登录。注册后才能参与 PK 与累积段位；不注册也能安心学历史。"},
+      {k:["左拉","你是谁","导游"], a:"我是左拉，你的历史导游 🧭。我会按你所在的页面给你引路：学历史、打 PK、升段位，不懂就问我。"},
+      {k:["开始","干嘛","做什么"], a:"建议路线：①「学习板块」逛锦江十二月市，看历史故事+打卡点+互动玩法；②「市集趣答」「锦江岁时志」巩固知识；③注册后去「PK 对战」检验成果。"}
+    ];
+    function answer(text){
+      const t=text.toLowerCase();
+      for(const item of KB){ if(item.k.some(k=>text.includes(k))) return item.a; }
+      return "你可以问我：十二月市有哪些、锦江打卡点在哪、市集趣答怎么玩、PK 怎么玩、怎么注册、段位怎么升。也可以直接去对应板块试试～";
+    }
+    $("#zola-send").addEventListener("click",()=>{
+      const v=qInput.value.trim(); if(!v) return;
+      msg.innerHTML+=`<div style="color:var(--parch-dim);margin:6px 0">你：${v}</div>`;
+      msg.innerHTML+=`<div style="color:var(--patina);margin:2px 0 8px">左拉：${answer(v)}</div>`;
+      qInput.value=""; msg.scrollTop=msg.scrollHeight;
+    });
+    qInput.addEventListener("keydown",e=>{ if(e.key==="Enter") $("#zola-send").click(); });
+    const CTX={
+      home:{m:"你好，我是导游左拉 🧭。览古现在聚焦锦江十二月市——先去「学习板块」逛市集、找打卡点，再注册打 PK。",q:["怎么开始？","这游戏干嘛的"]},
+      learn:{m:"学习板块三件宝：十二月市看历史故事与打卡点，市集趣答检验知识，锦江岁时志读懂锦江文化。先把十二月市过一遍吧。",q:["十二月市有哪些","锦江打卡点在哪","市集趣答怎么玩"]},
+      pk:{m:"PK 是两个机器人抢答对战：先抢且答对的一方选回血或攻击，先把对手打到 0 即胜。顶部可切「单人(对战电脑)」或「双人(两人同屏抢答)」。胜 +5 经验，负 -5。",q:["PK 怎么玩？","段位怎么升？"]},
+      account:{m:"注册只需名称+密码，登录后即可 PK 与累积经验段位。数据存在本机浏览器里。",q:["怎么注册？","经验有什么用？"]}
+    };
+    function context(v){
+      const c=CTX[v]||CTX.home;
+      say(c.m);
+      quick.innerHTML=c.q.map(t=>`<button>${t}</button>`).join("");
+      $$("#zola-quick button").forEach(b=>b.addEventListener("click",()=>{
+        msg.innerHTML+=`<div style="color:var(--parch-dim);margin:6px 0">你：${b.textContent}</div>`;
+        const a=answer(b.textContent);
+        msg.innerHTML+=`<div style="color:var(--patina);margin:2px 0 8px">左拉：${a}</div>`;
+        msg.scrollTop=msg.scrollHeight;
+      }));
+    }
+    return {say, context};
+  })();
+
+  /* ---------- 启动 ---------- */
+  refreshUserChip();
+  Zola.context("home");
+})();
+
+</script>
+</body>
+</html>
