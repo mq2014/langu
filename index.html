@@ -129,6 +129,14 @@ h1,h2,h3{font-family:"STKaiti","KaiTi","Songti SC","SimSun",serif;letter-spacing
 .opt.correct{border-color:var(--patina);background:rgba(107,144,128,.2);}
 .opt.wrong{border-color:var(--cinnabar);background:rgba(179,66,52,.18);}
 .opt:disabled{cursor:default;}
+.pk-options{margin:10px auto 2px;max-width:560px;}
+.pk-opt{margin:7px 0;}
+.human-tip{font-size:13px;color:var(--parch-dim);margin:8px 6px 2px;}
+.pk-human{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;align-items:center;margin:8px auto 0;max-width:620px;min-height:18px;}
+.btn-cinnabar{background:linear-gradient(145deg,#d4604f,var(--cinnabar));color:#fff;font-weight:700;}
+.btn-cinnabar:hover{filter:brightness(1.08);transform:translateY(-1px);}
+.btn-patina{background:linear-gradient(145deg,#8fb7a6,var(--patina));color:#0e1a16;font-weight:700;}
+.btn-patina:hover{filter:brightness(1.08);transform:translateY(-1px);}
 .quiz-feedback{margin-top:14px;font-size:14px;line-height:1.6;min-height:22px;}
 .quiz-feedback.ok{color:var(--patina);}
 .quiz-feedback.no{color:var(--cinnabar);}
@@ -210,6 +218,7 @@ h1,h2,h3{font-family:"STKaiti","KaiTi","Songti SC","SimSun",serif;letter-spacing
 .pk-log .l-1{color:var(--cinnabar);}
 .pk-log .l-2{color:var(--teal);}
 .pk-log .l-sys{color:var(--bronze-soft);}
+.pk-log .l-you{color:var(--gold);font-weight:700;}
 .pk-foot{display:flex;justify-content:space-between;align-items:center;margin-top:16px;flex-wrap:wrap;gap:10px;}
 .exp-line{font-size:13px;color:var(--parch-dim);}
 .exp-line b{color:var(--gold);}
@@ -249,7 +258,18 @@ h1,h2,h3{font-family:"STKaiti","KaiTi","Songti SC","SimSun",serif;letter-spacing
 /* 3D 场景 */
 .scene3d-stage{position:relative;height:440px;perspective:900px;overflow:hidden;border-radius:14px;background:linear-gradient(180deg,#0b1622,#0e2a24);border:1px solid var(--line);}
 .scene3d-sky{position:absolute;inset:0;background:radial-gradient(600px 300px at 50% 0%, rgba(212,175,55,.18), transparent 70%);}
-.scene3d-ground{position:absolute;left:-20%;right:-20%;bottom:-10%;height:70%;transform:rotateX(74deg);transform-origin:bottom center;background:linear-gradient(90deg, transparent 46%, rgba(60,120,160,.5) 48%, rgba(60,120,160,.5) 52%, transparent 54%),repeating-linear-gradient(0deg, rgba(255,255,255,.04) 0 38px, rgba(0,0,0,.12) 38px 40px),linear-gradient(180deg, #16352a, #0c2018);}
+.scene3d-ground{position:absolute;left:-45%;right:-45%;bottom:-28%;height:130%;transform:rotateX(74deg);transform-origin:bottom center;
+  background:
+    repeating-linear-gradient(0deg, rgba(247,228,178,.06) 0 2px, transparent 2px 48px),
+    repeating-linear-gradient(90deg, rgba(247,228,178,.06) 0 2px, transparent 2px 48px),
+    linear-gradient(118deg, transparent 30%, rgba(64,128,170,.55) 44%, rgba(86,156,196,.62) 52%, rgba(64,128,170,.5) 60%, transparent 72%),
+    radial-gradient(circle at 28% 38%, rgba(120,152,92,.30), transparent 26%),
+    radial-gradient(circle at 68% 64%, rgba(120,152,92,.26), transparent 24%),
+    radial-gradient(circle at 50% 18%, rgba(150,120,80,.22), transparent 22%),
+    linear-gradient(180deg, #2c4a32, #16352a);
+  box-shadow: inset 0 0 120px rgba(0,0,0,.5);
+}
+.scene3d-ground::after{content:"锦 江";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-family:"STKaiti","KaiTi",serif;font-size:46px;color:rgba(190,225,245,.18);letter-spacing:.4em;}
 .scene3d-world{position:absolute;left:50%;top:62%;width:0;height:0;transform-style:preserve-3d;animation:fly 16s linear infinite;}
 @keyframes fly{from{transform:translateZ(-2800px);}to{transform:translateZ(0);}}
 .stall{position:absolute;width:150px;height:120px;transform-style:preserve-3d;background:linear-gradient(180deg,var(--accent,#e0473a),rgba(0,0,0,.5));border:2px solid rgba(255,255,255,.25);border-radius:8px 8px 0 0;box-shadow:0 0 24px var(--glow,rgba(255,211,107,.4));display:grid;place-items:center;}
@@ -415,7 +435,7 @@ h1,h2,h3{font-family:"STKaiti","KaiTi","Songti SC","SimSun",serif;letter-spacing
     <section class="view" id="view-pk">
       <div class="view-head">
         <h2>十二月市历史知识 PK 对战</h2>
-        <p class="view-sub">三台机甲机器人自动对战：随机弹出历史题抢答，抢答胜者二选一——攻击敌方 1 点伤害，或给自己回 1 滴血。机甲初始血量 10 点，血量先归零者淘汰，最后存活者获胜。每题限时 20 秒，超时存活者各扣 1 血。</p>
+        <p class="view-sub">三台机甲机器人自动对战：每题弹出 <b>3 个选项</b> 供点击抢答，机器人反应均 ≥2 秒。你也能抢答——抢到并答对，就由你来选择【攻击】敌方 -1 血或【回血】友方 +1 血。机甲初始血量 10 点，血量先归零者淘汰，最后存活者获胜。每题限时 20 秒，超时存活者各扣 1 血。</p>
       </div>
       <div id="pk-arena" class="pk-arena">
         <div class="mecha-row" id="pk-row"></div>
@@ -423,6 +443,8 @@ h1,h2,h3{font-family:"STKaiti","KaiTi","Songti SC","SimSun",serif;letter-spacing
           <div class="round-tag" id="pk-round-tag">第 1 回合</div>
           <div class="timer-wrap"><div class="timer-bar" id="pk-timer-bar"></div><span class="timer-num" id="pk-timer-num">20</span></div>
           <div class="q-text" id="pk-q"></div>
+          <div class="pk-options" id="pk-options"></div>
+          <div class="pk-human" id="pk-human"></div>
           <div class="buzz-banner" id="pk-buzz-banner"></div>
         </div>
         <div class="action-flash" id="pk-action-flash"></div>
@@ -514,7 +536,7 @@ h1,h2,h3{font-family:"STKaiti","KaiTi","Songti SC","SimSun",serif;letter-spacing
           <button class="btn btn-ghost btn-sm" data-close="scene">退出 3D 街市</button>
         </div>
       </div>
-      <div class="scene-tip">卫星式底图还原 · 沿街飞行漫游 · 按月份换装街景</div>
+      <div class="scene-tip">3D 仿真街市 · 卫星底图还原（绿野 / 锦江 / 街格路网）· 沿街飞行漫游 · 按月份换装街景</div>
     </div>
   </div>
 
@@ -677,28 +699,28 @@ const MARKET_QUIZ = [
 
 /* PK 对战题库 */
 const PK_QUESTIONS = [
-  { q:"中国历史上第一个世袭王朝是？", options:["夏","商","周","秦"], answer:0 },
-  { q:"甲骨文最早大量出现于哪个朝代？", options:["夏","商","汉","唐"], answer:1 },
-  { q:"统一六国、自称「始皇帝」的是？", options:["汉武帝","秦始皇","唐太宗","明太祖"], answer:1 },
-  { q:"开通丝绸之路的盛世皇帝是？", options:["汉高祖","汉文帝","汉武帝","汉献帝"], answer:2 },
-  { q:"唐朝的都城是？", options:["长安","洛阳","汴京","大都"], answer:0 },
-  { q:"科举制度创立于哪个朝代？", options:["汉","隋","唐","明"], answer:1 },
-  { q:"郑和七下西洋发生在哪个朝代？", options:["宋","元","明","清"], answer:2 },
-  { q:"中国最后一个封建王朝是？", options:["明","清","元","隋"], answer:1 },
-  { q:"「贞观之治」出现在哪位皇帝在位时？", options:["唐高祖","唐太宗","唐玄宗","唐高宗"], answer:1 },
-  { q:"活字印刷术的改进者毕昇，生活于哪个朝代？", options:["唐","宋","元","明"], answer:1 },
-  { q:"京杭大运河在哪一朝代大规模开凿贯通？", options:["秦","隋","唐","宋"], answer:1 },
-  { q:"「康乾盛世」属于哪个王朝？", options:["明","清","元","宋"], answer:1 },
-  { q:"辛亥革命推翻的末代皇帝是？", options:["光绪","宣统","同治","道光"], answer:1 },
-  { q:"三国中「鞠躬尽瘁」的蜀汉丞相是？", options:["曹操","孙权","诸葛亮","司马懿"], answer:2 },
-  { q:"分封制与宗法礼制高度成熟于哪个朝代？", options:["商","周","秦","汉"], answer:1 },
-  { q:"成都十二月市中，「桃符市」对应今天的哪种年俗？", options:["贴春联/福字","吃月饼","赛龙舟","赏花灯"], answer:0 },
-  { q:"成都别称「锦官城」「蓉城」，其中「蓉」与哪种植物的遍种有关？", options:["芙蓉","牡丹","梅花","桂花"], answer:0 },
-  { q:"「扬一益二」中的「益」指的是哪座城市？", options:["益州（成都）","扬州","益阳","洛阳"], answer:0 },
-  { q:"锦江之名源于「濯锦之江」，与成都哪种传统手工业有关？", options:["织锦","制瓷","造船","冶铁"], answer:0 },
-  { q:"宋代成都最盛大的综合集市「七宝市」出现在哪个月？", options:["正月","七月","十月","十二月"], answer:1 },
-  { q:"陆游曾以「二十里中香不断」咏赞成都哪条香花之路？", options:["青羊宫到浣花溪","锦江到万里桥","大慈寺到东门","草堂到浣花溪"], answer:0 },
-  { q:"成都十二月市里，「灯市」最盛的月份是？", options:["正月","五月","八月","十一月"], answer:0 }
+  { q:"中国历史上第一个世袭王朝是？", options:["夏","商","周"], answer:0 },
+  { q:"甲骨文最早大量出现于哪个朝代？", options:["夏","商","汉"], answer:1 },
+  { q:"统一六国、自称「始皇帝」的是？", options:["汉武帝","秦始皇","唐太宗"], answer:1 },
+  { q:"开通丝绸之路的盛世皇帝是？", options:["汉高祖","汉文帝","汉武帝"], answer:2 },
+  { q:"唐朝的都城是？", options:["长安","洛阳","汴京"], answer:0 },
+  { q:"科举制度创立于哪个朝代？", options:["汉","隋","唐"], answer:1 },
+  { q:"郑和七下西洋发生在哪个朝代？", options:["宋","元","明"], answer:2 },
+  { q:"中国最后一个封建王朝是？", options:["明","清","元"], answer:1 },
+  { q:"「贞观之治」出现在哪位皇帝在位时？", options:["唐高祖","唐太宗","唐玄宗"], answer:1 },
+  { q:"活字印刷术的改进者毕昇，生活于哪个朝代？", options:["唐","宋","元"], answer:1 },
+  { q:"京杭大运河在哪一朝代大规模开凿贯通？", options:["秦","隋","唐"], answer:1 },
+  { q:"「康乾盛世」属于哪个王朝？", options:["明","清","元"], answer:1 },
+  { q:"辛亥革命推翻的末代皇帝是？", options:["光绪","宣统","同治"], answer:1 },
+  { q:"三国中「鞠躬尽瘁」的蜀汉丞相是？", options:["曹操","孙权","诸葛亮"], answer:2 },
+  { q:"分封制与宗法礼制高度成熟于哪个朝代？", options:["商","周","秦"], answer:1 },
+  { q:"成都十二月市中，「桃符市」对应今天的哪种年俗？", options:["贴春联/福字","吃月饼","赛龙舟"], answer:0 },
+  { q:"成都别称「锦官城」「蓉城」，其中「蓉」与哪种植物的遍种有关？", options:["芙蓉","牡丹","梅花"], answer:0 },
+  { q:"「扬一益二」中的「益」指的是哪座城市？", options:["益州（成都）","扬州","益阳"], answer:0 },
+  { q:"锦江之名源于「濯锦之江」，与成都哪种传统手工业有关？", options:["织锦","制瓷","造船"], answer:0 },
+  { q:"宋代成都最盛大的综合集市「七宝市」出现在哪个月？", options:["正月","七月","十月"], answer:1 },
+  { q:"陆游曾以「二十里中香不断」咏赞成都哪条香花之路？", options:["青羊宫到浣花溪","锦江到万里桥","大慈寺到东门"], answer:0 },
+  { q:"成都十二月市里，「灯市」最盛的月份是？", options:["正月","五月","八月"], answer:0 }
 ];
 
 /* 段位阈值 */
@@ -1086,7 +1108,7 @@ const RELICS = [
   const MIN_REACT=2000;           // 反应时下限 ≥2 秒（对面不能太快）
   const ROUND_MS=20000;
   const START_HP=10;
-  let pk=null,qOrder=[],qPos=0,pkTimers=[];
+  let pk=null,qOrder=[],qPos=0,pkTimers=[],pkHuman={};
   function clearPkTimers(){ pkTimers.forEach(t=>clearTimeout(t)); pkTimers=[]; }
   function later(fn,ms){ const t=setTimeout(fn,ms); pkTimers.push(t); return t; }
   function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
@@ -1122,11 +1144,16 @@ const RELICS = [
   function nextRound(){
     if(pk.over) return;
     if(aliveCount()<=1){ finish(pk.alive.indexOf(true)); return; }
-    pk.winner=null;
+    pk.winner=null; pk.resolved=false; pkHuman.done=false;
     $("#pk-round-tag").textContent="第 "+pk.round+" 回合";
     pk.qi=qOrder[qPos%qOrder.length]; qPos++;
-    $("#pk-q").textContent=PK_QUESTIONS[pk.qi].q;
+    const Q=PK_QUESTIONS[pk.qi];
+    $("#pk-q").textContent=Q.q;
     $("#pk-buzz-banner").textContent=""; $("#pk-action-flash").textContent="";
+    $("#pk-human").innerHTML="";
+    const optBox=$("#pk-options");
+    optBox.innerHTML=Q.options.map((o,i)=>`<button class="opt pk-opt" data-i="${i}">${String.fromCharCode(65+i)}. ${o}</button>`).join("");
+    $$(".pk-opt",optBox).forEach(btn=>btn.addEventListener("click",()=>humanPick(+btn.dataset.i)));
     for(let i=0;i<3;i++){ if(pk.alive[i]) $("#bot-"+i).classList.remove("active"); }
     startTimer();
   }
@@ -1157,48 +1184,98 @@ const RELICS = [
       bar.style.width=Math.max(0,remain)/ROUND_MS*100+"%";
       num.textContent=Math.max(0,Math.ceil(remain/1000));
       if(remain<=8000) bar.classList.add("warn");
-      if(remain>0 && pk.winner===null) later(tick,200);
-      else if(pk.winner===null) onTimeout();
+      if(remain>0 && !pk.resolved) later(tick,200);
+      else if(!pk.resolved) onTimeout();
     };
     later(tick,200);
     if(winner!==null) later(()=>onBuzz(winner), Math.max(400,buzzAt));
   }
 
+  function revealAnswer(){
+    const Q=PK_QUESTIONS[pk.qi];
+    $$(".pk-opt").forEach(b=>{ const i=+b.dataset.i; b.disabled=true; if(i===Q.answer) b.classList.add("correct"); });
+  }
+
+  function humanPick(i){
+    if(pk.over||pk.resolved||pkHuman.done) return;
+    const Q=PK_QUESTIONS[pk.qi];
+    if(i===Q.answer){
+      pkHuman.done=true; pk.resolved=true; clearPkTimers();
+      revealAnswer();
+      log("you","⚡ 你抢答成功！");
+      $("#pk-buzz-banner").textContent="⚡ 你抢答成功，选择行动…";
+      humanActionChoice();
+    } else {
+      pkHuman.done=true;
+      const b=document.querySelector('.pk-opt[data-i="'+i+'"]');
+      if(b){ b.disabled=true; b.classList.add("wrong"); }
+      $("#pk-buzz-banner").textContent="你答错了，机甲继续抢答…";
+      log("you","✗ 你答错，机甲继续抢答");
+    }
+  }
+
+  function humanActionChoice(){
+    const box=$("#pk-human");
+    box.innerHTML=`<div class="human-tip">你抢到了答题权，选择行动：</div>`+
+      `<button class="btn btn-cinnabar btn-sm" id="h-atk">⚔ 攻击（对一台机甲 -1 血）</button>`+
+      `<button class="btn btn-patina btn-sm" id="h-heal">❤ 回血（对一台机甲 +1 血）</button>`;
+    $("#h-atk").addEventListener("click",()=>humanPickTarget("attack"));
+    $("#h-heal").addEventListener("click",()=>humanPickTarget("heal"));
+  }
+
+  function humanPickTarget(kind){
+    const box=$("#pk-human");
+    const alive=[0,1,2].filter(i=>pk.alive[i]);
+    box.innerHTML=`<div class="human-tip">${kind==="attack"?"选择要攻击的机甲：":"选择要回血的机甲："}</div>`+
+      alive.map(i=>`<button class="btn btn-ghost btn-sm" data-t="${i}">${ROBOTS[i].name}</button>`).join("");
+    $$("[data-t]",box).forEach(b=>b.addEventListener("click",()=>{
+      const t=+b.dataset.t;
+      resolveAction("you",kind,t);
+    }));
+  }
+
   function onBuzz(side){
-    if(!pk||pk.over||pk.winner!==null||!pk.alive[side]) return;
-    pk.winner=side; clearPkTimers();
+    if(!pk||pk.over||pk.resolved||!pk.alive[side]) return;
+    pk.resolved=true; clearPkTimers();
+    revealAnswer();
     $("#bot-"+side).classList.add("active");
     log(side, "⚡ "+ROBOTS[side].name+" 抢答成功！");
     $("#pk-buzz-banner").textContent="⚡ "+ROBOTS[side].name+" 抢答成功，选择行动…";
-    later(()=>doAction(side),900);
+    later(()=>robotAction(side),900);
   }
 
-  function doAction(side){
+  function robotAction(side){
     if(!pk||pk.over) return;
     const heal = pk.hp[side]<=3 ? true : Math.random()>0.7;
-    if(heal){
-      pk.hp[side]=Math.min(START_HP,pk.hp[side]+1);
-      log(side, ROBOTS[side].name+" 选择【回血】 → 自身 +1 血");
-      $("#pk-action-flash").innerHTML=ROBOTS[side].name+" 选择 <span class=\"heal\">回血 +1</span>";
+    if(heal) resolveAction(side,"heal",side);
+    else { const opp=aliveOpponents(side); const target=opp.reduce((a,b)=>pk.hp[b]<pk.hp[a]?b:a,opp[0]); resolveAction(side,"attack",target); }
+  }
+
+  function resolveAction(actor, kind, target){
+    if(!pk||pk.over) return;
+    const actorName = actor==="you" ? "你" : ROBOTS[actor].name;
+    $("#pk-buzz-banner").textContent="";
+    if(kind==="heal"){
+      pk.hp[target]=Math.min(START_HP,pk.hp[target]+1);
+      log(actor==="you"?"you":actor, actorName+" 选择【回血】 → "+ROBOTS[target].name+" +1 血");
+      $("#pk-action-flash").innerHTML=actorName+" 选择 <span class=\"heal\">回血 "+ROBOTS[target].name+" +1</span>";
     } else {
-      const opp=aliveOpponents(side);
-      const target=opp.reduce((a,b)=>pk.hp[b]<pk.hp[a]?b:a,opp[0]);
       pk.hp[target]=Math.max(0,pk.hp[target]-1);
-      log(side, ROBOTS[side].name+" 选择【攻击】 → "+ROBOTS[target].name+" -1 血");
-      $("#pk-action-flash").innerHTML=ROBOTS[side].name+" 选择 <span class=\"atk\">攻击 "+ROBOTS[target].name+" -1</span>";
+      log(actor==="you"?"you":actor, actorName+" 选择【攻击】 → "+ROBOTS[target].name+" -1 血");
+      $("#pk-action-flash").innerHTML=actorName+" 选择 <span class=\"atk\">攻击 "+ROBOTS[target].name+" -1</span>";
       $("#bot-"+target).classList.add("hit");
       later(()=>$("#bot-"+target).classList.remove("hit"),420);
     }
     updateHP();
-    // 检查淘汰
     for(let i=0;i<3;i++){ if(pk.alive[i] && pk.hp[i]<=0){ pk.alive[i]=false; $("#mecha-"+i).classList.add("dead"); log("sys","💥 "+ROBOTS[i].name+" 血量归零，被淘汰！"); } }
     if(aliveCount()<=1){ const w=pk.alive.indexOf(true); finish(w); return; }
-    if(!endCheck()) later(()=>{ pk.round++; nextRound(); },1100);
+    later(()=>{ pk.round++; nextRound(); },1100);
   }
 
   function onTimeout(){
-    if(!pk||pk.over||pk.winner!==null) return;
-    clearPkTimers();
+    if(!pk||pk.over||pk.resolved) return;
+    pk.resolved=true; clearPkTimers();
+    revealAnswer();
     for(let i=0;i<3;i++){ if(pk.alive[i]){ pk.hp[i]=Math.max(0,pk.hp[i]-1); } }
     log("sys","⏱ 超时无人抢答，存活机甲各扣 1 血");
     $("#pk-buzz-banner").textContent="⏱ 超时，各 -1 血";
@@ -1207,7 +1284,7 @@ const RELICS = [
     updateHP();
     for(let i=0;i<3;i++){ if(pk.alive[i] && pk.hp[i]<=0){ pk.alive[i]=false; $("#mecha-"+i).classList.add("dead"); log("sys","💥 "+ROBOTS[i].name+" 血量归零，被淘汰！"); } }
     if(aliveCount()<=1){ const w=pk.alive.indexOf(true); finish(w); return; }
-    if(!endCheck()) later(()=>{ pk.round++; nextRound(); },1100);
+    later(()=>{ pk.round++; nextRound(); },1100);
   }
 
   function endCheck(){ return pk.over; }
@@ -1242,7 +1319,7 @@ const RELICS = [
       {k:["小地图","大地图","地图","3D","仿真","街市"],a:"学习板块顶部有小地图，点开展开完整大地图；双击任一市集圆点，就能进入该月市的 3D 仿真街市，沿街飞行漫游。"},
       {k:["赶市地图","打卡","纪念笺","大慈寺","万里桥"],a:"「赶市地图」看唐宋成都城同位置对照（大慈寺、万里桥、浣花溪、东门码头），切换图层看唐/宋/现代；去线下点位打卡可解锁十二月市纪念笺。"},
       {k:["藏品","风物","藏品阁","卡牌","蜀锦","花灯"],a:"「风物藏品阁」收集花灯、蜀锦、团扇等风物卡牌，含工艺科普与关联非遗；不靠氪金，答对其题即可解锁。"},
-      {k:["pk","对战","战斗","三台","机器人","抢答"],a:"PK 是「十二月市历史知识 PK 对战」：三台机甲机器人自动对战。每回合随机弹历史题，三方抢答（反应均 ≥2 秒），抢到且答对者二选一——【攻击】敌方 -1 血，或【回血】自身 +1。初始各 10 血，归零淘汰，最后存活者胜；每题限时 20 秒，超时存活者各 -1。"},
+      {k:["pk","对战","战斗","三台","机器人","抢答"],a:"PK 是「十二月市历史知识 PK 战」：三台机甲机器人自动对战。每回合弹出历史题与 3 个可点击选项，三方抢答（反应均 ≥2 秒）；你也可以抢答——抢到并答对就由你选【攻击】敌方 -1 血或【回血】友方 +1 血。初始各 10 血，归零淘汰，最后存活者胜；每题限时 20 秒，超时存活者各 -1。"},
       {k:["段位","经验","升级","青铜","王者"],a:"观战 PK 每局 +3 经验。段位门槛：青铜50·白银100·黄金200·铂金250·钻石300·王者400。"},
       {k:["注册","账号","登录","密码"],a:"到「账号」页填名称和密码即可注册登录。注册后才能累积段位；不注册也能安心学历史、看机甲对战。"},
       {k:["左拉","你是谁","导游"],a:"我是左拉，你的历史导游 🧭。学历史、逛地图、打 PK、收藏品，不懂就问我。"},
