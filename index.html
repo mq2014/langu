@@ -139,6 +139,38 @@ h1,h2,h3{font-family:"STKaiti","KaiTi","Songti SC","SimSun",serif;letter-spacing
 .leaflet-popup-content b{color:var(--gold);}
 .leaflet-popup-close-button{color:var(--parch)!important;}
 
+/* 卫星街景 + 知识点弹窗（双栏） */
+.scene-box{max-width:1020px;width:94%;}
+.scene-head{display:flex;align-items:baseline;gap:12px;margin-bottom:14px;flex-wrap:wrap;}
+.scene-sub{font-size:12.5px;color:var(--parch-dim);}
+.scene-grid{display:grid;grid-template-columns:1.12fr .88fr;gap:16px;align-items:start;}
+.scene-left{min-width:0;}
+.scene-map{width:100%;height:470px;border-radius:14px;background:#0e1a16;border:1px solid var(--line);}
+.scene-tip{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:10px;font-size:12.5px;color:var(--parch-dim);flex-wrap:wrap;}
+.rot-ctrls{display:flex;gap:6px;}
+.rot-btn{width:32px;height:32px;border-radius:8px;border:1px solid var(--line);background:rgba(43,33,20,.92);color:var(--gold);cursor:pointer;font-size:16px;line-height:1;transition:.15s;}
+.rot-btn:hover{border-color:var(--bronze);background:rgba(176,141,87,.28);color:#fff;}
+.scene-right{max-height:600px;overflow-y:auto;padding-right:6px;}
+.sc-head{display:flex;align-items:center;gap:12px;padding:14px 16px;border-bottom:1px solid var(--line);position:sticky;top:0;background:linear-gradient(180deg,var(--panel),rgba(33,25,15,.96));}
+.sc-month{font-family:"STKaiti","KaiTi",serif;font-size:28px;color:var(--gold);font-weight:700;line-height:1;}
+.sc-name{font-size:21px;font-weight:700;color:var(--parch);}
+.sc-desc{margin-left:auto;font-size:12.5px;color:var(--parch-dim);max-width:52%;text-align:right;line-height:1.5;}
+.sc-body{padding:14px 16px;}
+.sc-sec{margin-bottom:16px;}
+.sc-sec h4{margin:0 0 7px;font-size:14px;color:var(--bronze-soft);}
+.sc-sec p{margin:0;font-size:13.5px;line-height:1.78;color:var(--parch);}
+.sc-sec blockquote{margin:0;padding:9px 13px;border-left:3px solid var(--bronze);background:rgba(176,141,87,.09);border-radius:0 8px 8px 0;font-size:14px;color:var(--parch);line-height:1.7;}
+.sc-sec blockquote cite{display:block;margin-top:7px;font-size:12px;color:var(--parch-dim);font-style:normal;}
+.sc-actions{padding:12px 16px 18px;}
+.sc-actions .btn{width:100%;}
+@media(max-width:760px){
+  .scene-grid{grid-template-columns:1fr;}
+  .scene-right{max-height:none;padding-right:0;}
+  .scene-map{height:360px;}
+  .sc-head{flex-wrap:wrap;}
+  .sc-desc{max-width:100%;margin-left:0;text-align:left;}
+}
+
 /* 市集趣答 */
 .quiz-box{max-width:640px;}
 .quiz-card{border:1px solid var(--line);border-radius:14px;padding:22px;background:linear-gradient(180deg, rgba(51,38,23,.6), rgba(43,33,20,.4));}
@@ -415,7 +447,7 @@ h1,h2,h3{font-family:"STKaiti","KaiTi","Songti SC","SimSun",serif;letter-spacing
     <section class="view" id="view-learn">
       <div class="view-head">
         <h2>学习板块</h2>
-        <p class="view-sub">锦江十二月市：历史故事点 · 锦江打卡点 · 年轻互动点。点开下方小地图可展开完整大地图，双击地点进入卫星街景。</p>
+        <p class="view-sub">锦江十二月市：历史故事点 · 锦江打卡点 · 年轻互动点。点开下方小地图可展开完整大地图，点击任一金色市集圆点 → 卫星街景 + 十二月市历史知识点。</p>
       </div>
       <div class="minimap-wrap" id="minimap-wrap" title="点击展开完整大地图">
         <div class="minimap-head"><b>🗺️ 十二月市 · 小地图</b><span>点击展开完整大地图 ›</span></div>
@@ -448,7 +480,7 @@ h1,h2,h3{font-family:"STKaiti","KaiTi","Songti SC","SimSun",serif;letter-spacing
           <span><i style="background:#d4af37"></i>十二月市</span>
           <span><i style="background:#6b9080"></i>古成都地标</span>
           <span><i style="background:#3fa6c4"></i>现代打卡点</span>
-          <span style="color:var(--parch-dim)">提示：双击金色市集圆点 → 进入卫星街景</span>
+          <span style="color:var(--parch-dim)">提示：点击金色市集圆点 → 卫星街景 + 十二月市知识点</span>
         </div>
         <div id="layer-info" class="layer-info"></div>
       </div>
@@ -565,23 +597,36 @@ h1,h2,h3{font-family:"STKaiti","KaiTi","Songti SC","SimSun",serif;letter-spacing
     <div class="mask" data-close="map"></div>
     <div class="box" style="max-width:760px;">
       <button class="close" data-close="map" aria-label="关闭">×</button>
-      <div class="m-head"><span class="m-chip">十二月市 · 完整大地图</span><h3>双击市集圆点进入卫星街景</h3></div>
+      <div class="m-head"><span class="m-chip">十二月市 · 完整大地图</span><h3>点击市集圆点 → 卫星街景 + 知识点</h3></div>
       <div class="map-frame" style="border:none;padding:0;background:none;">
         <div id="modal-map" class="leaflet-modal"></div>
       </div>
     </div>
   </div>
 
-  <!-- 3D 场景弹窗 -->
+  <!-- 卫星街景 + 知识点弹窗（点击市集点位唤起） -->
   <div class="modal" id="scene-modal">
     <div class="mask" data-close="scene"></div>
-    <div class="box" style="max-width:840px;">
+    <div class="box scene-box">
       <button class="close" data-close="scene" aria-label="关闭">×</button>
-      <div class="scene3d-hud">
+      <div class="scene-head">
         <span class="hud-title" id="scene-title"></span>
+        <span class="scene-sub" id="scene-sub"></span>
       </div>
-      <div id="scene-map" class="scene-map"></div>
-      <div class="scene-tip" id="scene-desc">真实卫星街景 · 正交顶视 90° 垂直向下 · 双击其他市集可跳转</div>
+      <div class="scene-grid">
+        <div class="scene-left">
+          <div id="scene-map" class="scene-map"></div>
+          <div class="scene-tip">
+            <span>真实卫星街景 · 正交顶视 90°（无倾斜透视）· 拖拽平移 / 滚轮缩放 / 旋转浏览</span>
+            <span class="rot-ctrls">
+              <button class="rot-btn" id="rot-left" title="向左旋转视角">↺</button>
+              <button class="rot-btn" id="rot-reset" title="正北复位">N</button>
+              <button class="rot-btn" id="rot-right" title="向右旋转视角">↻</button>
+            </span>
+          </div>
+        </div>
+        <div class="scene-right" id="scene-card"></div>
+      </div>
     </div>
   </div>
 
@@ -597,6 +642,7 @@ h1,h2,h3{font-family:"STKaiti","KaiTi","Songti SC","SimSun",serif;letter-spacing
   </div>
 
   <script src="vendor/leaflet.js"></script>
+  <script src="vendor/leaflet-rotate.js"></script>
   <script>
 /* ====== 览古 · 数据层 ====== */
 const MONTHLY_MARKETS = [
@@ -1004,8 +1050,7 @@ const RELICS = [
     MONTHLY_MARKETS.forEach((m,i)=>{
       const mk = L.circleMarker([m.map.lat, m.map.lon], {radius:7, color:'#1c150c', weight:2, fillColor:'#d4af37', fillOpacity:1});
       mk.bindTooltip(`${m.month}${m.market}`, {permanent:true, direction:'right', className:'mk-tip', offset:[6,0]});
-      mk.on('dblclick', ()=>onPick(i));
-      mk.on('click', ()=>{ if(typeof Zola!=='undefined' && Zola && Zola.say) Zola.say(`「${m.month}${m.market}」：${m.desc}　双击金点可进入该月卫星街景。`); });
+      mk.on('click', ()=>onPick(i));
       g.addLayer(mk);
     });
     return g;
@@ -1044,22 +1089,69 @@ const RELICS = [
     } else { setTimeout(()=>modalMap.invalidateSize(),60); }
   }
 
-  /* 卫星街景（双击市集进入 · 正交顶视 · 无倾斜透视） */
-  const sceneModal=$("#scene-modal"), sceneTitle=$("#scene-title"), sceneDesc=$("#scene-desc");
-  let sceneMap=null, sceneMarker=null;
+  /* 卫星街景（点击市集进入 · 正交顶视 · 无倾斜透视 · 支持旋转/缩放） */
+  const sceneModal=$("#scene-modal"), sceneTitle=$("#scene-title"), sceneSub=$("#scene-sub"), sceneCard=$("#scene-card");
+  let sceneMap=null, sceneMarker=null, sceneRotateCtrl=null, rotBtnsBound=false;
+  function buildSceneCard(mi){
+    const m=MONTHLY_MARKETS[mi];
+    const g=(k)=>m.points.find(p=>p.key===k)||{};
+    const hist=g('history'), jin=g('jinjiang'), yth=g('youth');
+    return `
+      <div class="sc-head">
+        <span class="sc-month">${m.month}</span>
+        <span class="sc-name">${m.market}</span>
+        <span class="sc-desc">${m.desc}</span>
+      </div>
+      <div class="sc-body">
+        <section class="sc-sec">
+          <h4>📖 历史故事（${m.month}${m.market}）</h4>
+          <p>${hist.detail||hist.summary||""}</p>
+        </section>
+        <section class="sc-sec">
+          <h4>📜 名篇佐证</h4>
+          <blockquote>「${m.shop.poem}」<cite>${m.shop.src}</cite></blockquote>
+        </section>
+        <section class="sc-sec">
+          <h4>🔍 延伸解读</h4>
+          <p>${m.shop.extend}</p>
+        </section>
+        <section class="sc-sec">
+          <h4>📍 锦江打卡点</h4>
+          <p>${jin.detail||jin.summary||""}</p>
+        </section>
+        <section class="sc-sec">
+          <h4>🎯 年轻玩法</h4>
+          <p>${yth.detail||yth.summary||""}</p>
+        </section>
+      </div>
+      <div class="sc-actions">
+        <button class="btn btn-ghost btn-sm" id="sc-shop-btn">🏮 进入时序主街 · 看复原铺面</button>
+      </div>`;
+  }
   function openScene(mi){
     const m=MONTHLY_MARKETS[mi];
     sceneTitle.textContent="卫星街景 · "+m.month+m.market;
+    sceneSub.textContent="坐标 "+m.map.lat.toFixed(3)+"°N, "+m.map.lon.toFixed(3)+"°E";
+    sceneCard.innerHTML=buildSceneCard(mi);
+    const sb=$("#sc-shop-btn"); if(sb) sb.addEventListener("click",()=>{ sceneModal.classList.remove("open"); goView('home'); openShop(mi); });
     sceneModal.classList.add("open");
     if(!sceneMap){
-      sceneMap = L.map('scene-map', {center:[m.map.lat,m.map.lon], zoom:16, minZoom:14, maxZoom:16, zoomControl:true, scrollWheelZoom:true});
+      sceneMap = L.map('scene-map', {center:[m.map.lat,m.map.lon], zoom:16, minZoom:14, maxZoom:16, zoomControl:true, scrollWheelZoom:true, bearing:0, pitch:0});
       satTiles().addTo(sceneMap);
+      // 旋转控件：拖拽箭头或点下方按钮即可旋转浏览（仍保持正交顶视，无倾斜透视）
+      sceneRotateCtrl = L.control.rotate({position:'topleft', closeOnZeroBearing:false, visualizePitch:false}).addTo(sceneMap);
+      if(sceneRotateCtrl && sceneRotateCtrl._arrow) sceneRotateCtrl._arrow.style.filter='invert(.85) brightness(1.6)';
+      if(!rotBtnsBound){
+        $("#rot-left").addEventListener("click",()=>{ if(sceneMap) sceneMap.setBearing((sceneMap.getBearing()+345)%360); });
+        $("#rot-right").addEventListener("click",()=>{ if(sceneMap) sceneMap.setBearing((sceneMap.getBearing()+15)%360); });
+        $("#rot-reset").addEventListener("click",()=>{ if(sceneMap) sceneMap.setBearing(0); });
+        rotBtnsBound=true;
+      }
     } else { setTimeout(()=>sceneMap.invalidateSize(),60); }
     if(sceneMarker) sceneMap.removeLayer(sceneMarker);
     sceneMarker = L.circleMarker([m.map.lat, m.map.lon], {radius:9, color:'#1c150c', weight:2, fillColor:'#d4af37', fillOpacity:1}).addTo(sceneMap);
     sceneMarker.bindPopup(`<b>${m.month}${m.market}</b><br>${m.desc}`).openPopup();
     sceneMap.flyTo([m.map.lat, m.map.lon], 16, {duration:1.1});
-    sceneDesc.innerHTML = `<b style="color:var(--gold)">${m.month}${m.market}</b> · ${m.desc}<br><span style="color:var(--parch-dim)">${m.shop.restore}</span>`;
   }
 
   /* 赶市地图（大地图视图）+ 图层切换（唐/宋/现代 同位置对照） */
@@ -1469,7 +1561,7 @@ const RELICS = [
     function say(text){ msg.innerHTML=text; }
     const KB=[
       {k:["市集","十二月市","花市","灯市","锦市"],a:"锦江十二月市从正月灯市到十二月桃符市，月月有主题。首页「时序主街」可逐月逛铺子，看复原场景、史料与延伸知识。"},
-      {k:["小地图","大地图","地图","卫星","街景","实景"],a:"学习板块顶部有小地图，点开展开完整大地图；双击任一市集圆点，就能进入该月市的卫星街景，俯瞰锦江两岸真实实景。"},
+      {k:["小地图","大地图","地图","卫星","街景","实景"],a:"学习板块顶部有小地图，点开展开完整大地图；点击任一金色市集圆点，就能进入该月市的卫星街景：左侧可拖拽平移、滚轮缩放、旋转浏览真实实景（正交顶视），右侧是十二月市的历史知识点卡片。"},
       {k:["赶市地图","打卡","纪念笺","大慈寺","万里桥"],a:"「赶市地图」看唐宋成都城同位置对照（大慈寺、万里桥、浣花溪、东门码头），切换图层看唐/宋/现代；去线下点位打卡可解锁十二月市纪念笺。"},
       {k:["藏品","风物","藏品阁","卡牌","蜀锦","花灯"],a:"「风物藏品阁」收集花灯、蜀锦、团扇等风物卡牌，含工艺科普与关联非遗；不靠氪金，答对其题即可解锁。"},
       {k:["pk","对战","战斗","三台","机器人","抢答"],a:"PK 是「十二月市历史知识抢答对战」：每轮抽一张角色卡，卡内含 3 道十二月市题按序放出。每题人 + 三台机甲（反应 ≥2 秒）同场抢答，最先答对者立刻获 1 次行动——攻击（对一台机甲 -1）或回血（你自己 +1）；答错不罚、继续抢。3 题结算完即本张卡回合结束，自动抽下一张继续。血量归零倒下，全灭则本局结束，胜者为「十二月市霸主」。每完成一回合 +3 经验、每局结束 +5。"},
@@ -1484,7 +1576,7 @@ const RELICS = [
     const CTX={
       home:{m:"你好，我是导游左拉 🧭。览古聚焦锦江十二月市——首页「时序主街」逐月逛铺子，点进去看复原场景、史料与小动画。",q:["怎么开始？","十二月市有哪些"]},
       learn:{m:"学习板块三件宝：十二月市看历史与打卡点，市集趣答检验知识，锦江岁时志读懂锦江文化。顶部小地图点开可进卫星街景。",q:["小地图/卫星街景怎么进","锦江打卡点在哪"]},
-      map:{m:"赶市地图：切换唐/宋/现代图层看同位置对照；双击市集圆点进卫星街景；去线下点位打卡可解锁纪念笺。",q:["怎么打卡？","图层怎么切？"]},
+      map:{m:"赶市地图：切换唐/宋/现代图层看同位置对照；点击市集圆点进卫星街景（含知识点卡片）；去线下点位打卡可解锁纪念笺。",q:["怎么打卡？","图层怎么切？"]},
       relics:{m:"风物藏品阁收集花灯、蜀锦、团扇等卡牌，含工艺科普与关联非遗；答对其题即可解锁，不靠氪金。",q:["怎么解锁藏品？","有哪些藏品？"]},
       pk:{m:"PK 是十二月市知识抢答对战：每轮抽角色卡、卡内 3 题按序放出，人 + 三台机甲（反应 ≥2 秒）抢答，先答对者获 1 次行动（攻击 -1 / 回血 +1），答错不罚继续抢；3 题后抽下一张卡继续。",q:["PK 怎么玩？","段位怎么升？"]},
       account:{m:"注册只需名称+密码，登录后即可 PK 与累积经验段位。数据存在本机浏览器里。",q:["怎么注册？","经验有什么用？"]}
