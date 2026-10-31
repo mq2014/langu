@@ -119,6 +119,26 @@ h1,h2,h3{font-family:"STKaiti","KaiTi","Songti SC","SimSun",serif;letter-spacing
 .minimap-head span{font-size:12px;color:var(--parch-dim);}
 .minimap-svg{width:100%;height:auto;display:block;border-radius:10px;background:#0e1a16;}
 
+/* 真实卫星地图（Leaflet · 正交顶视 90° 垂直向下，禁止等轴测/斜鸟瞰） */
+.leaflet-mini{width:100%;height:330px;border-radius:10px;background:#0e1a16;border:1px solid var(--line);}
+.leaflet-big{width:100%;height:520px;border-radius:10px;background:#0e1a16;}
+.leaflet-modal{width:100%;height:520px;border-radius:10px;background:#0e1a16;}
+.scene-map{width:100%;height:440px;border-radius:14px;background:#0e1a16;border:1px solid var(--line);}
+.leaflet-container{background:#0e1a16;font-family:inherit;outline:none;}
+.leaflet-container .leaflet-control-attribution{background:rgba(10,7,4,.62)!important;color:var(--parch-dim)!important;}
+.leaflet-container .leaflet-control-attribution a{color:var(--bronze-soft)!important;}
+.leaflet-container .leaflet-bar a{background:rgba(43,33,20,.94);color:var(--gold);border-color:var(--line);}
+.leaflet-container .leaflet-bar a:hover{background:rgba(176,141,87,.3);color:#fff;}
+/* 地图标注气泡（青铜风 · 覆盖 Leaflet 默认白底） */
+.leaflet-tooltip.mk-tip,.leaflet-tooltip.site-tip,.leaflet-tooltip.modern-tip{background:rgba(20,15,9,.85);border:1px solid var(--bronze);color:var(--parch);font-size:12px;font-family:"STKaiti","KaiTi",serif;padding:1px 7px;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,.45);white-space:nowrap;}
+.leaflet-tooltip.mk-tip:before,.leaflet-tooltip.site-tip:before,.leaflet-tooltip.modern-tip:before{border-top-color:var(--bronze);}
+.leaflet-tooltip-left.mk-tip:before,.leaflet-tooltip-left.site-tip:before,.leaflet-tooltip-left.modern-tip:before{border-left-color:var(--bronze);}
+.leaflet-tooltip-right.mk-tip:before,.leaflet-tooltip-right.site-tip:before,.leaflet-tooltip-right.modern-tip:before{border-right-color:var(--bronze);}
+.leaflet-popup-content-wrapper,.leaflet-popup-tip{background:linear-gradient(180deg,var(--panel-2),var(--panel));color:var(--parch);border:1px solid var(--bronze);}
+.leaflet-popup-content{margin:10px 12px;font-size:13px;line-height:1.6;}
+.leaflet-popup-content b{color:var(--gold);}
+.leaflet-popup-close-button{color:var(--parch)!important;}
+
 /* 市集趣答 */
 .quiz-box{max-width:640px;}
 .quiz-card{border:1px solid var(--line);border-radius:14px;padding:22px;background:linear-gradient(180deg, rgba(51,38,23,.6), rgba(43,33,20,.4));}
@@ -159,6 +179,7 @@ h1,h2,h3{font-family:"STKaiti","KaiTi","Songti SC","SimSun",serif;letter-spacing
 .bigmap-svg{width:100%;height:auto;display:block;border-radius:10px;background:#0e1a16;cursor:crosshair;}
 .map-legend{display:flex;gap:16px;flex-wrap:wrap;margin-top:12px;font-size:12.5px;color:var(--parch-dim);}
 .map-legend i{display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:5px;vertical-align:middle;}
+.layer-info{margin-top:10px;font-size:13px;color:var(--bronze-soft);line-height:1.7;border-left:3px solid var(--bronze);padding-left:12px;}
 .checkin-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin-top:18px;}
 .checkin{border:1px solid var(--line);border-radius:12px;padding:14px;background:rgba(23,18,12,.4);}
 .checkin h4{margin:0 0 6px;color:var(--bronze-soft);font-size:15px;}
@@ -221,6 +242,18 @@ h1,h2,h3{font-family:"STKaiti","KaiTi","Songti SC","SimSun",serif;letter-spacing
 .pk-log .l-you{color:var(--gold);font-weight:700;}
 .pk-foot{display:flex;justify-content:space-between;align-items:center;margin-top:16px;flex-wrap:wrap;gap:10px;}
 .exp-line{font-size:13px;color:var(--parch-dim);}
+.pk-card{display:flex;justify-content:space-between;align-items:stretch;gap:14px;margin-bottom:16px;flex-wrap:wrap;}
+.card-face{flex:1;min-width:260px;border:1px solid var(--bronze);border-radius:14px;padding:14px 16px 14px;background:linear-gradient(145deg,rgba(176,141,87,.16),rgba(43,33,20,.5));position:relative;overflow:hidden;}
+.card-face::before{content:"角色卡";position:absolute;top:8px;right:12px;font-size:11px;color:var(--bronze-soft);letter-spacing:.2em;}
+.card-name{font-size:20px;color:var(--gold);font-weight:700;margin-bottom:4px;font-family:"STKaiti","KaiTi",serif;}
+.card-flavor{font-size:13px;color:var(--patina);margin-bottom:8px;}
+.card-buff{font-size:13px;color:var(--parch);line-height:1.6;background:rgba(23,18,12,.4);border-radius:8px;padding:8px 10px;border-left:3px solid var(--bronze-soft);}
+.human-hp{min-width:150px;border:1px solid var(--gold-d,var(--bronze));border-radius:14px;padding:14px 12px;background:rgba(23,18,12,.4);text-align:center;}
+.human-hp .h-label{font-size:13px;color:var(--gold);font-weight:700;margin-bottom:8px;}
+.human-hp .h-pips{display:flex;gap:3px;justify-content:center;flex-wrap:wrap;margin-bottom:6px;}
+.human-hp .h-pip{width:13px;height:13px;border-radius:3px;background:rgba(0,0,0,.4);border:1px solid var(--line);transition:.25s;}
+.human-hp .h-pip.on{background:linear-gradient(145deg,var(--gold),var(--bronze));}
+.human-hp .h-num{font-size:12px;color:var(--parch-dim);}
 .exp-line b{color:var(--gold);}
 
 /* 弹窗 */
@@ -333,7 +366,8 @@ h1,h2,h3{font-family:"STKaiti","KaiTi","Songti SC","SimSun",serif;letter-spacing
 .m-detail{font-size:14px;line-height:1.9;color:var(--parch-dim);}
 @media(max-width:900px){.home-cards{grid-template-columns:repeat(2,1fr);}.market-grid{grid-template-columns:1fr;}.mecha{min-width:120px;}}
 @media(max-width:640px){.nav-btn{padding:7px 9px;font-size:12.5px;}.home-cards{grid-template-columns:1fr;}.topbar{flex-wrap:wrap;gap:10px;}.nav{order:3;width:100%;justify-content:center;}}
-</style>
+  </style>
+  <link rel="stylesheet" href="vendor/leaflet.css"/>
 </head>
 <body>
   <header class="topbar">
@@ -361,7 +395,7 @@ h1,h2,h3{font-family:"STKaiti","KaiTi","Songti SC","SimSun",serif;letter-spacing
       <div class="hero">
         <div class="hero-rune">市</div>
         <h2 class="hero-title">时序主街 · 十二月市</h2>
-        <p class="hero-sub">一条古风长街，十二座铺面，沿月令次第开市。<br/>点进任意铺子，复原市集、品读诗史、读懂手艺，再乘小地图遁入 3D 仿真街市。</p>
+        <p class="hero-sub">一条古风长街，十二座铺面，沿月令次第开市。<br/>点进任意铺子，复原市集、品读诗史、读懂手艺，再乘小地图遁入卫星街景。</p>
         <div class="hero-actions">
           <button class="btn btn-gold" data-go="learn">逛学习板块</button>
           <button class="btn btn-ghost" data-go="pk">去 PK 对战</button>
@@ -381,11 +415,11 @@ h1,h2,h3{font-family:"STKaiti","KaiTi","Songti SC","SimSun",serif;letter-spacing
     <section class="view" id="view-learn">
       <div class="view-head">
         <h2>学习板块</h2>
-        <p class="view-sub">锦江十二月市：历史故事点 · 锦江打卡点 · 年轻互动点。点开下方小地图可展开完整大地图，双击地点进入 3D 仿真街市。</p>
+        <p class="view-sub">锦江十二月市：历史故事点 · 锦江打卡点 · 年轻互动点。点开下方小地图可展开完整大地图，双击地点进入卫星街景。</p>
       </div>
       <div class="minimap-wrap" id="minimap-wrap" title="点击展开完整大地图">
         <div class="minimap-head"><b>🗺️ 十二月市 · 小地图</b><span>点击展开完整大地图 ›</span></div>
-        <svg class="minimap-svg" id="minimap-svg" viewBox="0 0 1000 620" preserveAspectRatio="xMidYMid meet"></svg>
+        <div id="minimap" class="leaflet-mini" title="真实卫星地图 · 成都锦江十二月市"></div>
       </div>
       <div class="learn-tabs">
         <button class="ltab active" data-ltab="timeline">十二月市</button>
@@ -409,13 +443,14 @@ h1,h2,h3{font-family:"STKaiti","KaiTi","Songti SC","SimSun",serif;letter-spacing
         <button class="layer-btn" data-layer="modern">现代成都</button>
       </div>
       <div class="map-frame">
-        <svg class="bigmap-svg" id="bigmap-svg" viewBox="0 0 1000 620" preserveAspectRatio="xMidYMid meet"></svg>
+        <div id="bigmap" class="leaflet-big"></div>
         <div class="map-legend">
           <span><i style="background:#d4af37"></i>十二月市</span>
           <span><i style="background:#6b9080"></i>古成都地标</span>
           <span><i style="background:#3fa6c4"></i>现代打卡点</span>
-          <span style="color:var(--parch-dim)">提示：双击市集圆点 → 进入 3D 仿真街市</span>
+          <span style="color:var(--parch-dim)">提示：双击金色市集圆点 → 进入卫星街景</span>
         </div>
+        <div id="layer-info" class="layer-info"></div>
       </div>
       <h3 style="color:var(--bronze-soft);font-family:'STKaiti','KaiTi',serif;margin:22px 0 4px;">线下打卡 · 解锁纪念笺</h3>
       <div class="checkin-row" id="checkin-row"></div>
@@ -435,12 +470,24 @@ h1,h2,h3{font-family:"STKaiti","KaiTi","Songti SC","SimSun",serif;letter-spacing
     <section class="view" id="view-pk">
       <div class="view-head">
         <h2>十二月市历史知识 PK 对战</h2>
-        <p class="view-sub">三台机甲机器人自动对战：每题弹出 <b>3 个选项</b> 供点击抢答，机器人反应均 ≥2 秒。你也能抢答——抢到并答对，就由你来选择【攻击】敌方 -1 血或【回血】友方 +1 血。机甲初始血量 10 点，血量先归零者淘汰，最后存活者获胜。每题限时 20 秒，超时存活者各扣 1 血。</p>
+        <p class="view-sub">十二月市历史知识抢答对战：三台机甲（青铜 / 朱红 / 苍碧）自动参与抢答，反应均 ≥2 秒。每轮抽一张「角色卡」，卡内含 <b>3 道十二月市题</b> 按序放出——一题一轮抢答，最先答对者立刻获得 1 次行动（攻击 -1 / 回血 +1）；答错不惩罚，继续等待。3 题结算完毕即本张角色卡回合结束，自动抽下一张继续。血量归零者倒下，全灭则本局结束，胜者为「十二月市霸主」。</p>
       </div>
       <div id="pk-arena" class="pk-arena">
         <div class="mecha-row" id="pk-row"></div>
+        <div class="pk-card" id="pk-card">
+          <div class="card-face">
+            <div class="card-name" id="card-name">等待抽卡…</div>
+            <div class="card-flavor" id="card-flavor"></div>
+            <div class="card-buff" id="card-buff">点击「重新开战」开始，每轮自动抽取一张十二月市角色卡。</div>
+          </div>
+          <div class="human-hp">
+            <div class="h-label">你 · 血量</div>
+            <div class="h-pips" id="human-h-pips"></div>
+            <div class="h-num"><span id="human-h-num">10</span> / 12</div>
+          </div>
+        </div>
         <div class="round-box" id="pk-round">
-          <div class="round-tag" id="pk-round-tag">第 1 回合</div>
+          <div class="round-tag" id="pk-round-tag">等待开战…</div>
           <div class="timer-wrap"><div class="timer-bar" id="pk-timer-bar"></div><span class="timer-num" id="pk-timer-num">20</span></div>
           <div class="q-text" id="pk-q"></div>
           <div class="pk-options" id="pk-options"></div>
@@ -451,7 +498,10 @@ h1,h2,h3{font-family:"STKaiti","KaiTi","Songti SC","SimSun",serif;letter-spacing
         <div class="pk-log" id="pk-log"></div>
         <div class="pk-foot">
           <span class="exp-line" id="pk-exp-line"></span>
-          <button class="btn btn-ghost" id="pk-restart">重新开战</button>
+          <span>
+            <button class="btn btn-cinnabar btn-sm" id="pk-next" style="display:none">抽下一张角色卡 →</button>
+            <button class="btn btn-ghost" id="pk-restart">重新开战</button>
+          </span>
         </div>
       </div>
     </section>
@@ -515,9 +565,9 @@ h1,h2,h3{font-family:"STKaiti","KaiTi","Songti SC","SimSun",serif;letter-spacing
     <div class="mask" data-close="map"></div>
     <div class="box" style="max-width:760px;">
       <button class="close" data-close="map" aria-label="关闭">×</button>
-      <div class="m-head"><span class="m-chip">十二月市 · 完整大地图</span><h3>双击市集圆点进入 3D 仿真街市</h3></div>
+      <div class="m-head"><span class="m-chip">十二月市 · 完整大地图</span><h3>双击市集圆点进入卫星街景</h3></div>
       <div class="map-frame" style="border:none;padding:0;background:none;">
-        <svg class="bigmap-svg" id="modal-map-svg" viewBox="0 0 1000 620" preserveAspectRatio="xMidYMid meet"></svg>
+        <div id="modal-map" class="leaflet-modal"></div>
       </div>
     </div>
   </div>
@@ -527,16 +577,11 @@ h1,h2,h3{font-family:"STKaiti","KaiTi","Songti SC","SimSun",serif;letter-spacing
     <div class="mask" data-close="scene"></div>
     <div class="box" style="max-width:840px;">
       <button class="close" data-close="scene" aria-label="关闭">×</button>
-      <div class="scene3d-stage" id="scene3d-stage">
-        <div class="scene3d-sky"></div>
-        <div class="scene3d-ground"></div>
-        <div class="scene3d-world" id="scene3d-world"></div>
-        <div class="scene3d-hud">
-          <span class="hud-title" id="scene-title"></span>
-          <button class="btn btn-ghost btn-sm" data-close="scene">退出 3D 街市</button>
-        </div>
+      <div class="scene3d-hud">
+        <span class="hud-title" id="scene-title"></span>
       </div>
-      <div class="scene-tip">3D 仿真街市 · 卫星底图还原（绿野 / 锦江 / 街格路网）· 沿街飞行漫游 · 按月份换装街景</div>
+      <div id="scene-map" class="scene-map"></div>
+      <div class="scene-tip" id="scene-desc">真实卫星街景 · 正交顶视 90° 垂直向下 · 双击其他市集可跳转</div>
     </div>
   </div>
 
@@ -551,12 +596,13 @@ h1,h2,h3{font-family:"STKaiti","KaiTi","Songti SC","SimSun",serif;letter-spacing
     </div>
   </div>
 
+  <script src="vendor/leaflet.js"></script>
   <script>
 /* ====== 览古 · 数据层 ====== */
 const MONTHLY_MARKETS = [
   { month:"正月", market:"灯市", desc:"灯火标记年轮，守岁焕发新机。",
     theme:{bg:"#3a0d12",accent:"#e0473a",glow:"#ffd36b",decor:"rise"},
-    map:{x:560,y:420},
+    map:{lat:30.648,lon:104.083},
     shop:{ restore:"正月十五，锦江两岸搭起数丈「灯山」，缀满琉璃灯、羊皮灯，通宵不熄；灯下百货罗列，百姓扶老携幼来赶灯市，以灯火守岁迎新。",
       poem:"成都元夕，每夜用油五千斤，为灯山，光明如昼。", src:"——宋·陆游《老学庵笔记》",
       extend:"灯市催生了成都最早的「夜经济」：商铺借灯会招徕顾客，形成「以灯促市」。宋代四川已用<b>交子</b>（世界最早纸币）交易，一盏花灯约值数文至数十文，富户购灯动辄费钱千百。" },
@@ -567,7 +613,7 @@ const MONTHLY_MARKETS = [
     ]},
   { month:"二月", market:"花市", desc:"花事唤醒春天，芳菲亦是经济。",
     theme:{bg:"#3a1e2e",accent:"#e98ab0",glow:"#ffd1e6",decor:"fall"},
-    map:{x:440,y:210},
+    map:{lat:30.657,lon:104.090},
     shop:{ restore:"二月春深，花农挑担入市，芙蓉、牡丹、海棠、山茶列满长街；仕女簪花出游，文人置酒赏花，花市与游春合一，是成都最早的「春日经济」。",
       poem:"四十里城花发时，锦江江上最堪思。", src:"——后蜀·花蕊夫人（咏蜀中花事）",
       extend:"成都遍种<b>芙蓉</b>而称「蓉城」，种花、卖花、簪花成俗。花市也带动花器、香粉等手工业，一束时花在宋代约值十余文，逢节令可涨数倍。" },
@@ -578,7 +624,7 @@ const MONTHLY_MARKETS = [
     ]},
   { month:"三月", market:"蚕市", desc:"蚕事预判年成，农时蕴藏商机。",
     theme:{bg:"#16331f",accent:"#5fae6a",glow:"#bfe6a0",decor:"fall"},
-    map:{x:300,y:180},
+    map:{lat:30.651,lon:104.061},
     shop:{ restore:"三月蚕市，农人携桑苗、蚕种、织机零件入市，祭祀蚕神后开市交易；市上丝车转动、茧行林立，是蜀地「蚕桑立国」的活态缩影。",
       poem:"蚕市光阴非故国，马行灯火记当年。", src:"——宋·陆游《剑南诗稿》",
       extend:"古蜀王<b>蚕丛</b>教民养蚕，蜀锦由此发端。蚕市推动桑、丝、织一条龙，宋代成都蚕丝经此发往天下；一枚上等蚕种纸在宋时值钱数十文。" },
@@ -589,7 +635,7 @@ const MONTHLY_MARKETS = [
     ]},
   { month:"四月", market:"锦市", desc:"晴燥临抒织锦，天时铸就华裳。",
     theme:{bg:"#3a2e10",accent:"#d4af37",glow:"#ffe9a8",decor:"pulse"},
-    map:{x:500,y:320},
+    map:{lat:30.652,lon:104.080},
     shop:{ restore:"四月天晴气燥，最宜曝锦晾绸。锦官城内设市，蜀锦、蜀绣、锦官署的织品列肆而陈；织娘现场抛梭，金线在日头下流光，引来四海客商。",
       poem:"蜀江如线如针水，锦城丝管日纷纷。", src:"——晋·常璩《华阳国志》载蜀地织锦之盛",
       extend:"西汉设<b>锦官</b>理织锦，成都得名「锦官城」；江水濯锦而华彩，故称<b>锦江</b>。蜀锦经南方丝绸之路远销，一匹上锦在唐值绢数匹，是硬通货；交易多用金、绢与<b>交子</b>折算。" },
@@ -600,7 +646,7 @@ const MONTHLY_MARKETS = [
     ]},
   { month:"五月", market:"扇市", desc:"竹扇驯服炎夏，清风引客云来。",
     theme:{bg:"#0f3338",accent:"#3fb6b0",glow:"#bff0ec",decor:"fall"},
-    map:{x:620,y:300},
+    map:{lat:30.638,lon:104.098},
     shop:{ restore:"五月暑气初盛，竹扇、团扇、蜀绣扇列满市口；匠人现场削竹、裱绢、题诗作画，文人执扇纳凉、以扇会友，一把好扇既是日用品也是身份符号。",
       poem:"蜀扇轻罗小扇白，一时风景属成都。", src:"——宋人咏成都扇市（辑录）",
       extend:"蜀地盛产竹，<b>竹扇、团扇、蜀绣扇</b>自古消夏。扇面题诗作画之风自唐而盛，宋代扇市成为文人雅集的延伸；一柄素面竹扇不过数文，名家题画团扇可值数百文。" },
@@ -611,7 +657,7 @@ const MONTHLY_MARKETS = [
     ]},
   { month:"六月", market:"香市", desc:"篆烟调和时序，芳香氤氲潮流。",
     theme:{bg:"#241a3a",accent:"#9b7bd4",glow:"#d8c4ff",decor:"rise"},
-    map:{x:540,y:380},
+    map:{lat:30.654,lon:104.087},
     shop:{ restore:"六月暑湿，香铺沿街而设，香丸、香饼、香炉、香料堆叠如山；道人、仕女、药商皆来采买，焚香避暑、以香疗疾，市井里浮动着安息香与白芷的气息。",
       poem:"二十里中香不断，青羊宫到浣花溪。", src:"——宋·陆游《梅花绝句》（咏成都香花之路）",
       extend:"唐宋焚香成俗，从庙堂到市井皆用香，<b>香事</b>是最早的「芳香疗法」。香市带动香料贸易与香器手工业；一帖避暑香方在宋时约值数十文，名贵沉香论两计价。" },
@@ -622,7 +668,7 @@ const MONTHLY_MARKETS = [
     ]},
   { month:"七月", market:"七宝市", desc:"巧手锤炼金玉，匠心即是财富。",
     theme:{bg:"#33240a",accent:"#e0a93a",glow:"#ffe6a8",decor:"pulse"},
-    map:{x:560,y:360},
+    map:{lat:30.657,lon:104.081},
     shop:{ restore:"七月七宝市是全年最盛的综合大集：金玉、犀象、古玩、日用之器、奇珍异物汇聚一堂；珠光宝气映着锦江，是「扬一益二」中益州繁华的缩影。",
       poem:"成都游赏之盛，甲于西蜀，盖地大物繁而俗好娱乐。", src:"——宋·陆游《老学庵笔记》",
       extend:"成都「每月皆有市」，而七宝市品类最全、最显繁华。市上金箔、银花丝、漆器、珠宝手艺云集，是蜀地<b>手工业</b>的总展演；大笔交易多以金银与<b>交子</b>结算。" },
@@ -633,7 +679,7 @@ const MONTHLY_MARKETS = [
     ]},
   { month:"八月", market:"桂市", desc:"闻桂而知秋香，食桂而知秋味。",
     theme:{bg:"#33260c",accent:"#e6a23c",glow:"#ffd98a",decor:"fall"},
-    map:{x:640,y:260},
+    map:{lat:30.640,lon:104.105},
     shop:{ restore:"八月桂子月中落，文人沿锦江泛舟赏桂、置酒赋诗；岸上桂市卖桂花、桂糕、桂酒、桂蜜，满城浮动暗香，是成都人对秋天的味觉记忆。",
       poem:"重湖叠巘清嘉，有三秋桂子，十里荷花。", src:"——宋·柳永《望海潮》（咏江南秋景，成都亦尚桂）",
       extend:"桂花入茶、入糕、入酒，成独特「秋之味」。<b>桂酒</b>是宋时成都名产，市上以桂花酿制的蜜酒、黄酒供不应求；一小坛桂酒在宋约值数十文至百余文。" },
@@ -644,7 +690,7 @@ const MONTHLY_MARKETS = [
     ]},
   { month:"九月", market:"药市", desc:"九月药市规模盛大，是全国性的药材集散中心。",
     theme:{bg:"#242a16",accent:"#9bab5a",glow:"#d6e2a0",decor:"fall"},
-    map:{x:470,y:300},
+    map:{lat:30.659,lon:104.076},
     shop:{ restore:"九月药市，川贝、川芎、附子、黄芪堆积如山，药商来自天南地北；医馆、药铺沿街把脉抓药，孙思邈入蜀采药的故事在此流传。",
       poem:"天下药材聚于蜀，成都九月药市为最。", src:"——宋人笔记（辑录成都药市之盛）",
       extend:"成都九月药市曾是全国药材集散中心，<b>川药</b>经此发往各地，孕育「药食同源」传统。市上药材论斤、论两计价，名贵虫草、麝香以「对」或「两」计。" },
@@ -655,7 +701,7 @@ const MONTHLY_MARKETS = [
     ]},
   { month:"十月", market:"酒市", desc:"酒是游宴饮品，四川人的心头好。",
     theme:{bg:"#2e1a12",accent:"#c8743a",glow:"#f0b27a",decor:"rise"},
-    map:{x:700,y:400},
+    map:{lat:30.648,lon:104.088},
     shop:{ restore:"十月酒市，锦江两岸酒楼林立，文君酒、鹅黄酒、锦江春列肆而陈；酒客当垆买醉，歌姬侑酒，诗酒风流是成都文化的重要底色。",
       poem:"益州官楼酒如海，我来解旗论日买。", src:"——宋·陆游《楼上醉书》",
       extend:"卓文君与司马相如「当垆卖酒」的典故即发生于此。<b>文君酒、鹅黄酒</b>名动一时，宋代成都酒坊由官府专卖（榷酤），酒税是重要财源；一壶村酒值钱数十文，名酒则倍之。" },
@@ -666,7 +712,7 @@ const MONTHLY_MARKETS = [
     ]},
   { month:"十一月", market:"梅市", desc:"天气渐冷，赏梅、售梅花相关物品的市集。",
     theme:{bg:"#2a1620",accent:"#e06a8a",glow:"#ffc2d6",decor:"fall"},
-    map:{x:220,y:260},
+    map:{lat:30.659,lon:104.036},
     shop:{ restore:"十一月隆冬，梅市售梅、赏梅、卖梅花笺与梅妆；杜甫草堂早梅初绽，文人踏雪寻梅、分茶咏句，梅花成为成都文人「凌寒独放」的精神符号。",
       poem:"二十里中香不断，青羊宫到浣花溪。", src:"——宋·陆游《梅花绝句》",
       extend:"成都冬日梅市售梅、赏梅，杜甫草堂的「江梅」、陆游入蜀后「二十里中香不断」的咏梅名句，让梅花成为成都文人的精神符号，承载着凌寒独放的气节。" },
@@ -677,7 +723,7 @@ const MONTHLY_MARKETS = [
     ]},
   { month:"十二月", market:"桃符市", desc:"售卖春联、桃符等过年用品的市集。",
     theme:{bg:"#2a0f12",accent:"#d83b2e",glow:"#ffb37a",decor:"pulse"},
-    map:{x:600,y:440},
+    map:{lat:30.653,lon:104.093},
     shop:{ restore:"十二月岁末，桃符市满街红火：桃木板、春联、门神、福字、年画沿街铺开；书生当街挥毫写对子，百姓采买年货，为新岁拉开序幕。",
       poem:"千门万户曈曈日，总把新桃换旧符。", src:"——宋·王安石《元日》",
       extend:"<b>桃符</b>是春联前身，古人于岁末在桃木板上画神荼、郁垒二神以驱邪。五代后蜀主孟昶写下第一副春联「新年纳余庆，嘉节号长春」，王安石诗句使之家喻户晓。" },
@@ -699,28 +745,24 @@ const MARKET_QUIZ = [
 
 /* PK 对战题库 */
 const PK_QUESTIONS = [
-  { q:"中国历史上第一个世袭王朝是？", options:["夏","商","周"], answer:0 },
-  { q:"甲骨文最早大量出现于哪个朝代？", options:["夏","商","汉"], answer:1 },
-  { q:"统一六国、自称「始皇帝」的是？", options:["汉武帝","秦始皇","唐太宗"], answer:1 },
-  { q:"开通丝绸之路的盛世皇帝是？", options:["汉高祖","汉文帝","汉武帝"], answer:2 },
-  { q:"唐朝的都城是？", options:["长安","洛阳","汴京"], answer:0 },
-  { q:"科举制度创立于哪个朝代？", options:["汉","隋","唐"], answer:1 },
-  { q:"郑和七下西洋发生在哪个朝代？", options:["宋","元","明"], answer:2 },
-  { q:"中国最后一个封建王朝是？", options:["明","清","元"], answer:1 },
-  { q:"「贞观之治」出现在哪位皇帝在位时？", options:["唐高祖","唐太宗","唐玄宗"], answer:1 },
-  { q:"活字印刷术的改进者毕昇，生活于哪个朝代？", options:["唐","宋","元"], answer:1 },
-  { q:"京杭大运河在哪一朝代大规模开凿贯通？", options:["秦","隋","唐"], answer:1 },
-  { q:"「康乾盛世」属于哪个王朝？", options:["明","清","元"], answer:1 },
-  { q:"辛亥革命推翻的末代皇帝是？", options:["光绪","宣统","同治"], answer:1 },
-  { q:"三国中「鞠躬尽瘁」的蜀汉丞相是？", options:["曹操","孙权","诸葛亮"], answer:2 },
-  { q:"分封制与宗法礼制高度成熟于哪个朝代？", options:["商","周","秦"], answer:1 },
-  { q:"成都十二月市中，「桃符市」对应今天的哪种年俗？", options:["贴春联/福字","吃月饼","赛龙舟"], answer:0 },
-  { q:"成都别称「锦官城」「蓉城」，其中「蓉」与哪种植物的遍种有关？", options:["芙蓉","牡丹","梅花"], answer:0 },
-  { q:"「扬一益二」中的「益」指的是哪座城市？", options:["益州（成都）","扬州","益阳"], answer:0 },
-  { q:"锦江之名源于「濯锦之江」，与成都哪种传统手工业有关？", options:["织锦","制瓷","造船"], answer:0 },
-  { q:"宋代成都最盛大的综合集市「七宝市」出现在哪个月？", options:["正月","七月","十月"], answer:1 },
-  { q:"陆游曾以「二十里中香不断」咏赞成都哪条香花之路？", options:["青羊宫到浣花溪","锦江到万里桥","大慈寺到东门"], answer:0 },
-  { q:"成都十二月市里，「灯市」最盛的月份是？", options:["正月","五月","八月"], answer:0 }
+  { q:"成都「锦官城」之名，与下列哪一个月市直接相关？", options:["正月·灯市","四月·锦市","九月·药市"], answer:1 },
+  { q:"「千门万户曈曈日，总把新桃换旧符」写的是哪个月市？", options:["梅市","七宝市","桃符市"], answer:2 },
+  { q:"成都因遍种哪种花而别称「蓉城」？", options:["牡丹","芙蓉","梅花"], answer:1 },
+  { q:"宋代成都「灯市甲天下」，主要在哪个月最盛？", options:["正月","五月","八月"], answer:0 },
+  { q:"「扬一益二」中的「益」，指的是哪座城市？", options:["扬州","益州（成都）","益阳"], answer:1 },
+  { q:"锦江之名源于「濯锦之江」，与成都哪一手工业有关？", options:["织锦","制瓷","造船"], answer:0 },
+  { q:"宋代成都最盛大的综合集市「七宝市」出现在哪个月？", options:["正月","十月","七月"], answer:2 },
+  { q:"陆游「二十里中香不断」咏赞成都哪条香花之路？", options:["锦江到万里桥","青羊宫到浣花溪","大慈寺到东门"], answer:1 },
+  { q:"成都十二月市中，最宜曝锦晾绸的是哪个月市？", options:["四月·锦市","六月·香市","八月·桂市"], answer:0 },
+  { q:"成都九月「药市」曾是全国性的什么集散中心？", options:["丝绸","茶叶","药材"], answer:2 },
+  { q:"世界上最早的纸币「交子」诞生于哪个朝代的成都？", options:["唐代","宋代","汉代"], answer:1 },
+  { q:"杜甫草堂、浣花溪一带，是成都哪个月市的打卡地？", options:["十一月·梅市","十二月·桃符市","二月·花市"], answer:0 },
+  { q:"成都「蚕市」与古蜀哪位首领「教民养蚕」有关？", options:["杜宇","鳖灵","蚕丛"], answer:2 },
+  { q:"成都「香市」在农历几月，百姓焚香避暑驱疫？", options:["三月","六月","九月"], answer:1 },
+  { q:"成都「桂市」在几月，文人沿锦江泛舟赏桂？", options:["四月","八月","十月"], answer:1 },
+  { q:"成都「扇市」在几月，竹扇、团扇用以消夏？", options:["五月","六月","七月"], answer:0 },
+  { q:"成都「桃符市」在岁末售卖什么？", options:["灯笼","春联/桃符","鲜花"], answer:1 },
+  { q:"锦江畔的「水井坊」古迹，与哪个月市关联最密？", options:["三月·蚕市","十月·酒市","五月·扇市"], answer:1 }
 ];
 
 /* 段位阈值 */
@@ -739,19 +781,19 @@ const JIANGJIN_GUIDE = [
 
 /* 古成都地标（地图点位） */
 const MAP_SITES = [
-  {id:"daci", name:"大慈寺", x:520, y:360, type:"site"},
-  {id:"wanli", name:"万里桥", x:300, y:470, type:"site"},
-  {id:"huanhua", name:"浣花溪", x:180, y:250, type:"site"},
-  {id:"dongmen", name:"东门码头", x:760, y:430, type:"site"}
+  {id:"daci", name:"大慈寺", lat:30.6564, lon:104.0853, type:"site"},
+  {id:"wanli", name:"万里桥", lat:30.6420, lon:104.0550, type:"site"},
+  {id:"huanhua", name:"浣花溪", lat:30.6605, lon:104.0390, type:"site"},
+  {id:"dongmen", name:"东门码头", lat:30.6500, lon:104.0900, type:"site"}
 ];
 /* 现代打卡点 */
 const MAP_MODERN = [
-  {id:"bowuguan", name:"十二月市博物馆", x:470, y:250, type:"modern"},
-  {id:"taiguli", name:"太古里·春熙路", x:560, y:380, type:"modern"},
-  {id:"shujin", name:"蜀锦织绣博物馆", x:300, y:330, type:"modern"},
-  {id:"wangjiang", name:"望江楼公园", x:700, y:300, type:"modern"},
-  {id:"caotang", name:"杜甫草堂", x:200, y:230, type:"modern"},
-  {id:"shuijing", name:"水井坊博物馆", x:720, y:420, type:"modern"}
+  {id:"bowuguan", name:"十二月市博物馆", lat:30.6510, lon:104.0820, type:"modern"},
+  {id:"taiguli", name:"太古里·春熙路", lat:30.6570, lon:104.0810, type:"modern"},
+  {id:"shujin", name:"蜀锦织绣博物馆", lat:30.6505, lon:104.0640, type:"modern"},
+  {id:"wangjiang", name:"望江楼公园", lat:30.6370, lon:104.1000, type:"modern"},
+  {id:"caotang", name:"杜甫草堂", lat:30.6600, lon:104.0300, type:"modern"},
+  {id:"shuijing", name:"水井坊博物馆", lat:30.6490, lon:104.0850, type:"modern"}
 ];
 /* 图层说明 */
 const LAYER_INFO = {
@@ -818,7 +860,8 @@ const RELICS = [
     if(v==="account") renderAccount();
     if(v==="pk") startBattle();
     if(v==="relics") renderRelics();
-    if(v==="map"){ renderCheckin(); }
+    if(v==="map"){ renderCheckin(); ensureBigMap(); }
+    if(v==="learn"){ ensureMiniMap(); }
     Zola.context(v);
   }
   $$("[data-view]").forEach(b=>b.addEventListener("click",()=>goView(b.dataset.view)));
@@ -931,89 +974,113 @@ const RELICS = [
   function renderChrono(){ chronoEl.innerHTML=JIANGJIN_GUIDE.map(c=>`<div class="chrono-block"><h3>${c.t}</h3><p>${c.p}</p><div class="ex">${c.ex}</div></div>`).join(""); }
   $$(".ltab").forEach(t=>t.addEventListener("click",()=>{ $$(".ltab").forEach(x=>x.classList.toggle("active",x===t)); $$(".learn-panel").forEach(p=>p.classList.remove("active")); $("#lt-"+t.dataset.ltab).classList.add("active"); }));
 
-  /* ---------- 地图（小地图 / 大地图 / 3D 入口） ---------- */
-  function buildMapSVG(svg, opts){
-    opts=opts||{};
-    const W=1000,H=620;
-    let s='';
-    // 底图：城郭 + 锦江
-    s+=`<rect x="0" y="0" width="${W}" height="${H}" fill="#0e1a16"/>`;
-    s+=`<rect x="120" y="80" width="760" height="470" rx="18" fill="none" stroke="rgba(176,141,87,.4)" stroke-width="2" stroke-dasharray="6 6"/>`;
-    // 锦江：斜穿的蓝色带
-    s+=`<path d="M 120 520 C 320 500, 520 470, 760 520 L 820 560 L 100 560 Z" fill="rgba(60,120,160,.35)" opacity=".7"/>`;
-    s+=`<text x="640" y="545" fill="rgba(150,200,230,.8)" font-size="16" font-family="STKaiti,KaiTi,serif">锦 江</text>`;
-    // 古地标
-    MAP_SITES.forEach(p=>{ s+=`<circle cx="${p.x}" cy="${p.y}" r="7" fill="#6b9080" stroke="#0e1a16" stroke-width="2"/>`; s+=`<text x="${p.x+11}" y="${p.y+5}" fill="#bfe6c8" font-size="13">${p.name}</text>`; });
-    // 现代打卡点
-    if(opts.modern!==false) MAP_MODERN.forEach(p=>{ s+=`<circle cx="${p.x}" cy="${p.y}" r="6" fill="#3fa6c4" stroke="#0e1a16" stroke-width="2"/>`; s+=`<text x="${p.x+10}" y="${p.y+4}" fill="#bfe6f0" font-size="12">${p.name}</text>`; });
-    // 十二月市
+  /* ---------- 真实卫星地图（Leaflet · 正交顶视 90°） ---------- */
+  // 硬约束：正交顶视 = 90°垂直向下，禁止等轴测、禁止斜鸟瞰；
+  // 严格保留真实卫星底图（道路/锦江/浣花溪/地块/建筑）的位置与轮廓，不改动布局，仅叠加标注。
+  const TILE_URL = 'tiles/{z}/{x}/{y}.png';
+  const CENTER = [30.652, 104.072];                 // 成都十二月市中心（锦江两岸）
+  const BBOX = [[30.600, 104.000], [30.700, 104.130]];
+  const BLANK = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==';
+
+  function satTiles(){
+    return L.tileLayer(TILE_URL, {
+      minZoom: 13, maxZoom: 16, noWrap: true, bounds: BBOX,
+      attribution: '卫星影像 © Esri World Imagery',
+      errorTileUrl: BLANK
+    });
+  }
+  function newSatMap(id, opt){
+    opt = opt || {};
+    const map = L.map(id, {
+      center: opt.center || CENTER, zoom: opt.zoom || 14,
+      minZoom: 13, maxZoom: 16, zoomControl: opt.zoomControl !== false,
+      attributionControl: true, scrollWheelZoom: true, dragging: true
+    });
+    satTiles().addTo(map);
+    return map;
+  }
+  function addMarkets(map, onPick){
+    const g = L.layerGroup().addTo(map);
     MONTHLY_MARKETS.forEach((m,i)=>{
-      const x=m.map.x,y=m.map.y;
-      s+=`<circle class="mk-dot" data-mi="${i}" cx="${x}" cy="${y}" r="9" fill="#d4af37" stroke="#1c150c" stroke-width="2" style="cursor:pointer"/>`;
-      s+=`<text x="${x-9}" y="${y-14}" fill="#ffe9a8" font-size="13" font-family="STKaiti,KaiTi,serif">${m.month}${m.market}</text>`;
+      const mk = L.circleMarker([m.map.lat, m.map.lon], {radius:7, color:'#1c150c', weight:2, fillColor:'#d4af37', fillOpacity:1});
+      mk.bindTooltip(`${m.month}${m.market}`, {permanent:true, direction:'right', className:'mk-tip', offset:[6,0]});
+      mk.on('dblclick', ()=>onPick(i));
+      mk.on('click', ()=>{ if(typeof Zola!=='undefined' && Zola && Zola.say) Zola.say(`「${m.month}${m.market}」：${m.desc}　双击金点可进入该月卫星街景。`); });
+      g.addLayer(mk);
     });
-    svg.innerHTML=s;
-    $$(".mk-dot",svg).forEach(c=>{
-      c.addEventListener("dblclick",()=>openScene(+c.dataset.mi));
-      if(opts.onClick) c.addEventListener("click",()=>opts.onClick(+c.dataset.mi));
-    });
+    return g;
   }
-  const minimapSvg=$("#minimap-svg");
-  buildMapSVG(minimapSvg,{modern:true});
-  $("#minimap-wrap").addEventListener("click",openMapModal);
-  const mapModal=$("#map-modal"), modalMapSvg=$("#modal-map-svg");
-  function openMapModal(){ buildMapSVG(modalMapSvg,{modern:true}); mapModal.classList.add("open"); }
+  function addSites(map){
+    const g = L.layerGroup().addTo(map);
+    MAP_SITES.forEach(p=>{ const mk=L.circleMarker([p.lat,p.lon],{radius:6,color:'#0e1a16',weight:2,fillColor:'#6b9080',fillOpacity:1}); mk.bindTooltip(p.name,{permanent:true,direction:'right',className:'site-tip',offset:[6,0]}); g.addLayer(mk); });
+    return g;
+  }
+  function addModern(map){
+    const g = L.layerGroup().addTo(map);
+    MAP_MODERN.forEach(p=>{ const mk=L.circleMarker([p.lat,p.lon],{radius:6,color:'#0e1a16',weight:2,fillColor:'#3fa6c4',fillOpacity:1}); mk.bindTooltip(p.name,{permanent:true,direction:'right',className:'modern-tip',offset:[6,0]}); g.addLayer(mk); });
+    return g;
+  }
 
-  /* 3D 仿真场景 */
-  const sceneModal=$("#scene-modal"), sceneWorld=$("#scene3d-world"), sceneStage=$("#scene3d-stage"), sceneTitle=$("#scene-title");
+  /* 小地图（学习板块） */
+  let miniMap=null;
+  function ensureMiniMap(){
+    if(miniMap){ setTimeout(()=>miniMap.invalidateSize(),60); return; }
+    miniMap = newSatMap('minimap',{zoom:13, zoomControl:false});
+    addMarkets(miniMap, openScene);
+    addSites(miniMap);
+  }
+  $("#minimap-wrap").addEventListener("click", openMapModal);
+
+  /* 完整大地图弹窗 */
+  const mapModal=$("#map-modal");
+  let modalMap=null;
+  function openMapModal(){
+    mapModal.classList.add("open");
+    if(!modalMap){
+      modalMap = newSatMap('modal-map',{zoom:14});
+      addMarkets(modalMap, openScene);
+      addSites(modalMap);
+      addModern(modalMap);
+    } else { setTimeout(()=>modalMap.invalidateSize(),60); }
+  }
+
+  /* 卫星街景（双击市集进入 · 正交顶视 · 无倾斜透视） */
+  const sceneModal=$("#scene-modal"), sceneTitle=$("#scene-title"), sceneDesc=$("#scene-desc");
+  let sceneMap=null, sceneMarker=null;
   function openScene(mi){
-    const m=MONTHLY_MARKETS[mi], th=m.theme;
-    sceneTitle.textContent="3D 仿真 · "+m.month+m.market;
-    sceneStage.style.setProperty("--accent",th.accent);
-    sceneStage.style.setProperty("--glow",th.glow);
-    sceneWorld.style.setProperty("--accent",th.accent);
-    sceneWorld.style.setProperty("--glow",th.glow);
-    // 生成沿街摊位
-    let s="";
-    const goods=["货摊","酒肆","绣坊","药铺","灯铺","花担","香铺","书肆"];
-    for(let i=0;i<8;i++){
-      const side=(i%2===0)?-1:1;
-      const z=-200-i*340;
-      const x=side*180;
-      s+=`<div class="stall" style="left:${x}px;top:0;transform:translateZ(${z}px)"><div class="awning"></div><div class="label">${m.market}<br>${goods[i%goods.length]}</div></div>`;
-    }
-    // 灯笼/装饰
-    for(let i=0;i<10;i++){
-      const side=(i%2===0)?-1:1;
-      s+=`<div class="lantern" style="left:${side*(120+Math.random()*120)}px;top:${20+Math.random()*40}px;transform:translateZ(${-100-Math.random()*2400}px)"></div>`;
-    }
-    sceneWorld.innerHTML=s;
+    const m=MONTHLY_MARKETS[mi];
+    sceneTitle.textContent="卫星街景 · "+m.month+m.market;
     sceneModal.classList.add("open");
+    if(!sceneMap){
+      sceneMap = L.map('scene-map', {center:[m.map.lat,m.map.lon], zoom:16, minZoom:14, maxZoom:16, zoomControl:true, scrollWheelZoom:true});
+      satTiles().addTo(sceneMap);
+    } else { setTimeout(()=>sceneMap.invalidateSize(),60); }
+    if(sceneMarker) sceneMap.removeLayer(sceneMarker);
+    sceneMarker = L.circleMarker([m.map.lat, m.map.lon], {radius:9, color:'#1c150c', weight:2, fillColor:'#d4af37', fillOpacity:1}).addTo(sceneMap);
+    sceneMarker.bindPopup(`<b>${m.month}${m.market}</b><br>${m.desc}`).openPopup();
+    sceneMap.flyTo([m.map.lat, m.map.lon], 16, {duration:1.1});
+    sceneDesc.innerHTML = `<b style="color:var(--gold)">${m.month}${m.market}</b> · ${m.desc}<br><span style="color:var(--parch-dim)">${m.shop.restore}</span>`;
   }
 
-  /* ---------- 大地图视图 + 图层 ---------- */
-  const bigmapSvg=$("#bigmap-svg"), mapToolbar=$("#map-toolbar");
-  function renderBigMap(layer){
-    const svg=bigmapSvg;
-    let s=`<rect x="0" y="0" width="1000" height="620" fill="#0e1a16"/>`;
-    s+=`<rect x="120" y="80" width="760" height="470" rx="18" fill="none" stroke="rgba(176,141,87,.4)" stroke-width="2" stroke-dasharray="6 6"/>`;
-    s+=`<path d="M 120 520 C 320 500, 520 470, 760 520 L 820 560 L 100 560 Z" fill="rgba(60,120,160,.35)" opacity=".7"/>`;
-    s+=`<text x="430" y="60" fill="#e8dcc0" font-size="20" font-family="STKaiti,KaiTi,serif">${LAYER_INFO[layer]}</text>`;
-    if(layer!=="modern"){
-      MAP_SITES.forEach(p=>{ s+=`<circle cx="${p.x}" cy="${p.y}" r="7" fill="#6b9080" stroke="#0e1a16" stroke-width="2"/>`; s+=`<text x="${p.x+11}" y="${p.y+5}" fill="#bfe6c8" font-size="13">${p.name}</text>`; });
-    } else {
-      MAP_MODERN.forEach(p=>{ s+=`<circle cx="${p.x}" cy="${p.y}" r="6" fill="#3fa6c4" stroke="#0e1a16" stroke-width="2"/>`; s+=`<text x="${p.x+10}" y="${p.y+4}" fill="#bfe6f0" font-size="12">${p.name}</text>`; });
-    }
-    MONTHLY_MARKETS.forEach((m,i)=>{ const x=m.map.x,y=m.map.y;
-      s+=`<circle class="mk-dot" data-mi="${i}" cx="${x}" cy="${y}" r="9" fill="#d4af37" stroke="#1c150c" stroke-width="2" style="cursor:pointer"/>`;
-      s+=`<text x="${x-9}" y="${y-14}" fill="#ffe9a8" font-size="13" font-family="STKaiti,KaiTi,serif">${m.month}${m.market}</text>`;
-    });
-    svg.innerHTML=s;
-    $$(".mk-dot",svg).forEach(c=>c.addEventListener("dblclick",()=>openScene(+c.dataset.mi)));
+  /* 赶市地图（大地图视图）+ 图层切换（唐/宋/现代 同位置对照） */
+  let bigMap=null, bigSites=null, bigModern=null, bigMarkets=null, layerInfo=$("#layer-info");
+  function ensureBigMap(){
+    if(bigMap){ setTimeout(()=>bigMap.invalidateSize(),60); return; }
+    bigMap = newSatMap('bigmap',{zoom:14});
+    bigMarkets = addMarkets(bigMap, openScene);
+    bigSites = addSites(bigMap);
+    bigModern = addModern(bigMap);
+    applyLayer('song');
   }
-  mapToolbar.addEventListener("click",e=>{ const b=e.target.closest(".layer-btn"); if(!b) return;
-    $$(".layer-btn",mapToolbar).forEach(x=>x.classList.toggle("active",x===b)); renderBigMap(b.dataset.layer); });
-  renderBigMap("song");
+  function applyLayer(layer){
+    if(!bigMap) return;
+    if(layer==='modern'){ bigMap.addLayer(bigModern); bigMap.removeLayer(bigSites); }
+    else { bigMap.addLayer(bigSites); bigMap.removeLayer(bigModern); }
+    if(layerInfo) layerInfo.textContent = (LAYER_INFO && LAYER_INFO[layer]) ? LAYER_INFO[layer] : '';
+  }
+  const mapToolbar=$("#map-toolbar");
+  mapToolbar.addEventListener("click", e=>{ const b=e.target.closest(".layer-btn"); if(!b) return;
+    $$(".layer-btn",mapToolbar).forEach(x=>x.classList.toggle("active",x===b)); applyLayer(b.dataset.layer); });
 
   /* 打卡解锁纪念笺 */
   const CHECKIN=MAP_MODERN;
@@ -1079,39 +1146,64 @@ const RELICS = [
     }
   }
 
-  /* ---------- 账号 / localStorage ---------- */
-  const USERS_KEY="langu_users", CUR_KEY="langu_current";
+  /* ---------- 账号 / 后端（Cloudflare Pages Functions + D1） ---------- */
+  const CUR_KEY="langu_current", EXP_KEY="langu_exp";
   const userChip=$("#user-chip"), tierBadge=$("#tier-badge");
-  function loadUsers(){ try{return JSON.parse(localStorage.getItem(USERS_KEY))||{};}catch(e){return {};} }
-  function saveUsers(u){ localStorage.setItem(USERS_KEY,JSON.stringify(u)); }
   function currentUser(){ return localStorage.getItem(CUR_KEY); }
   function tierInfo(exp){ let cur=TIERS[0],next=null; for(const t of TIERS){ if(exp>=t.need){cur=t;} else {next=t;break;} } const maxed=exp>=TIERS[TIERS.length-1].need; return {cur,next,maxed}; }
-  function refreshUserChip(){ const name=currentUser(); if(name){ const u=loadUsers()[name]; const ti=tierInfo(u.exp); userChip.classList.remove("hidden"); $(".uname",userChip).textContent=name; tierBadge.textContent=ti.cur.name; } else userChip.classList.add("hidden"); }
-  function renderAccount(){ const name=currentUser(); if(name){ const u=loadUsers()[name]; const ti=tierInfo(u.exp);
+  function getExp(name){ try{const m=JSON.parse(localStorage.getItem(EXP_KEY)||"{}"); return (m[name]||0);}catch(e){return 0;} }
+  function setExp(name,v){ const m=JSON.parse(localStorage.getItem(EXP_KEY)||"{}"); m[name]=v; localStorage.setItem(EXP_KEY,JSON.stringify(m)); }
+  function refreshUserChip(){ const name=currentUser(); if(name){ const ti=tierInfo(getExp(name)); userChip.classList.remove("hidden"); $(".uname",userChip).textContent=name; tierBadge.textContent=ti.cur.name; } else userChip.classList.add("hidden"); }
+  function renderAccount(){ const name=currentUser(); if(name){ const ti=tierInfo(getExp(name));
     $("#acc-loggedout").classList.add("hidden"); $("#acc-loggedin").classList.remove("hidden");
-    $("#acc-name-show").textContent=name; $("#acc-exp").textContent=u.exp; $("#acc-tier").textContent=ti.cur.name;
-    $("#acc-next").textContent=ti.maxed?"已满级":("还需 "+(ti.next.need-u.exp));
+    $("#acc-name-show").textContent=name; $("#acc-exp").textContent=getExp(name); $("#acc-tier").textContent=ti.cur.name;
+    $("#acc-next").textContent=ti.maxed?"已满级":("还需 "+(ti.next.need-getExp(name)));
     $("#tier-track").innerHTML=TIERS.map(t=>`<span class="tt ${t.name===ti.cur.name?'cur':''}">${t.name}</span>`).join("");
   } else { $("#acc-loggedout").classList.remove("hidden"); $("#acc-loggedin").classList.add("hidden"); } }
   function setHint(msg,ok){ const h=$("#acc-hint"); h.textContent=msg; h.className="acc-hint"+(ok?" ok":""); }
-  $("#acc-register").addEventListener("click",()=>{ const name=$("#acc-name").value.trim(),pass=$("#acc-pass").value; if(!name||!pass){setHint("请填写名称与密码。");return;} const users=loadUsers(); if(users[name]){setHint("该名称已被占用，请换一个或登录。");return;} users[name]={pass,exp:0}; saveUsers(users); localStorage.setItem(CUR_KEY,name); setHint("注册成功，已登录！",true); refreshUserChip(); renderAccount(); Zola.say(`欢迎加入览古，${name}！现在可以去「PK 对战」检验你的历史功力了。`); });
-  $("#acc-login").addEventListener("click",()=>{ const name=$("#acc-name").value.trim(),pass=$("#acc-pass").value; const users=loadUsers(); if(!users[name]){setHint("没有这个账号，请先注册。");return;} if(users[name].pass!==pass){setHint("密码不对，再试试。");return;} localStorage.setItem(CUR_KEY,name); setHint("登录成功！",true); refreshUserChip(); renderAccount(); });
-  $("#acc-logout").addEventListener("click",()=>{ localStorage.removeItem(CUR_KEY); refreshUserChip(); renderAccount(); Zola.say("已退出。随时可再来学习或注册 PK。"); });
+  async function api(path, body){ const r=await fetch(path,{method:body?'POST':'GET',headers:{'Content-Type':'application/json'},body:body?JSON.stringify(body):undefined,credentials:'same-origin'}); let d={}; try{d=await r.json();}catch(e){} return {status:r.status,d}; }
+  $("#acc-register").addEventListener("click",async ()=>{ const name=$("#acc-name").value.trim(),pass=$("#acc-pass").value; if(!name||!pass){setHint("请填写名称与密码。");return;} const {status,d}=await api("/api/register",{username:name,password:pass}); if(status===200&&d.ok){ localStorage.setItem(CUR_KEY,name); setExp(name,0); setHint("注册成功，已登录！",true); refreshUserChip(); renderAccount(); Zola.say(`欢迎加入览古，${name}！现在可以去「PK 对战」检验你的历史功力了。`); } else { setHint(d.error||"注册失败，请重试。"); } });
+  $("#acc-login").addEventListener("click",async ()=>{ const name=$("#acc-name").value.trim(),pass=$("#acc-pass").value; if(!name||!pass){setHint("请填写名称与密码。");return;} const {status,d}=await api("/api/login",{username:name,password:pass}); if(status===200&&d.ok){ localStorage.setItem(CUR_KEY,name); setHint("登录成功！",true); refreshUserChip(); renderAccount(); Zola.say("登录成功，欢迎回来，"+name+"！"); } else { setHint(d.error||"登录失败，请重试。"); } });
+  $("#acc-logout").addEventListener("click",async ()=>{ await api("/api/logout"); localStorage.removeItem(CUR_KEY); refreshUserChip(); renderAccount(); Zola.say("已退出。随时可再来学习或注册 PK。"); });
+  // 页面加载时与后端会话同步登录态（后端为账号真源）
+  (async ()=>{ const {status,d}=await api("/api/me"); if(status===200&&d.loggedIn){ localStorage.setItem(CUR_KEY,d.username); } else { localStorage.removeItem(CUR_KEY); } refreshUserChip(); renderAccount(); })();
 
-  /* ---------- PK · 三机甲自动对战 ---------- */
+  /* ---------- PK · 十二月市知识抢答对战 ---------- */
+  /* 用户定制规则：
+     ① 题库仅用「十二月市」相关题。
+     ② 每轮抽一张「角色卡」，卡内含 3 道十二月市题，按序放出（一题 = 一轮抢答）。
+     ③ 每题开放抢答：人 + 三台机甲同场竞争，机甲反应均 ≥2 秒。
+     ④ 最先答对该题者，立刻获得 1 次行动机会：攻击（对一台 -1 血）或回血（对一台 +1 血）。
+     ⑤ 答错不惩罚，继续等待抢答（该角色本題答错则锁定，不再抢本题）。
+     ⑥ 3 道题独立结算；3 题全部结束 → 本张角色卡回合结束 → 进入下一轮抽卡。
+     ⑦ 血量归零者「倒下」退出本局；人或三机甲全灭则本局结束，胜者为「十二月市霸主」。 */
+
   const ROBOTS=[
     {name:"机甲·甲（青铜）",cls:"m0"},
     {name:"机甲·乙（朱红）",cls:"m1"},
     {name:"机甲·丙（苍碧）",cls:"m2"}
   ];
-  const ACC=[0.82,0.76,0.70];     // 三台机甲答题正确率（丙稍弱）
-  const MIN_REACT=2000;           // 反应时下限 ≥2 秒（对面不能太快）
-  const ROUND_MS=20000;
-  const START_HP=10;
-  let pk=null,qOrder=[],qPos=0,pkTimers=[],pkHuman={};
+  const ACC=[0.80,0.74,0.68];      // 三台机甲答题正确率
+  const MIN_REACT=2000;            // 反应时下限 ≥2 秒（对面不能太快）
+  const Q_TIME=22000;              // 每题抢答时限
+  const Q_PER_ROUND=3;             // 每张角色卡 3 题
+  const START_HP=10, MAX_HP=12;
+
+  // 角色卡牌库：每轮抽一张，赋予「你」一项本回合增益
+  const CHAR_CARDS=[
+    {id:"deng",name:"灯市灯匠",flavor:"正月灯市 · 手速如风",buff:"retry",buffText:"你答错不锁，本题可继续抢答"},
+    {id:"jin", name:"锦市织娘",flavor:"四月锦市 · 回春妙手",buff:"heal2",buffText:"你回血 +2（通常 +1）"},
+    {id:"yao", name:"药市郎中",flavor:"九月药市 · 雷霆一击",buff:"atk2", buffText:"你攻击 -2（通常 -1）"},
+    {id:"gui", name:"桂市书生",flavor:"八月桂市 · 先声夺人",buff:"tie",  buffText:"机甲反应额外 +1.2 秒（你先声夺人）"},
+    {id:"mei", name:"梅市隐士",flavor:"十一月梅市 · 后发制人",buff:"slow",buffText:"机甲反应 +1 秒（机甲更慢）"}
+  ];
+
+  let pk=null, pkTimers=[];
   function clearPkTimers(){ pkTimers.forEach(t=>clearTimeout(t)); pkTimers=[]; }
   function later(fn,ms){ const t=setTimeout(fn,ms); pkTimers.push(t); return t; }
   function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+  function drawCard(){ return CHAR_CARDS[Math.floor(Math.random()*CHAR_CARDS.length)]; }
+
   const pkRow=$("#pk-row");
   function renderMechaRow(){
     pkRow.innerHTML=ROBOTS.map((r,i)=>`
@@ -1119,76 +1211,104 @@ const RELICS = [
         <div class="mecha-bot" id="bot-${i}">🤖</div>
         <div class="mecha-name" id="pk-name-${i}">${r.name}</div>
         <div class="hp-pips" id="pips-${i}"></div>
-        <div class="hp-num"><span id="hp-${i}-num">10</span> / 10</div>
+        <div class="hp-num"><span id="hp-${i}-num">${START_HP}</span> / ${MAX_HP}</div>
       </div>`).join("");
   }
-  function renderPips(side){ const box=$("#pips-"+side); box.innerHTML=""; for(let i=0;i<START_HP;i++){ const d=document.createElement("div"); d.className="pip "+(i<pk.hp[side]?"on ":"")+(side===0?"m0":side===1?"m1":"m2"); box.appendChild(d); } $("#hp-"+side+"-num").textContent=pk.hp[side]; }
-  function updateHP(){ for(let i=0;i<3;i++){ if(pk.alive[i]) renderPips(i); } }
-  function log(cls,msg){ const l=$("#pk-log"); l.innerHTML+=`<div class="l-${cls}">${msg}</div>`; l.scrollTop=l.scrollHeight; }
-  function aliveCount(){ return pk.alive.filter(Boolean).length; }
+  function renderPips(side){ const box=$("#pips-"+side); if(!box) return; box.innerHTML=""; const shown=Math.min(MAX_HP,pk.hp[side]); for(let i=0;i<MAX_HP;i++){ const d=document.createElement("div"); d.className="pip "+(i<shown?"on ":"")+(side===0?"m0":side===1?"m1":"m2"); box.appendChild(d); } const n=$("#hp-"+side+"-num"); if(n) n.textContent=pk.hp[side]; }
+  function renderHumanPips(){ const box=$("#human-h-pips"); if(!box) return; box.innerHTML=""; const shown=Math.min(MAX_HP,pk.hpH); for(let i=0;i<MAX_HP;i++){ const d=document.createElement("div"); d.className="h-pip "+(i<shown?"on":""); box.appendChild(d); } const n=$("#human-h-num"); if(n) n.textContent=pk.hpH; }
+  function updateHP(){ for(let i=0;i<3;i++){ if(pk.alive[i]||pk.hp[i]>0) renderPips(i); } renderHumanPips(); }
+  function log(cls,msg){ const l=$("#pk-log"); if(!l) return; l.innerHTML+=`<div class="l-${cls}">${msg}</div>`; l.scrollTop=l.scrollHeight; }
+  function aliveCount(){ let n=0; for(let i=0;i<3;i++) if(pk.alive[i]) n++; return n; }
   function aliveOpponents(side){ const a=[]; for(let i=0;i<3;i++){ if(i!==side && pk.alive[i]) a.push(i); } return a; }
 
   function startBattle(){
     if(!pkRow.querySelector("#mecha-0")) renderMechaRow();
     clearPkTimers();
-    pk={hp:[START_HP,START_HP,START_HP],round:1,over:false,winner:null,alive:[true,true,true],champion:null};
-    qOrder=shuffle(PK_QUESTIONS.map((_,i)=>i)); qPos=0;
+    pk={hp:[START_HP,START_HP,START_HP],hpH:START_HP,round:0,over:false,alive:[true,true,true],card:null,
+        qInRound:0,qOrder:[],qi:0,resolved:false,correctSide:null,humanLocked:false,robotLocked:[false,false,false]};
     $("#pk-log").innerHTML="";
-    for(let i=0;i<3;i++){ $("#mecha-"+i).classList.remove("active","hit","dead"); }
+    $("#pk-next").style.display="none";
+    for(let i=0;i<3;i++){ const m=$("#mecha-"+i); if(m) m.classList.remove("active","hit","dead"); }
     updateHP();
-    $("#pk-exp-line").textContent="三台机甲就位：甲（青铜）VS 乙（朱红）VS 丙（苍碧）。每台反应 ≥2 秒，抢答胜者攻击(-1)或回血(+1)。";
-    log("sys","⚙ 三台机甲就位：甲（青铜）VS 乙（朱红）VS 丙（苍碧）。每题限时 20 秒，超时存活者各扣 1 血，血量归零淘汰，最后存活者胜。");
+    showCard(null);
+    log("sys","⚙ 三台机甲就位：甲（青铜）VS 乙（朱红）VS 丙（苍碧）。每题抢答，先答对者获得 1 次行动；答错不罚，继续抢。每轮 3 题，3 题后抽下一张角色卡。");
     nextRound();
+  }
+
+  function showCard(card){
+    if(!card){
+      $("#card-name").textContent="等待抽卡…";
+      $("#card-flavor").textContent="";
+      $("#card-buff").textContent="点击「重新开战」开始，每轮自动抽取一张十二月市角色卡。";
+      return;
+    }
+    $("#card-name").textContent=card.name;
+    $("#card-flavor").textContent=card.flavor;
+    $("#card-buff").textContent="本回合增益 · "+card.buffText;
   }
 
   function nextRound(){
     if(pk.over) return;
-    if(aliveCount()<=1){ finish(pk.alive.indexOf(true)); return; }
-    pk.winner=null; pk.resolved=false; pkHuman.done=false;
-    $("#pk-round-tag").textContent="第 "+pk.round+" 回合";
-    pk.qi=qOrder[qPos%qOrder.length]; qPos++;
-    const Q=PK_QUESTIONS[pk.qi];
-    $("#pk-q").textContent=Q.q;
+    if(checkEnd()) return;
+    pk.round++;
+    pk.card=drawCard();
+    pk.qInRound=0;
+    pk.qOrder=shuffle(PK_QUESTIONS.map((_,i)=>i)).slice(0,Q_PER_ROUND);
+    showCard(pk.card);
+    $("#pk-next").style.display="none";
+    $("#pk-round-tag").textContent="第 "+pk.round+" 张角色卡 · "+pk.card.name;
+    log("sys","—— 第 "+pk.round+" 张角色卡回合：「"+pk.card.name+"」——");
+    if(currentUser()) log("you","（你抽到角色卡：「"+pk.card.name+"」，增益："+pk.card.buffText+"）");
+    nextQuestion();
+  }
+
+  function nextQuestion(){
+    if(pk.over) return;
+    if(pk.qInRound>=Q_PER_ROUND){ endRound(); return; }
+    const qi=pk.qOrder[pk.qInRound]; pk.qInRound++;
+    pk.qi=qi; pk.resolved=false; pk.correctSide=null; pk.humanLocked=false; pk.robotLocked=[false,false,false];
+    const Q=PK_QUESTIONS[qi];
+    $("#pk-q").textContent="（第 "+pk.qInRound+" / "+Q_PER_ROUND+" 题）"+Q.q;
     $("#pk-buzz-banner").textContent=""; $("#pk-action-flash").textContent="";
     $("#pk-human").innerHTML="";
     const optBox=$("#pk-options");
     optBox.innerHTML=Q.options.map((o,i)=>`<button class="opt pk-opt" data-i="${i}">${String.fromCharCode(65+i)}. ${o}</button>`).join("");
     $$(".pk-opt",optBox).forEach(btn=>btn.addEventListener("click",()=>humanPick(+btn.dataset.i)));
-    for(let i=0;i<3;i++){ if(pk.alive[i]) $("#bot-"+i).classList.remove("active"); }
-    startTimer();
+    for(let i=0;i<3;i++){ const b=$("#bot-"+i); if(b) b.classList.remove("active"); }
+    startSnatch();
   }
 
-  function startTimer(){
-    const bar=$("#pk-timer-bar"),num=$("#pk-timer-num");
-    bar.style.width="100%"; bar.classList.remove("warn");
-    // 为存活机甲计算正确性与反应时（≥2 秒）
-    const info={};
-    const eligible=[];
+  function startSnatch(){
+    const slowAdd = (pk.card && pk.card.buff==="slow") ? 1000 : 0;
+    const tieAdd  = (pk.card && pk.card.buff==="tie")  ? 1200 : 0;
+    const plan=[];
     for(let i=0;i<3;i++){
       if(!pk.alive[i]) continue;
       const correct=Math.random()<ACC[i];
-      const react=MIN_REACT + (Math.random()*5000); // 2000ms ~ 7000ms
-      info[i]={correct,react};
-      if(correct) eligible.push(i);
+      const react=MIN_REACT + slowAdd + tieAdd + Math.random()*5000; // ≥2 秒
+      plan.push({side:i,correct,react});
     }
-    let winner=null,buzzAt=0;
-    if(eligible.length){
-      winner=eligible[0];
-      for(const i of eligible){ if(info[i].react<info[winner].react) winner=i; }
-      buzzAt=info[winner].react;
-    }
+    plan.sort((a,b)=>a.react-b.react);
     const started=Date.now();
+    const bar=$("#pk-timer-bar"),num=$("#pk-timer-num");
+    if(bar){ bar.style.width="100%"; bar.classList.remove("warn"); }
     const tick=()=>{
-      if(pk.over) return;
-      const remain=ROUND_MS-(Date.now()-started);
-      bar.style.width=Math.max(0,remain)/ROUND_MS*100+"%";
-      num.textContent=Math.max(0,Math.ceil(remain/1000));
-      if(remain<=8000) bar.classList.add("warn");
-      if(remain>0 && !pk.resolved) later(tick,200);
-      else if(!pk.resolved) onTimeout();
+      if(pk.over||pk.resolved) return;
+      const remain=Q_TIME-(Date.now()-started);
+      if(bar) bar.style.width=Math.max(0,remain)/Q_TIME*100+"%";
+      if(num) num.textContent=Math.max(0,Math.ceil(remain/1000));
+      if(remain<=8000 && bar) bar.classList.add("warn");
+      if(remain>0) later(tick,200);
+      else onTimeout();
     };
     later(tick,200);
-    if(winner!==null) later(()=>onBuzz(winner), Math.max(400,buzzAt));
+    plan.forEach(p=>{
+      later(()=>{
+        if(pk.over||pk.resolved||!pk.alive[p.side]||pk.robotLocked[p.side]) return;
+        if(p.correct) robotBuzz(p.side);
+        else { pk.robotLocked[p.side]=true; } // 机甲答错，本题锁定，继续等待
+      }, p.react);
+    });
   }
 
   function revealAnswer(){
@@ -1197,117 +1317,150 @@ const RELICS = [
   }
 
   function humanPick(i){
-    if(pk.over||pk.resolved||pkHuman.done) return;
+    if(pk.over||pk.resolved||pk.humanLocked) return;
     const Q=PK_QUESTIONS[pk.qi];
     if(i===Q.answer){
-      pkHuman.done=true; pk.resolved=true; clearPkTimers();
-      revealAnswer();
-      log("you","⚡ 你抢答成功！");
+      pk.resolved=true; clearPkTimers(); revealAnswer();
+      log("you","⚡ 你率先答对该题！");
       $("#pk-buzz-banner").textContent="⚡ 你抢答成功，选择行动…";
       humanActionChoice();
     } else {
-      pkHuman.done=true;
+      const retry = pk.card && pk.card.buff==="retry";
+      pk.humanLocked = !retry;
       const b=document.querySelector('.pk-opt[data-i="'+i+'"]');
       if(b){ b.disabled=true; b.classList.add("wrong"); }
-      $("#pk-buzz-banner").textContent="你答错了，机甲继续抢答…";
-      log("you","✗ 你答错，机甲继续抢答");
+      if(retry) $("#pk-buzz-banner").textContent="你答错了，但「灯市灯匠」护体——本题仍可继续抢答！";
+      else $("#pk-buzz-banner").textContent="你答错了，本题不再抢答，看机甲表现…";
+      log("you","✗ 你答错"+(retry?"（灯市灯匠：可继续抢答）":""));
     }
   }
 
   function humanActionChoice(){
     const box=$("#pk-human");
+    const atkTxt = (pk.card&&pk.card.buff==="atk2")?"攻击（对一台机甲 -2 血）":"攻击（对一台机甲 -1 血）";
+    const healTxt = (pk.card&&pk.card.buff==="heal2")?"回血（你 +2 血）":"回血（你 +1 血）";
     box.innerHTML=`<div class="human-tip">你抢到了答题权，选择行动：</div>`+
-      `<button class="btn btn-cinnabar btn-sm" id="h-atk">⚔ 攻击（对一台机甲 -1 血）</button>`+
-      `<button class="btn btn-patina btn-sm" id="h-heal">❤ 回血（对一台机甲 +1 血）</button>`;
+      `<button class="btn btn-cinnabar btn-sm" id="h-atk">⚔ ${atkTxt}</button>`+
+      `<button class="btn btn-patina btn-sm" id="h-heal">❤ ${healTxt}</button>`;
     $("#h-atk").addEventListener("click",()=>humanPickTarget("attack"));
     $("#h-heal").addEventListener("click",()=>humanPickTarget("heal"));
   }
 
   function humanPickTarget(kind){
     const box=$("#pk-human");
+    if(kind==="heal"){ resolveAction("you","heal",null); return; }
     const alive=[0,1,2].filter(i=>pk.alive[i]);
-    box.innerHTML=`<div class="human-tip">${kind==="attack"?"选择要攻击的机甲：":"选择要回血的机甲："}</div>`+
+    box.innerHTML=`<div class="human-tip">选择要攻击的机甲：</div>`+
       alive.map(i=>`<button class="btn btn-ghost btn-sm" data-t="${i}">${ROBOTS[i].name}</button>`).join("");
-    $$("[data-t]",box).forEach(b=>b.addEventListener("click",()=>{
-      const t=+b.dataset.t;
-      resolveAction("you",kind,t);
-    }));
+    $$("[data-t]",box).forEach(b=>b.addEventListener("click",()=>resolveAction("you","attack",+b.dataset.t)));
   }
 
-  function onBuzz(side){
-    if(!pk||pk.over||pk.resolved||!pk.alive[side]) return;
-    pk.resolved=true; clearPkTimers();
-    revealAnswer();
-    $("#bot-"+side).classList.add("active");
-    log(side, "⚡ "+ROBOTS[side].name+" 抢答成功！");
+  function robotBuzz(side){
+    if(pk.over||pk.resolved||!pk.alive[side]) return;
+    pk.resolved=true; clearPkTimers(); revealAnswer();
+    const b=$("#bot-"+side); if(b) b.classList.add("active");
+    log(side,"⚡ "+ROBOTS[side].name+" 抢答成功！");
     $("#pk-buzz-banner").textContent="⚡ "+ROBOTS[side].name+" 抢答成功，选择行动…";
     later(()=>robotAction(side),900);
   }
 
   function robotAction(side){
-    if(!pk||pk.over) return;
-    const heal = pk.hp[side]<=3 ? true : Math.random()>0.7;
-    if(heal) resolveAction(side,"heal",side);
-    else { const opp=aliveOpponents(side); const target=opp.reduce((a,b)=>pk.hp[b]<pk.hp[a]?b:a,opp[0]); resolveAction(side,"attack",target); }
+    if(pk.over) return;
+    const heal = pk.hp[side]<=3 ? true : Math.random()>0.72;
+    if(heal){ resolveAction(side,"heal",side); return; }
+    if(pk.hpH>0){ resolveAction(side,"attack","you"); return; }
+    const opp=aliveOpponents(side);
+    if(opp.length){ const target=opp.reduce((a,b)=>pk.hp[b]<pk.hp[a]?b:a,opp[0]); resolveAction(side,"attack",target); }
+    else resolveAction(side,"heal",side);
   }
 
   function resolveAction(actor, kind, target){
     if(!pk||pk.over) return;
     const actorName = actor==="you" ? "你" : ROBOTS[actor].name;
     $("#pk-buzz-banner").textContent="";
-    if(kind==="heal"){
-      pk.hp[target]=Math.min(START_HP,pk.hp[target]+1);
-      log(actor==="you"?"you":actor, actorName+" 选择【回血】 → "+ROBOTS[target].name+" +1 血");
-      $("#pk-action-flash").innerHTML=actorName+" 选择 <span class=\"heal\">回血 "+ROBOTS[target].name+" +1</span>";
+    if(actor==="you"){
+      if(kind==="heal"){
+        const amt=(pk.card&&pk.card.buff==="heal2")?2:1;
+        pk.hpH=Math.min(MAX_HP,pk.hpH+amt);
+        log("you","你选择【回血】 → 你 +"+amt+" 血");
+        $("#pk-action-flash").innerHTML="你选择 <span class=\"heal\">回血 +"+amt+"</span>";
+      } else if(target!==null && pk.alive[target]){
+        const amt=(pk.card&&pk.card.buff==="atk2")?2:1;
+        pk.hp[target]=Math.max(0,pk.hp[target]-amt);
+        log("you","你选择【攻击】 → "+ROBOTS[target].name+" -"+amt+" 血");
+        $("#pk-action-flash").innerHTML="你选择 <span class=\"atk\">攻击 "+ROBOTS[target].name+" -"+amt+"</span>";
+        const tb=$("#bot-"+target); if(tb){ tb.classList.add("hit"); later(()=>tb.classList.remove("hit"),420); }
+      }
     } else {
-      pk.hp[target]=Math.max(0,pk.hp[target]-1);
-      log(actor==="you"?"you":actor, actorName+" 选择【攻击】 → "+ROBOTS[target].name+" -1 血");
-      $("#pk-action-flash").innerHTML=actorName+" 选择 <span class=\"atk\">攻击 "+ROBOTS[target].name+" -1</span>";
-      $("#bot-"+target).classList.add("hit");
-      later(()=>$("#bot-"+target).classList.remove("hit"),420);
+      if(kind==="heal"){
+        pk.hp[actor]=Math.min(MAX_HP,pk.hp[actor]+1);
+        log(actor,ROBOTS[actor].name+" 选择【回血】 → 自己 +1 血");
+        $("#pk-action-flash").innerHTML=ROBOTS[actor].name+" 选择 <span class=\"heal\">回血 +1</span>";
+      } else if(target==="you"){
+        pk.hpH=Math.max(0,pk.hpH-1);
+        log(actor,ROBOTS[actor].name+" 选择【攻击】 → 你 -1 血");
+        $("#pk-action-flash").innerHTML=ROBOTS[actor].name+" 选择 <span class=\"atk\">攻击 你 -1</span>";
+      } else if(target!==null && pk.alive[target]){
+        pk.hp[target]=Math.max(0,pk.hp[target]-1);
+        log(actor,ROBOTS[actor].name+" 选择【攻击】 → "+ROBOTS[target].name+" -1 血");
+        $("#pk-action-flash").innerHTML=ROBOTS[actor].name+" 选择 <span class=\"atk\">攻击 "+ROBOTS[target].name+" -1</span>";
+        const tb=$("#bot-"+target); if(tb){ tb.classList.add("hit"); later(()=>tb.classList.remove("hit"),420); }
+      }
     }
     updateHP();
-    for(let i=0;i<3;i++){ if(pk.alive[i] && pk.hp[i]<=0){ pk.alive[i]=false; $("#mecha-"+i).classList.add("dead"); log("sys","💥 "+ROBOTS[i].name+" 血量归零，被淘汰！"); } }
-    if(aliveCount()<=1){ const w=pk.alive.indexOf(true); finish(w); return; }
-    later(()=>{ pk.round++; nextRound(); },1100);
+    for(let i=0;i<3;i++){ if(pk.alive[i] && pk.hp[i]<=0){ pk.alive[i]=false; const m=$("#mecha-"+i); if(m) m.classList.add("dead"); log("sys","💥 "+ROBOTS[i].name+" 血量归零，倒下！"); } }
+    if(pk.hpH<=0){ pk.hpH=0; log("sys","💥 你血量归零，倒下！"); }
+    updateHP();
+    if(checkEnd()) return;
+    later(()=>{ nextQuestion(); },1300);
   }
 
   function onTimeout(){
-    if(!pk||pk.over||pk.resolved) return;
-    pk.resolved=true; clearPkTimers();
-    revealAnswer();
-    for(let i=0;i<3;i++){ if(pk.alive[i]){ pk.hp[i]=Math.max(0,pk.hp[i]-1); } }
-    log("sys","⏱ 超时无人抢答，存活机甲各扣 1 血");
-    $("#pk-buzz-banner").textContent="⏱ 超时，各 -1 血";
-    for(let i=0;i<3;i++){ if(pk.alive[i]) $("#bot-"+i).classList.add("hit"); }
-    later(()=>{ for(let i=0;i<3;i++){ if(pk.alive[i]) $("#bot-"+i).classList.remove("hit"); } },420);
+    if(pk.over||pk.resolved) return;
+    pk.resolved=true; clearPkTimers(); revealAnswer();
+    log("sys","⏱ 本题限时内无人答对，揭晓答案，无人获得行动。");
+    $("#pk-buzz-banner").textContent="⏱ 本题无人答对，跳过";
     updateHP();
-    for(let i=0;i<3;i++){ if(pk.alive[i] && pk.hp[i]<=0){ pk.alive[i]=false; $("#mecha-"+i).classList.add("dead"); log("sys","💥 "+ROBOTS[i].name+" 血量归零，被淘汰！"); } }
-    if(aliveCount()<=1){ const w=pk.alive.indexOf(true); finish(w); return; }
-    later(()=>{ pk.round++; nextRound(); },1100);
+    later(()=>{ nextQuestion(); },1200);
   }
 
-  function endCheck(){ return pk.over; }
-  function finish(loser){
+  function endRound(){
+    log("sys","—— 本张角色卡「"+pk.card.name+"」回合结束（3 题结算完毕）——");
+    if(currentUser()){ const nm=currentUser(); setExp(nm,getExp(nm)+3); const ti=tierInfo(getExp(nm)); $("#pk-exp-line").innerHTML="本回合 +3 经验 · 当前 <b>"+getExp(nm)+"</b> · 段位 <b>"+ti.cur.name+"</b>"; refreshUserChip(); }
+    else { $("#pk-exp-line").textContent="本张角色卡回合结束，点「抽下一张角色卡」继续。"; }
+    const nextBtn=$("#pk-next"); if(nextBtn) nextBtn.style.display="";
+    $("#pk-buzz-banner").textContent="本张角色卡回合结束 → 进入下一轮抽卡";
+    updateHP();
+  }
+
+  function checkEnd(){
+    if(pk.over) return true;
+    const robotsAlive = pk.alive.some(Boolean);
+    const humanAlive = pk.hpH>0;
+    if(!humanAlive || !robotsAlive){ finish(humanAlive ? "you" : (robotsAlive ? "robots" : "draw")); return true; }
+    return false;
+  }
+
+  function finish(result){
     if(pk.over) return;
     pk.over=true; clearPkTimers();
-    const winner=loser;
+    const nextBtn=$("#pk-next"); if(nextBtn) nextBtn.style.display="none";
     log("sys","—— 对战结束 ——");
-    log(winner, "🏆 "+ROBOTS[winner].name+" 笑到最后，夺得「十二月市霸主」！");
-    $("#pk-q").textContent="🏆 "+ROBOTS[winner].name+" 获胜！";
+    let title,who;
+    if(result==="you"){ title="🏆 你成为「十二月市霸主」！"; who="你"; }
+    else if(result==="robots"){ title="🤖 三台机甲联手将你击败，霸主暂归机甲。"; who="机甲"; }
+    else { title="⚖ 同归于尽，平局收场。"; who="平局"; }
+    log("sys",title);
+    $("#pk-q").textContent=title;
     $("#pk-buzz-banner").textContent=""; $("#pk-action-flash").textContent="";
-    if(currentUser()){
-      const users=loadUsers(); const u=users[currentUser()]; u.exp=u.exp+3; saveUsers(users);
-      const ti=tierInfo(u.exp);
-      $("#pk-exp-line").innerHTML="观战 +3 经验 · 当前 <b>"+u.exp+"</b> · 段位 <b>"+ti.cur.name+"</b>";
-      refreshUserChip();
-    } else {
-      $("#pk-exp-line").textContent="🏆 "+ROBOTS[winner].name+" 获胜！点击「重新开战」再来一局。";
-    }
-    Zola.say("本局「"+ROBOTS[winner].name+"」称霸！多去「学习板块」看看十二月市，下局机甲会更聪明～");
+    if(currentUser()){ const nm=currentUser(); setExp(nm,getExp(nm)+5); const ti=tierInfo(getExp(nm)); $("#pk-exp-line").innerHTML="本局结束 +5 经验 · 当前 <b>"+getExp(nm)+"</b> · 段位 <b>"+ti.cur.name+"</b>"; refreshUserChip(); }
+    else { $("#pk-exp-line").textContent=title+" 点击「重新开战」再来一局。"; }
+    if(typeof Zola!=="undefined") Zola.say("本局「"+who+"」称霸！多去「学习板块」看看十二月市，下局机甲会更聪明～");
   }
 
   $("#pk-restart").addEventListener("click",startBattle);
+  $("#pk-next").addEventListener("click",nextRound);
+  renderMechaRow(); // 初始渲染三台机甲外壳，避免面板空白
 
   /* ---------- 左拉 · 导游 AI ---------- */
   const Zola=(function(){
@@ -1316,24 +1469,24 @@ const RELICS = [
     function say(text){ msg.innerHTML=text; }
     const KB=[
       {k:["市集","十二月市","花市","灯市","锦市"],a:"锦江十二月市从正月灯市到十二月桃符市，月月有主题。首页「时序主街」可逐月逛铺子，看复原场景、史料与延伸知识。"},
-      {k:["小地图","大地图","地图","3D","仿真","街市"],a:"学习板块顶部有小地图，点开展开完整大地图；双击任一市集圆点，就能进入该月市的 3D 仿真街市，沿街飞行漫游。"},
+      {k:["小地图","大地图","地图","卫星","街景","实景"],a:"学习板块顶部有小地图，点开展开完整大地图；双击任一市集圆点，就能进入该月市的卫星街景，俯瞰锦江两岸真实实景。"},
       {k:["赶市地图","打卡","纪念笺","大慈寺","万里桥"],a:"「赶市地图」看唐宋成都城同位置对照（大慈寺、万里桥、浣花溪、东门码头），切换图层看唐/宋/现代；去线下点位打卡可解锁十二月市纪念笺。"},
       {k:["藏品","风物","藏品阁","卡牌","蜀锦","花灯"],a:"「风物藏品阁」收集花灯、蜀锦、团扇等风物卡牌，含工艺科普与关联非遗；不靠氪金，答对其题即可解锁。"},
-      {k:["pk","对战","战斗","三台","机器人","抢答"],a:"PK 是「十二月市历史知识 PK 战」：三台机甲机器人自动对战。每回合弹出历史题与 3 个可点击选项，三方抢答（反应均 ≥2 秒）；你也可以抢答——抢到并答对就由你选【攻击】敌方 -1 血或【回血】友方 +1 血。初始各 10 血，归零淘汰，最后存活者胜；每题限时 20 秒，超时存活者各 -1。"},
+      {k:["pk","对战","战斗","三台","机器人","抢答"],a:"PK 是「十二月市历史知识抢答对战」：每轮抽一张角色卡，卡内含 3 道十二月市题按序放出。每题人 + 三台机甲（反应 ≥2 秒）同场抢答，最先答对者立刻获 1 次行动——攻击（对一台机甲 -1）或回血（你自己 +1）；答错不罚、继续抢。3 题结算完即本张卡回合结束，自动抽下一张继续。血量归零倒下，全灭则本局结束，胜者为「十二月市霸主」。每完成一回合 +3 经验、每局结束 +5。"},
       {k:["段位","经验","升级","青铜","王者"],a:"观战 PK 每局 +3 经验。段位门槛：青铜50·白银100·黄金200·铂金250·钻石300·王者400。"},
       {k:["注册","账号","登录","密码"],a:"到「账号」页填名称和密码即可注册登录。注册后才能累积段位；不注册也能安心学历史、看机甲对战。"},
       {k:["左拉","你是谁","导游"],a:"我是左拉，你的历史导游 🧭。学历史、逛地图、打 PK、收藏品，不懂就问我。"},
-      {k:["开始","干嘛","做什么"],a:"建议路线：①首页时序主街逛十二月市；②学习板块看史料、点小地图进 3D 街市；③赶市地图打卡解锁纪念笺；④藏品阁答题收卡；⑤注册后去 PK 看三机甲对战。"}
+      {k:["开始","干嘛","做什么"],a:"建议路线：①首页时序主街逛十二月市；②学习板块看史料、点小地图进卫星街景；③赶市地图打卡解锁纪念笺；④藏品阁答题收卡；⑤注册后去 PK 看三机甲对战。"}
     ];
-    function answer(text){ for(const item of KB){ if(item.k.some(k=>text.includes(k))) return item.a; } return "你可以问我：十二月市有哪些、小地图和 3D 街市怎么进、赶市地图怎么打卡、藏品阁怎么解锁、PK 怎么玩、怎么注册、段位怎么升。"; }
+    function answer(text){ for(const item of KB){ if(item.k.some(k=>text.includes(k))) return item.a; } return "你可以问我：十二月市有哪些、小地图和卫星街景怎么进、赶市地图怎么打卡、藏品阁怎么解锁、PK 怎么玩、怎么注册、段位怎么升。"; }
     $("#zola-send").addEventListener("click",()=>{ const v=qInput.value.trim(); if(!v) return; msg.innerHTML+=`<div style="color:var(--parch-dim);margin:6px 0">你：${v}</div>`; msg.innerHTML+=`<div style="color:var(--patina);margin:2px 0 8px">左拉：${answer(v)}</div>`; qInput.value=""; msg.scrollTop=msg.scrollHeight; });
     qInput.addEventListener("keydown",e=>{ if(e.key==="Enter") $("#zola-send").click(); });
     const CTX={
       home:{m:"你好，我是导游左拉 🧭。览古聚焦锦江十二月市——首页「时序主街」逐月逛铺子，点进去看复原场景、史料与小动画。",q:["怎么开始？","十二月市有哪些"]},
-      learn:{m:"学习板块三件宝：十二月市看历史与打卡点，市集趣答检验知识，锦江岁时志读懂锦江文化。顶部小地图点开可进 3D 仿真街市。",q:["小地图/3D 怎么进","锦江打卡点在哪"]},
-      map:{m:"赶市地图：切换唐/宋/现代图层看同位置对照；双击市集圆点进 3D 街市；去线下点位打卡可解锁纪念笺。",q:["怎么打卡？","图层怎么切？"]},
+      learn:{m:"学习板块三件宝：十二月市看历史与打卡点，市集趣答检验知识，锦江岁时志读懂锦江文化。顶部小地图点开可进卫星街景。",q:["小地图/卫星街景怎么进","锦江打卡点在哪"]},
+      map:{m:"赶市地图：切换唐/宋/现代图层看同位置对照；双击市集圆点进卫星街景；去线下点位打卡可解锁纪念笺。",q:["怎么打卡？","图层怎么切？"]},
       relics:{m:"风物藏品阁收集花灯、蜀锦、团扇等卡牌，含工艺科普与关联非遗；答对其题即可解锁，不靠氪金。",q:["怎么解锁藏品？","有哪些藏品？"]},
-      pk:{m:"PK 是十二月市历史知识对战：三台机甲机器人自动抢答历史题，抢到者可选「攻击 -1」或「回血 +1」。初始各 10 血，归零淘汰，最后存活者胜；每题限时 20 秒。",q:["PK 怎么玩？","段位怎么升？"]},
+      pk:{m:"PK 是十二月市知识抢答对战：每轮抽角色卡、卡内 3 题按序放出，人 + 三台机甲（反应 ≥2 秒）抢答，先答对者获 1 次行动（攻击 -1 / 回血 +1），答错不罚继续抢；3 题后抽下一张卡继续。",q:["PK 怎么玩？","段位怎么升？"]},
       account:{m:"注册只需名称+密码，登录后即可 PK 与累积经验段位。数据存在本机浏览器里。",q:["怎么注册？","经验有什么用？"]}
     };
     function context(v){ const c=CTX[v]||CTX.home; say(c.m); quick.innerHTML=c.q.map(t=>`<button>${t}</button>`).join(""); $$("#zola-quick button").forEach(b=>b.addEventListener("click",()=>{ msg.innerHTML+=`<div style="color:var(--parch-dim);margin:6px 0">你：${b.textContent}</div>`; const a=answer(b.textContent); msg.innerHTML+=`<div style="color:var(--patina);margin:2px 0 8px">左拉：${a}</div>`; msg.scrollTop=msg.scrollHeight; })); }
