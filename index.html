@@ -163,6 +163,10 @@ h1,h2,h3{font-family:"STKaiti","KaiTi","Songti SC","SimSun",serif;letter-spacing
 .sc-sec blockquote cite{display:block;margin-top:7px;font-size:12px;color:var(--parch-dim);font-style:normal;}
 .sc-actions{padding:12px 16px 18px;}
 .sc-actions .btn{width:100%;}
+.sc-near .near-chips{display:flex;flex-wrap:wrap;gap:8px;}
+.near-chip{display:inline-flex;flex-direction:column;align-items:center;gap:2px;padding:7px 11px;border-radius:10px;border:1px solid var(--line);background:rgba(176,141,87,.10);color:var(--parch);font-size:13px;cursor:pointer;transition:.15s;}
+.near-chip:hover{border-color:var(--bronze);background:rgba(176,141,87,.22);transform:translateY(-1px);}
+.near-chip small{font-size:10.5px;color:var(--parch-dim);}
 @media(max-width:760px){
   .scene-grid{grid-template-columns:1fr;}
   .scene-right{max-height:none;padding-right:0;}
@@ -617,7 +621,7 @@ h1,h2,h3{font-family:"STKaiti","KaiTi","Songti SC","SimSun",serif;letter-spacing
         <div class="scene-left">
           <div id="scene-map" class="scene-map"></div>
           <div class="scene-tip">
-            <span>真实卫星街景 · 正交顶视 90°（无倾斜透视）· 拖拽平移 / 滚轮缩放 / 旋转浏览</span>
+            <span>真实卫星街景 · 正交顶视 90°（无倾斜透视）· 拖拽平移 / 滚轮缩放看周边 / 旋转浏览</span>
             <span class="rot-ctrls">
               <button class="rot-btn" id="rot-left" title="向左旋转视角">↺</button>
               <button class="rot-btn" id="rot-reset" title="正北复位">N</button>
@@ -1092,6 +1096,7 @@ const RELICS = [
   /* 卫星街景（点击市集进入 · 正交顶视 · 无倾斜透视 · 支持旋转/缩放） */
   const sceneModal=$("#scene-modal"), sceneTitle=$("#scene-title"), sceneSub=$("#scene-sub"), sceneCard=$("#scene-card");
   let sceneMap=null, sceneMarker=null, sceneRotateCtrl=null, rotBtnsBound=false;
+  function haversine(la1,lo1,la2,lo2){ const R=6371,toR=Math.PI/180; const dLa=(la2-la1)*toR,dLo=(lo2-lo1)*toR; const a=Math.sin(dLa/2)**2+Math.cos(la1*toR)*Math.cos(la2*toR)*Math.sin(dLo/2)**2; return R*2*Math.atan2(Math.sqrt(a),Math.sqrt(1-a)); }
   function buildSceneCard(mi){
     const m=MONTHLY_MARKETS[mi];
     const g=(k)=>m.points.find(p=>p.key===k)||{};
@@ -1123,6 +1128,12 @@ const RELICS = [
           <h4>🎯 年轻玩法</h4>
           <p>${yth.detail||yth.summary||""}</p>
         </section>
+        <section class="sc-sec sc-near">
+          <h4>🧭 附近市集（点此飞看周边街景）</h4>
+          <div class="near-chips">
+            ${ (()=>{ const others=MONTHLY_MARKETS.map((mm,idx)=>({idx,d:haversine(m.map.lat,m.map.lon,mm.map.lat,mm.map.lon)})).filter(o=>o.idx!==mi).sort((a,b)=>a.d-b.d).slice(0,4); return others.map(o=>`<button class="near-chip" data-mi="${o.idx}">${MONTHLY_MARKETS[o.idx].month}${MONTHLY_MARKETS[o.idx].market}<small>${o.d.toFixed(1)}km</small></button>`).join(''); })() }
+          </div>
+        </section>
       </div>
       <div class="sc-actions">
         <button class="btn btn-ghost btn-sm" id="sc-shop-btn">🏮 进入时序主街 · 看复原铺面</button>
@@ -1134,9 +1145,10 @@ const RELICS = [
     sceneSub.textContent="坐标 "+m.map.lat.toFixed(3)+"°N, "+m.map.lon.toFixed(3)+"°E";
     sceneCard.innerHTML=buildSceneCard(mi);
     const sb=$("#sc-shop-btn"); if(sb) sb.addEventListener("click",()=>{ sceneModal.classList.remove("open"); goView('home'); openShop(mi); });
+    $$(".near-chip", sceneCard).forEach(c=>c.addEventListener("click",()=>openScene(+c.dataset.mi)));
     sceneModal.classList.add("open");
     if(!sceneMap){
-      sceneMap = L.map('scene-map', {center:[m.map.lat,m.map.lon], zoom:16, minZoom:14, maxZoom:16, zoomControl:true, scrollWheelZoom:true, bearing:0, pitch:0});
+      sceneMap = L.map('scene-map', {center:[m.map.lat,m.map.lon], zoom:15, minZoom:13, maxZoom:16, zoomControl:true, scrollWheelZoom:true, bearing:0, pitch:0});
       satTiles().addTo(sceneMap);
       // 旋转控件：拖拽箭头或点下方按钮即可旋转浏览（仍保持正交顶视，无倾斜透视）
       sceneRotateCtrl = L.control.rotate({position:'topleft', closeOnZeroBearing:false, visualizePitch:false}).addTo(sceneMap);
@@ -1151,7 +1163,7 @@ const RELICS = [
     if(sceneMarker) sceneMap.removeLayer(sceneMarker);
     sceneMarker = L.circleMarker([m.map.lat, m.map.lon], {radius:9, color:'#1c150c', weight:2, fillColor:'#d4af37', fillOpacity:1}).addTo(sceneMap);
     sceneMarker.bindPopup(`<b>${m.month}${m.market}</b><br>${m.desc}`).openPopup();
-    sceneMap.flyTo([m.map.lat, m.map.lon], 16, {duration:1.1});
+    sceneMap.flyTo([m.map.lat, m.map.lon], 15, {duration:1.1});
   }
 
   /* 赶市地图（大地图视图）+ 图层切换（唐/宋/现代 同位置对照） */
